@@ -396,15 +396,53 @@ class Helper {
         return $mes;
     }
     
+    /**
+     * Funcion que retorna los elementos del slide principal de la pagina
+     * @return array
+     */
     public function getHomeSlider(){
         $sql = $this->db->select("SELECT n.id,
                                         n.titulo,
                                         n.contenido,
                                         n.img,
-                                        c.descripcion as categoria
+                                        c.descripcion as categoria,
+                                        m.descripcion as marca
                                 FROM noticia n
+                                LEFT JOIN marca m on m.id = n.id_marca
                                 LEFT JOIN categoria c on c.id = n.id_categoria
-                                where n.destacado = 1
+                                where n.destacado = 'PRINCIPAL'
+                                and n.estado = 1
+                                ORDER BY n.orden ASC");
+        return $sql;
+    }
+    
+    /**
+     * Funcion que retorna los registros destacados de las promociones
+     * @return array
+     */
+    public function getHomePromociones(){
+        $sql = $this->db->select("SELECT p.titulo, 
+                                        p.contenido,
+                                        p.img,
+                                        m.descripcion as marca
+                                FROM promocion p
+                                LEFT JOIN marca m on m.id = p.id_marca
+                                WHERE p.estado = 1
+                                and p.destacado = 1
+                                ORDER BY p.orden ASC");
+        return $sql;
+    }
+    
+    /**
+     * Funcion que retorna los registros destacados de las publicaciones de recursos humanos
+     * @return array
+     */
+    public function getHomeRRHH(){
+        $sql = $this->db->select("SELECT n.titulo,
+                                        n.contenido,
+                                        n.img
+                                FROM noticia n
+                                WHERE n.destacado = 'RRHH'
                                 and n.estado = 1
                                 ORDER BY n.orden ASC");
         return $sql;

@@ -105,7 +105,10 @@
                                 </li>                                 
                                 <li>
                                     <a href="<?= URL; ?>noticias/listado">Noticias</a> 
-                                </li>                                 
+                                </li>  
+                                <li>
+                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
+                                </li> 
                                 <li>
                                     <a href="<?= URL; ?>promociones/listado">Promociones</a> 
                                 </li>                                 
@@ -131,7 +134,10 @@
                                 </li>                                 
                                 <li>
                                     <a href="<?= URL; ?>noticias/listado">Noticias</a> 
-                                </li>                                 
+                                </li>   
+                                <li>
+                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
+                                </li>
                                 <li>
                                     <a href="<?= URL; ?>promociones/listado">Promociones</a> 
                                 </li>                                 

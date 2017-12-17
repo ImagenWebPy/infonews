@@ -10,6 +10,8 @@ class Index extends Controller {
 
     public function index() {
         $this->view->slider = $this->helper->getHomeSlider();
+        $this->view->promocion = $this->helper->getHomePromociones();
+        $this->view->rrhh = $this->helper->getHomeRRHH();
         $this->view->title = SITE_TITLE . 'Info-News';
         $this->view->description = 'Portal de Noticias e Informaciones';
         $this->view->render('header');

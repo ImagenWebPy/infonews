@@ -5,21 +5,7 @@
             <div class="container"> 
                 <div class="row no-gutter"> 
                     <div class="col-sm-6 col-md-3"> 
-                        <h3 class="title-left title-style03 underline03">About Us</h3> 
-                        <p class="about-us">When you’re building a website, it’s tempting to get distracted by all the bells and whistles of the design process and forget all about creating compelling content.<br> 
-                            But having awesome content on your website is crucial to making inbound marketing
-                            work for your business.<br> 
-                            We know ... easier said than done. </p> 
-                        <div class="site-logo">
-                            <a href="index-2.html">
-                                <img src="<?= URL; ?>public/img/logo.png" alt="Side Logo" /> 
-                                <h3>24h <span>News</span></h3> 
-                                <p>Your 24h News Source</p> 
-                            </a>
-                        </div>                                     
-                    </div>                                 
-                    <div class="col-sm-6 col-md-3"> 
-                        <h3 class="title-left title-style03 underline03">News</h3> 
+                        <h3 class="title-left title-style03 underline03">Noticias</h3> 
                         <div class="footer-post"> 
                             <ul> 
                                 <li> 
@@ -74,7 +60,62 @@
                         </div>                                     
                     </div>                                 
                     <div class="col-sm-6 col-md-3"> 
-                        <h3 class="title-left title-style03 underline03">Watch+Listen</h3> 
+                        <h3 class="title-left title-style03 underline03">Promociones</h3> 
+                        <div class="footer-post"> 
+                            <ul> 
+                                <li> 
+                                    <div class="item"> 
+                                        <div class="item-image">
+                                            <a class="img-link" href="deals.html">
+                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/art-entertainment_370x185-image04.jpg" alt="">
+                                            </a>
+                                        </div>                                                     
+                                        <div class="item-content"> 
+                                            <p class="ellipsis"><a href="#">Music may help you think better, analyze matters faster, and work more efficiently.</a></p> 
+                                        </div>                                                     
+                                    </div>                                                 
+                                </li>                                             
+                                <li> 
+                                    <div class="item"> 
+                                        <div class="item-image">
+                                            <a class="img-link" href="deals.html">
+                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image15.jpg" alt="">
+                                            </a>
+                                        </div>                                                     
+                                        <div class="item-content"> 
+                                            <p class="ellipsis"><a href="#">Video on Demand can be used for entertainment and videoconferencing.</a></p> 
+                                        </div>                                                     
+                                    </div>                                                 
+                                </li>                                             
+                                <li> 
+                                    <div class="item"> 
+                                        <div class="item-image">
+                                            <a class="img-link" href="deals.html">
+                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image08.jpg" alt="">
+                                            </a>
+                                        </div>                                                     
+                                        <div class="item-content"> 
+                                            <p class="ellipsis"><a href="#">Podcast is a program made available in digital format for download.</a></p> 
+                                        </div>                                                     
+                                    </div>                                                 
+                                </li>                                             
+                                <li> 
+                                    <div class="item"> 
+                                        <div class="item-image">
+                                            <a class="img-link" href="deals.html">
+                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image16.jpg" alt="">
+                                            </a>
+                                        </div>                                                     
+                                        <div class="item-content"> 
+                                            <p class="ellipsis"><a href="#">Watch live TV news and your favorite shows on demand. At home or on the go!</a></p> 
+                                        </div>                                                     
+                                    </div>                                                 
+                                </li>                                             
+                            </ul>                                         
+                        </div>                                     
+                    </div>                                 
+                    <div class="col-sm-6 col-md-3"> 
+                        <h3 class="title-left title-style03 underline03">Recursos Humanos</h3> 
                         <div class="footer-post"> 
                             <ul> 
                                 <li> 
@@ -165,26 +206,8 @@
     <!-- Begin .container -->                 
     <div class="container"> 
         <!-- Begin .copyright -->                     
-        <div class="copyright"> &copy; 2016, Copyrights 24hNews Theme. All Rights Reserved </div>                     
+        <div class="copyright"> Desarrollado por <a href="mailto:raul.ramirez@garden.com.py">GardenMKT</a></div>                     
         <!-- End .copyright -->                     
-        <!--  Begin .footer-social-icons -->                     
-        <div class="footer-social-icons"> 
-            <ul> 
-                <li> 
-                    <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a> 
-                </li>                             
-                <li> 
-                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a> 
-                </li>                             
-                <li> 
-                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a> 
-                </li>                             
-                <li> 
-                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a> 
-                </li>                             
-            </ul>                         
-        </div>                     
-        <!--  End .footer-social-icons -->                     
     </div>                 
     <!-- End .container -->                 
 </div>             
