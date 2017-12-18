@@ -2,8 +2,6 @@
 
 class Index extends Controller {
 
-    private $meta_description = '';
-
     function __construct() {
         parent::__construct();
     }
@@ -12,6 +10,11 @@ class Index extends Controller {
         $this->view->slider = $this->helper->getHomeSlider();
         $this->view->promocion = $this->helper->getHomePromociones();
         $this->view->rrhh = $this->helper->getHomeRRHH();
+        $this->view->marcas = $this->helper->getHomeMarcasNovedades();
+        $this->view->videos = $this->helper->getHomeVideos();
+        $this->view->varios = $this->helper->getHomeVarios();
+        $this->view->listadoPromociones = $this->helper->getHomeListadoPromociones();
+        $this->view->listadoRRHH = $this->helper->getFooterRRHH();
         $this->view->title = SITE_TITLE . 'Info-News';
         $this->view->description = 'Portal de Noticias e Informaciones';
         $this->view->render('header');

@@ -33,7 +33,7 @@ $helper = new Helper();
                                     <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
                                     <p><?= utf8_encode($val['titulo']) ?></p> 
                                 </div>                                         
-                                <img class="img-responsive" src="<?= URL; ?>public/img/<?= utf8_encode($val['img']); ?>" alt=""> 
+                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/<?= utf8_encode($val['img']); ?>" alt=""> 
                             </a>                                     
                         </div>                                                          
 
@@ -138,14 +138,14 @@ $helper = new Helper();
                             <div class="item"> 
                                 <div class="item-image-2">
                                     <a class="img-link" href="#">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/noticias/<?= utf8_encode($item['img']) ?>" alt="">
+                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/rrhh/<?= utf8_encode($item['img']) ?>" alt="">
                                     </a>
                                 </div>                                         
                                 <div class="item-content"> 
                                     <div class="title-left title-style04 underline04"> 
                                         <h3><a href="#"><strong><?= utf8_encode($item['titulo']) ?></a></h3> 
                                     </div>                                             
-                                    <p><?= substr(strip_tags(utf8_encode($item['contenido'])),0,180) ?></p> 
+                                    <p><?= substr(strip_tags(utf8_encode($item['contenido'])), 0, 180) ?></p> 
                                 </div>                                         
                             </div>                                     
                             <!-- End .item-->  
@@ -165,85 +165,22 @@ $helper = new Helper();
                     <div class="sidebar-newsfeed"> 
                         <!-- Begin .newsfeed -->                                     
                         <div class="newsfeed-3"> 
-                            <ul> 
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image01.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">From propaganda to pop artist</a></h4> 
-                                            <p class="ellipsis"><a href="#">A gift for drawing led to a prestigious career as artist...</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image02.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">One Type of Food You Never Eat</a></h4> 
-                                            <p class="ellipsis"><a href="#">No one has ever felt better after eating plane food.</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image03.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">Preschool</a></h4> 
-                                            <p class="ellipsis"><a href="#">Your child should feel confident in her ability to meet the challenges...</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image04.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">Antarctica Stations</a></h4> 
-                                            <p class="ellipsis"><a href="#">New research factors in collapsing Antarctic ice sheet that could...</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image05.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">Yellow fever outbreak</a></h4> 
-                                            <p class="ellipsis"><a href="#">Drug manufacturers globally produce just enough vaccines for...</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
-                                <li> 
-                                    <div class="item"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="#">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image06.jpg" alt="">
-                                            </a>
-                                        </div>                                                     
-                                        <div class="item-content"> 
-                                            <h4 class="ellipsis"><a href="#">How To Succeed In</a></h4> 
-                                            <p class="ellipsis"><a href="#">How to achieve business success in a certain sector or country.</a></p> 
-                                        </div>                                                     
-                                    </div>                                                 
-                                </li>                                             
+                            <ul>
+                                <?php foreach ($this->marcas as $item): ?>
+                                    <li> 
+                                        <div class="item"> 
+                                            <div class="item-image">
+                                                <a class="img-link" href="#">
+                                                    <img class="img-responsive img-full" src="<?= URL; ?>public/img/marcas/<?= utf8_encode($item['img']); ?>" alt="">
+                                                </a>
+                                            </div>                                                     
+                                            <div class="item-content"> 
+                                                <h4 class="ellipsis"><a href="#"><?= utf8_encode($item['titulo']); ?></a></h4> 
+                                                <p class="ellipsis"><a href="#"><?= substr(utf8_encode($item['contenido']), 0, 100); ?>...</a></p> 
+                                            </div>                                                     
+                                        </div>                                                 
+                                    </li>
+                                <?php endforeach; ?>
                             </ul>                                         
                         </div>                                     
                         <!-- End .newsfeed -->                                     
@@ -280,7 +217,7 @@ $helper = new Helper();
     <!--========== END .MODULE ==========-->                 
     <!--========== BEGIN .MODULE ==========-->                 
     <section class="module dark"> 
-        <!--========== BEGIN VIDEO ==========-->                     
+        <!--========== BEGIN VIDEO ==========-->
         <!-- Begin .container-->                     
         <div class="container"> 
             <div class="row no-gutter"> 
@@ -288,7 +225,10 @@ $helper = new Helper();
                 <div class="col-sm-9 col-md-9"> 
                     <div class="video-full"> 
                         <div class="video-container"> 
-                            <iframe src="https://player.vimeo.com/video/97744717?title=0&amp;byline=0&amp;portrait=0" class="video" title="Advertisement"></iframe>                                         
+                            <video controls style="width: 100%;">
+                                <source src="<?= URL; ?>public/videos/<?= $this->videos[0]['video']; ?>" type="video/mp4">
+                                Tu Navegador no soporta la reproducción de video. Por favor actualizalo. 
+                            </video>
                         </div>                                     
                     </div>                                 
                 </div>                             
@@ -296,19 +236,23 @@ $helper = new Helper();
                 <!-- Begin .col-md-3-->                             
                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                     <div class="title-left title-style03 underline03"> 
-                        <h4>Related Videos</h4> 
+                        <h4><a href="">Ver Todos los Videos</a></h4> 
                     </div>                                 
                     <div class="module-media"> 
                         <div class="image">
-                            <img class="img-responsive" src="<?= URL; ?>public/img/index_620x465-image04.jpg" alt="">
+                            <video controls style="width: 100%;">
+                                <source src="<?= URL; ?>public/videos/<?= $this->videos[1]['video']; ?>" type="video/mp4">
+                                Tu Navegador no soporta la reproducción de video. Por favor actualizalo. 
+                            </video>
                         </div>                                     
-                        <a href="video.html"><span class="play-icon"></span></a> 
                     </div>                                 
                     <div class="module-media"> 
                         <div class="image">
-                            <img class="img-responsive" src="<?= URL; ?>public/img/index_620x465-image02.jpg" alt="">
+                            <video controls style="width: 100%;">
+                                <source src="<?= URL; ?>public/videos/<?= $this->videos[2]['video']; ?>" type="video/mp4">
+                                Tu Navegador no soporta la reproducción de video. Por favor actualizalo. 
+                            </video>
                         </div>                                     
-                        <a href="video.html"><span class="play-icon"></span></a> 
                     </div>                                 
                 </div>                             
                 <!-- End .col-md-3-->                             
@@ -331,83 +275,45 @@ $helper = new Helper();
                         <div class="module-title"> 
                             <h3 class="title"><span class="bg-1">Variedad</span></h3> 
                             <h3 class="subtitle">Últimas novedades</h3> 
-                        </div>                                     
+                        </div>
+                        <?php
+                        $VariosPrincipal = $this->varios[0];
+                        unset($this->varios[0]);
+                        ?>
                         <!-- Begin .item -->                                     
                         <div class="item"> 
                             <div class="item-image-1">
                                 <a class="img-link" href="#">
-                                    <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_800x400-image17.jpg" alt="">
+                                    <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($VariosPrincipal['img']); ?>" alt="">
                                 </a>
                             </div>                                         
                             <div class="item-content"> 
                                 <div class="title-left title-style04 underline04"> 
-                                    <h3><a href="#"><strong>Breaking</strong> News Stories</a></h3> 
+                                    <h3><a href="#"><?= utf8_encode($VariosPrincipal['titulo']); ?></a></h3> 
                                 </div>                                             
                                 <br> 
-                                <div class="post-meta-elements"> 
-                                    <div class="post-meta-author"> 
-                                        <i class="fa fa-user"></i>
-                                        <a href="#">By Hugh Jackson</a> 
-                                    </div>                                                 
-                                    <div class="post-meta-date"> 
-                                        <i class="fa fa-calendar"></i>December 25, 2016 
-                                    </div>                                                 
-                                </div>                                             
-                                <p><a href="#" target="_blank" class="external-link">At the 24h News we see breaking news events as unexpected, momentous or informative events...</a></p> 
-                                <p><a href="#" target="_blank" class="external-link">Our editors also consider other aspects of...</a></p> 
-                                <p><a href="#" target="_blank" class="external-link">Is this event part of a subject the 24h News often reports on?</a></p> 
+                                <p><?= utf8_encode($VariosPrincipal['contenido']); ?></p> 
                                 <div> 
-                                    <a href="#"><span class="read-more">Continue reading</span></a> 
+                                    <a href="#"><span class="read-more">Continuar Leyendo</span></a> 
                                 </div>                                             
                             </div>                                         
                         </div>                                     
                         <!-- End .item -->                                     
                         <!-- Begin .news-block" -->                                     
-                        <div class="news-block"> 
-                            <div class="item-block"> 
-                                <div class="item-image">
-                                    <a class="img-link" href="#">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_800x400-image21.jpg" alt="">
-                                    </a>
-                                </div>                                             
-                                <div class="item-content">
-                                    <span class="day">Thu, Dec 12, 2016</span> 
-                                    <p><a href="#" target="_blank" class="external-link">The energy choices</a></p> 
-                                </div>                                             
-                            </div>                                         
-                            <div class="item-block"> 
-                                <div class="item-image">
-                                    <a class="img-link" href="#">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_800x400-image22.jpg" alt="">
-                                    </a>
-                                </div>                                             
-                                <div class="item-content">
-                                    <span class="day">Thu, Dec 12, 2016</span> 
-                                    <p><a href="#" target="_blank" class="external-link">Food/Agriculture</a></p> 
-                                </div>                                             
-                            </div>                                         
-                            <div class="item-block"> 
-                                <div class="item-image">
-                                    <a class="img-link" href="#">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_800x400-image23.jpg" alt="">
-                                    </a>
-                                </div>                                             
-                                <div class="item-content">
-                                    <span class="day">Thu, Dec 12, 2016</span> 
-                                    <p><a href="#" target="_blank" class="external-link">Healthcare</a></p> 
-                                </div>                                             
-                            </div>                                         
-                            <div class="item-block"> 
-                                <div class="item-image">
-                                    <a class="img-link" href="#">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_800x400-image24.jpg" alt="">
-                                    </a>
-                                </div>                                             
-                                <div class="item-content">
-                                    <span class="day">Thu, Dec 12, 2016</span> 
-                                    <p><a href="#" target="_blank" class="external-link">Housing/Construction</a></p> 
-                                </div>                                             
-                            </div>                                         
+                        <div class="news-block">
+                            <?php foreach ($this->varios as $item): ?>
+                                <div class="item-block"> 
+                                    <div class="item-image">
+                                        <a class="img-link" href="#">
+                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
+                                        </a>
+                                    </div>                                             
+                                    <div class="item-content">
+                                        <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
+                                        <p><a href="#" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
+                                    </div>                                             
+                                </div>
+                            <?php endforeach; ?>
                         </div>                                     
                         <!-- End .news-block" -->                                     
                     </div>                                 
@@ -423,59 +329,22 @@ $helper = new Helper();
                     <!-- End .title-style02 -->                                 
                     <!--========== BEGIN .SIDEBAR-POST ==========-->                                 
                     <div class="sidebar-post"> 
-                        <ul> 
-                            <li> 
-                                <div class="item"> 
-                                    <div class="item-image">
-                                        <a class="img-link" href="#">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image07.jpg" alt="">
-                                        </a>
-                                    </div>                                                 
-                                    <div class="item-content"> 
-                                        <h3>01</h3> 
-                                        <p class="ellipsis"><a href="#">Survivor is world's oldest man - Guinness World Records.</a></p> 
-                                    </div>                                                 
-                                </div>                                             
-                            </li>                                         
-                            <li> 
-                                <div class="item"> 
-                                    <div class="item-image">
-                                        <a class="img-link" href="#">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image08.jpg" alt="">
-                                        </a>
-                                    </div>                                                 
-                                    <div class="item-content"> 
-                                        <h3>02</h3> 
-                                        <p class="ellipsis"><a href="#">East Kilbride: Manager Billy O. to leave post on 20 Dec.</a></p> 
-                                    </div>                                                 
-                                </div>                                             
-                            </li>                                         
-                            <li> 
-                                <div class="item"> 
-                                    <div class="item-image">
-                                        <a class="img-link" href="#">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image09.jpg" alt="">
-                                        </a>
-                                    </div>                                                 
-                                    <div class="item-content"> 
-                                        <h3>03</h3> 
-                                        <p class="ellipsis"><a href="#">Nature's way of saying older women aren't attractive?</a></p> 
-                                    </div>                                                 
-                                </div>                                             
-                            </li>                                         
-                            <li> 
-                                <div class="item"> 
-                                    <div class="item-image">
-                                        <a class="img-link" href="#">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/index_370x185-image10.jpg" alt="">
-                                        </a>
-                                    </div>                                                 
-                                    <div class="item-content"> 
-                                        <h3>04</h3> 
-                                        <p class="ellipsis"><a href="#">Last post for stamp collectors,  valued in catalogues</a></p> 
-                                    </div>                                                 
-                                </div>                                             
-                            </li>                                         
+                        <ul>
+                            <?php foreach ($this->listadoPromociones as $item): ?>
+                                <li> 
+                                    <div class="item"> 
+                                        <div class="item-image">
+                                            <a class="img-link" href="#">
+                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($item['img']) ?>" alt="">
+                                            </a>
+                                        </div>                                                 
+                                        <div class="item-content"> 
+                                            <h3><?= utf8_encode($item['marca']) . ' - ' . utf8_encode($item['titulo']) ?></h3> 
+                                            <p class="ellipsis"><a href="#"><?= strip_tags(utf8_encode($item['contenido'])) ?></a></p> 
+                                        </div>                                                 
+                                    </div>                                             
+                                </li>                                         
+                            <?php endforeach; ?>                                       
                         </ul>                                     
                     </div>                                 
                     <!--========== END .SIDEBAR-POST ==========-->                                 

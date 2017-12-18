@@ -395,12 +395,12 @@ class Helper {
         }
         return $mes;
     }
-    
+
     /**
      * Funcion que retorna los elementos del slide principal de la pagina
      * @return array
      */
-    public function getHomeSlider(){
+    public function getHomeSlider() {
         $sql = $this->db->select("SELECT n.id,
                                         n.titulo,
                                         n.contenido,
@@ -415,12 +415,12 @@ class Helper {
                                 ORDER BY n.orden ASC");
         return $sql;
     }
-    
+
     /**
      * Funcion que retorna los registros destacados de las promociones
      * @return array
      */
-    public function getHomePromociones(){
+    public function getHomePromociones() {
         $sql = $this->db->select("SELECT p.titulo, 
                                         p.contenido,
                                         p.img,
@@ -432,12 +432,12 @@ class Helper {
                                 ORDER BY p.orden ASC");
         return $sql;
     }
-    
+
     /**
      * Funcion que retorna los registros destacados de las publicaciones de recursos humanos
      * @return array
      */
-    public function getHomeRRHH(){
+    public function getHomeRRHH() {
         $sql = $this->db->select("SELECT n.titulo,
                                         n.contenido,
                                         n.img
@@ -447,4 +447,123 @@ class Helper {
                                 ORDER BY n.orden ASC");
         return $sql;
     }
+
+    /**
+     * Funcion que retorna los registros de las ultimas publicaciones sobre las marcas
+     * que no estan marcadas como destacadas
+     * @return array
+     */
+    public function getHomeMarcasNovedades() {
+        $sql = $this->db->select("SELECT n.id,
+                                        n.titulo,
+                                        n.img,
+                                        SUBSTRING(n.contenido,1,160) as contenido,
+                                        m.descripcion as marca
+                                FROM noticia n
+                                LEFT JOIN marca m on m.id = n.id_marca
+                                where n.id_categoria = 1
+                                and ISNULL(n.destacado)
+                                and n.estado = 1
+                                ORDER BY fecha_visible DESC
+                                LIMIT 5");
+        return $sql;
+    }
+
+    /**
+     * Funcion que retorna los registros destacados de videos
+     * @return array
+     */
+    public function getHomeVideos() {
+        $sql = $this->db->select("SELECT n.video
+                                FROM noticia n
+                                where n.destacado = 'VIDEO'
+                                and n.estado = 1
+                                ORDER BY orden ASC");
+        return $sql;
+    }
+
+    /**
+     * Funcion que retorna los registros destacados de la categoria varios
+     * @return array
+     */
+    public function getHomeVarios() {
+        $sql = $this->db->select("SELECT n.id,
+                                        n.titulo,
+                                        n.img,
+                                        SUBSTRING(n.contenido,1,180) as contenido,
+                                        n.tag
+                                FROM noticia n
+                                where n.destacado = 'VARIOS'
+                                ORDER BY n.orden ASC");
+        return $sql;
+    }
+
+    /**
+     * Funcion que lista las noticas por fecha(sin destacar).
+     * @return array
+     */
+    public function getHomeListadoPromociones() {
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        SUBSTRING(p.contenido,1,60) as contenido,
+                                        p.img,
+                                        m.descripcion as marca
+                                FROM promocion p 
+                                LEFT JOIN marca m on m.id = p.id_marca
+                                WHERE p.destacado = 0
+                                ORDER BY p.fecha_publicacion DESC 
+                                LIMIT 4");
+        return $sql;
+    }
+
+    public function getFooterNoticias() {
+        $sql = $this->db->select("SELECT n.id,
+                                        n.titulo,
+                                        n.img
+                                FROM noticia n
+                                where n.id_categoria = 1
+                                and n.estado = 1
+                                ORDER BY n.fecha_visible DESC
+                                LIMIT 4");
+        return $sql;
+    }
+
+    public function getFooterPromociones() {
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        p.img
+                                FROM promocion p
+                                where p.estado = 1
+                                ORDER BY p.fecha_publicacion DESC
+                                LIMIT 4");
+        return $sql;
+    }
+
+    public function getFooterRRHH() {
+        $sql = $this->db->select("select n.id,
+                                        n.titulo,
+                                        n.img
+                                from noticia n
+                                where n.id_categoria = 3
+                                and n.estado = 1
+                                ORDER BY n.fecha_visible DESC
+                                LIMIT 4");
+        return $sql;
+    }
+
+    public function getFooterTags() {
+        $sql = $this->db->select("select tag 
+                                from noticia
+                                ORDER BY fecha_visible DESC
+                                LIMIT 10");
+        $tags = array();
+        foreach ($sql as $item) {
+            $val = explode(',', $item['tag']);
+            foreach ($val as $value) {
+                array_push($tags, $value);
+            }
+        }
+        return array_unique($tags);
+    }
+
 }

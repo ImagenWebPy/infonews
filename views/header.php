@@ -1,3 +1,16 @@
+<?php
+$helper = new Helper();
+$page = $helper->getPage();
+$class = '';
+$classNoticia = '';
+switch ($page[0]) {
+    case 'noticia':
+        $classNoticia = 'class="active"';
+        break;
+    default :
+        $class = 'class="active"';
+}
+?>
 <!DOCTYPE html> 
 <html lang="es"> 
     <head> 
@@ -100,11 +113,11 @@
                                 </div>                                 
                             </div>                             
                             <ul class="sidenav-menu"> 
-                                <li class="active">
+                                <li <?= $class ?>>
                                     <a href="<?= URL; ?>">Inicio</a>
                                 </li>                                 
-                                <li>
-                                    <a href="<?= URL; ?>noticias/listado">Noticias</a> 
+                                <li <?= $classNoticia ?>>
+                                    <a href="<?= URL; ?>noticia/listado">Noticias</a> 
                                 </li>  
                                 <li>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
@@ -129,11 +142,11 @@
                         <div class="container"> 
                             <!-- Begin .nav navbar-nav -->                             
                             <ul class="nav navbar-nav"> 
-                                <li class="active">
+                                <li <?= $class ?>>
                                     <a href="<?= URL; ?>">Inicio</a>
                                 </li>                                 
-                                <li>
-                                    <a href="<?= URL; ?>noticias/listado">Noticias</a> 
+                                <li <?= $classNoticia ?>>
+                                    <a href="<?= URL; ?>noticia/listado">Noticias</a> 
                                 </li>   
                                 <li>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
