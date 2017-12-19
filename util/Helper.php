@@ -421,7 +421,8 @@ class Helper {
      * @return array
      */
     public function getHomePromociones() {
-        $sql = $this->db->select("SELECT p.titulo, 
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo, 
                                         p.contenido,
                                         p.img,
                                         m.descripcion as marca
@@ -438,7 +439,8 @@ class Helper {
      * @return array
      */
     public function getHomeRRHH() {
-        $sql = $this->db->select("SELECT n.titulo,
+        $sql = $this->db->select("SELECT n.id,
+                                        n.titulo,
                                         n.contenido,
                                         n.img
                                 FROM noticia n
@@ -564,6 +566,47 @@ class Helper {
             }
         }
         return array_unique($tags);
+    }
+
+    /**
+     * Función que retorna los metatags de las publicaciones
+     * @param int $id
+     * @param string $tabla
+     * @return array[titulo,contenido]
+     */
+    public function getDatosMetaPublicacion($id, $tabla) {
+        $sql = $this->db->select("select titulo, SUBSTRING(contenido, 1, 280) as contenido from $tabla where id = $id");
+        $data = array(
+            'titulo' => utf8_encode($sql[0]['titulo']),
+            'contenido' => strip_tags(utf8_encode($sql[0]['contenido']))
+        );
+        return $data;
+    }
+
+    /**
+     * Funcion que retorna las ultimas publicaciones de acuerdo a la categoria que se le pasa
+     * @param int $idCategoria
+     * @param int $limit
+     * @return array
+     */
+    public function ultimosPost($tabla, $idCategoria, $limit) {
+        if($tabla == 'noticia')
+            $from = "FROM $tabla n
+                                where n.id_categoria = $idCategoria
+                                and n.estado = 1
+                                ORDER BY n.fecha_visible DESC
+                                LIMIT $limit";
+        else
+            $from = "FROM $tabla n
+                                where n.estado = 1
+                                ORDER BY n.fecha_publicacion DESC
+                                LIMIT $limit";
+        $sql = $this->db->select("SELECT n.id,
+                                        n.titulo,
+                                        SUBSTRING(n.contenido, 1, 120) as contenido,
+                                        n.img
+                                $from");
+        return $sql;
     }
 
 }

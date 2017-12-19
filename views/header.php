@@ -3,9 +3,17 @@ $helper = new Helper();
 $page = $helper->getPage();
 $class = '';
 $classNoticia = '';
+$classRRHH = '';
+$classPromocion = '';
 switch ($page[0]) {
     case 'noticia':
         $classNoticia = 'class="active"';
+        break;
+    case 'rrhh':
+        $classRRHH = 'class="active"';
+        break;
+    case 'promocion':
+        $classPromocion = 'class="active"';
         break;
     default :
         $class = 'class="active"';
@@ -74,7 +82,7 @@ switch ($page[0]) {
                 <div class="container"> 
                     <!-- Begin .header-logo -->                     
                     <div class="header-logo">
-                        <a href="index-2.html">
+                        <a href="<?= URL; ?>">
                             <img src="<?= URL; ?>public/img/logo.png" alt="Info-News" /> 
                             <h1>Info <span>News</span></h1> 
                             <h4>Portal del Grupo Garden</h4>
@@ -119,11 +127,11 @@ switch ($page[0]) {
                                 <li <?= $classNoticia ?>>
                                     <a href="<?= URL; ?>noticia/listado">Noticias</a> 
                                 </li>  
-                                <li>
+                                <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li> 
                                 <li>
-                                    <a href="<?= URL; ?>promociones/listado">Promociones</a> 
+                                    <a href="<?= URL; ?>promocion/listado">Promociones</a> 
                                 </li>                                 
                                 <li>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>
@@ -148,11 +156,11 @@ switch ($page[0]) {
                                 <li <?= $classNoticia ?>>
                                     <a href="<?= URL; ?>noticia/listado">Noticias</a> 
                                 </li>   
-                                <li>
+                                <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li>
                                 <li>
-                                    <a href="<?= URL; ?>promociones/listado">Promociones</a> 
+                                    <a href="<?= URL; ?>promocion/listado">Promociones</a> 
                                 </li>                                 
                                 <li>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>

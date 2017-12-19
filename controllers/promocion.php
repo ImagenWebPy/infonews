@@ -1,12 +1,12 @@
 <?php
 
-class Noticia extends Controller {
+class Promocion extends Controller {
 
     function __construct() {
         parent::__construct();
     }
-
-    public function listado() {
+    
+    public function listado(){
         $url = $this->helper->getUrl();
         if (!empty($url[2])) {
             $pagina = $url[2];
@@ -14,27 +14,26 @@ class Noticia extends Controller {
             $pagina = 1;
         }
 
-        $this->view->listado = $this->model->listadoNoticias($pagina);
+        $this->view->listado = $this->model->listadoPromociones($pagina);
 
-        $this->view->title = SITE_TITLE . 'Noticias';
-        $this->view->description = 'Listado de Noticias';
+        $this->view->title = SITE_TITLE . 'Promociones';
+        $this->view->description = 'Listado de Promociones';
         $this->view->render('header');
-        $this->view->render('noticia/index');
+        $this->view->render('promocion/index');
         $this->view->render('footer');
     }
-
+    
     public function publicacion() {
         $url = $this->helper->getUrl();
         $id = $url[2];
 
-        $datosMeta = $this->helper->getDatosMetaPublicacion($id, 'noticia');
-        $this->view->contenido = $this->model->getDatosNoticia($id);
-        $this->view->ultimasNoticias = $this->helper->ultimosPost('noticia',1,6);
+        $datosMeta = $this->helper->getDatosMetaPublicacion($id, 'promocion');
+        $this->view->contenido = $this->model->getDatosPromocion($id);
+        $this->view->ultimasNoticias = $this->helper->ultimosPost('promocion',1,6);
         $this->view->title = SITE_TITLE . $datosMeta['titulo'];
         $this->view->description = $datosMeta['contenido'];
         $this->view->render('header');
-        $this->view->render('noticia/post');
+        $this->view->render('promocion/post');
         $this->view->render('footer');
     }
-
 }

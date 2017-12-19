@@ -8,7 +8,7 @@ class Error extends Controller {
 
     public function index() {
         $this->view->title = SITE_TITLE . '404 - Opps, la pagina solicitada no existe.';
-        $this->view->meta_sitename = META_SITENAME;
+        $this->view->description = 'Página de error';
         $this->view->render('header');
         $this->view->render('error/index');
         $this->view->render('footer');

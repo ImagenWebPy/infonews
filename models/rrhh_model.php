@@ -1,12 +1,12 @@
 <?php
 
-class Noticia_Model extends Model {
+class Rrhh_Model extends Model {
 
     function __construct() {
         parent::__construct();
     }
 
-    public function listadoNoticias($pagina, $marca = NULL) {
+    public function listadoRRHH($pagina) {
         if (!empty($pagina)) {
             $page = $pagina;
         } else {
@@ -22,25 +22,21 @@ class Noticia_Model extends Model {
                                 from noticia n
                                 LEFT JOIN marca m on m.id = n.id_marca
                                 where n.estado = 1
-                                and n.id_categoria = 1
+                                and n.id_categoria = 3
                                 ORDER BY n.fecha_visible DESC
                                 LIMIT $pageLimit, $setLimit");
-        if (empty($marca)) {
-            $condicion = "from noticia n
-                        LEFT JOIN marca m on m.id = n.id_marca
-                        where n.estado = 1
-                        and n.id_categoria = 1 ";
-        }
+        $condicion = "from noticia n
+                    LEFT JOIN marca m on m.id = n.id_marca
+                    where n.estado = 1
+                    and n.id_categoria = 3";
         $data = array(
             'listado' => $sql,
-            'paginador' => $this->helper->mostrarPaginador($setLimit, $page, 'noticia', 'noticia/listado', $condicion)
+            'paginador' => $this->helper->mostrarPaginador($setLimit, $page, 'noticia', 'rrhh/listado', $condicion)
         );
         return $data;
     }
 
-
-
-    public function getDatosNoticia($id) {
+    public function getDatosPublicacion($id) {
         $sql = $this->db->select("select titulo, contenido, img, tag, fecha_visible from noticia where id = $id");
         return $sql[0];
     }

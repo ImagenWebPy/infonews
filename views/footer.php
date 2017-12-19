@@ -15,12 +15,12 @@ $helper = new Helper();
                                     <li> 
                                         <div class="item"> 
                                             <div class="item-image">
-                                                <a class="img-link" href="#">
+                                                <a class="img-link" href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                                     <img class="img-responsive img-full" src="<?= URL; ?>public/img/marcas/<?= utf8_encode($item['img']); ?>" alt="<?= utf8_encode($item['img']); ?>">
                                                 </a>
                                             </div>                                                     
                                             <div class="item-content"> 
-                                                <p class="ellipsis"><a href="#"><?= utf8_encode($item['titulo']); ?></a></p> 
+                                                <p class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></p> 
                                             </div>                                                     
                                         </div>                                                 
                                     </li>
@@ -36,12 +36,12 @@ $helper = new Helper();
                                     <li> 
                                         <div class="item"> 
                                             <div class="item-image">
-                                                <a class="img-link" href="#">
+                                                <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                                     <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($item['img']); ?>" alt="<?= utf8_encode($item['img']); ?>">
                                                 </a>
                                             </div>                                                     
                                             <div class="item-content"> 
-                                                <p class="ellipsis"><a href="#"><?= utf8_encode($item['titulo']); ?></a></p> 
+                                                <p class="ellipsis"><a href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></p> 
                                             </div>                                                     
                                         </div>                                                 
                                     </li>                                             
@@ -57,12 +57,12 @@ $helper = new Helper();
                                     <li> 
                                         <div class="item"> 
                                             <div class="item-image">
-                                                <a class="img-link" href="#">
+                                                <a class="img-link" href="<?= URL; ?>rrhh/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                                     <img class="img-responsive img-full" src="<?= URL; ?>public/img/rrhh/<?= utf8_encode($item['img']); ?>" alt="<?= utf8_encode($item['img']); ?>">
                                                 </a>
                                             </div>                                                     
                                             <div class="item-content"> 
-                                                <p class="ellipsis"><a href="#"><?= utf8_encode($item['titulo']); ?></a></p> 
+                                                <p class="ellipsis"><a href="<?= URL; ?>rrhh/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></p> 
                                             </div>                                                     
                                         </div>                                                 
                                     </li>                                             

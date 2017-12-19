@@ -28,7 +28,7 @@ $helper = new Helper();
                         }
                         ?>
                         <div class="news-slider-layer <?= $position; ?>"> 
-                            <a href="<?= URL; ?>noticias/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>" target="_blank"> 
+                            <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>" target="_blank"> 
                                 <div class="content"> 
                                     <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
                                     <p><?= utf8_encode($val['titulo']) ?></p> 
@@ -64,14 +64,14 @@ $helper = new Helper();
                                 <!-- Begin .item -->                                     
                                 <div class="item"> 
                                     <div class="item-image-1">
-                                        <a class="img-link" href="#">
+                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>">
                                             <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($val['img']) ?>" alt="">
                                         </a>
                                         <span><a class="label-5" href="tech-science.html"><?= utf8_encode($val['marca']) ?></a></span>
                                     </div>                                         
                                     <div class="item-content"> 
                                         <div class="title-left title-style04 underline04"> 
-                                            <h3><a href="#"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
+                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
                                         </div>                                             
                                         <?= utf8_encode($val['contenido']) ?>
                                     </div>                                         
@@ -96,14 +96,14 @@ $helper = new Helper();
                                 <!-- Begin .item-->                                     
                                 <div class="item"> 
                                     <div class="item-image-1">
-                                        <a class="img-link" href="#">
+                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>">
                                             <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($val['img']) ?>" alt="">
                                         </a>
                                         <span><a class="label-5" href="tech-science.html"><?= utf8_encode($val['marca']) ?></a></span>
                                     </div>                                         
                                     <div class="item-content"> 
                                         <div class="title-left title-style04 underline04"> 
-                                            <h3><a href="#"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
+                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
                                         </div>                                             
                                         <?= utf8_encode($val['contenido']) ?>
                                     </div>                                         
@@ -137,13 +137,13 @@ $helper = new Helper();
                             <!-- Begin .item-->                                     
                             <div class="item"> 
                                 <div class="item-image-2">
-                                    <a class="img-link" href="#">
+                                    <a class="img-link" href="<?= URL; ?>rrhh/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                         <img class="img-responsive img-full" src="<?= URL; ?>public/img/rrhh/<?= utf8_encode($item['img']) ?>" alt="">
                                     </a>
                                 </div>                                         
                                 <div class="item-content"> 
                                     <div class="title-left title-style04 underline04"> 
-                                        <h3><a href="#"><strong><?= utf8_encode($item['titulo']) ?></a></h3> 
+                                        <h3><a href="<?= URL; ?>rrhh/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><strong><?= utf8_encode($item['titulo']) ?></a></h3> 
                                     </div>                                             
                                     <p><?= substr(strip_tags(utf8_encode($item['contenido'])), 0, 180) ?></p> 
                                 </div>                                         
@@ -170,13 +170,13 @@ $helper = new Helper();
                                     <li> 
                                         <div class="item"> 
                                             <div class="item-image">
-                                                <a class="img-link" href="#">
+                                                <a class="img-link" href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                                     <img class="img-responsive img-full" src="<?= URL; ?>public/img/marcas/<?= utf8_encode($item['img']); ?>" alt="">
                                                 </a>
                                             </div>                                                     
                                             <div class="item-content"> 
-                                                <h4 class="ellipsis"><a href="#"><?= utf8_encode($item['titulo']); ?></a></h4> 
-                                                <p class="ellipsis"><a href="#"><?= substr(utf8_encode($item['contenido']), 0, 100); ?>...</a></p> 
+                                                <h4 class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></h4> 
+                                                <p class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= substr(utf8_encode($item['contenido']), 0, 100); ?>...</a></p> 
                                             </div>                                                     
                                         </div>                                                 
                                     </li>
@@ -334,13 +334,13 @@ $helper = new Helper();
                                 <li> 
                                     <div class="item"> 
                                         <div class="item-image">
-                                            <a class="img-link" href="#">
+                                            <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                                 <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($item['img']) ?>" alt="">
                                             </a>
                                         </div>                                                 
                                         <div class="item-content"> 
                                             <h3><?= utf8_encode($item['marca']) . ' - ' . utf8_encode($item['titulo']) ?></h3> 
-                                            <p class="ellipsis"><a href="#"><?= strip_tags(utf8_encode($item['contenido'])) ?></a></p> 
+                                            <p class="ellipsis"><a href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= strip_tags(utf8_encode($item['contenido'])) ?></a></p> 
                                         </div>                                                 
                                     </div>                                             
                                 </li>                                         
