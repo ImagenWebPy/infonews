@@ -22,9 +22,15 @@ class Noticia_Model extends Model {
                                 from noticia n
                                 LEFT JOIN marca m on m.id = n.id_marca
                                 where n.estado = 1
+                                and n.id_categoria = 1
                                 ORDER BY n.fecha_visible DESC
                                 LIMIT $pageLimit, $setLimit");
-        $condicion = '';
+        if (empty($marca)) {
+            $condicion = "from noticia n
+                        LEFT JOIN marca m on m.id = n.id_marca
+                        where n.estado = 1
+                        and n.id_categoria = 1 ";
+        }
         $data = array(
             'listado' => $sql,
             'paginador' => $this->helper->mostrarPaginador($setLimit, $page, 'noticia', 'noticia/listado', $condicion)

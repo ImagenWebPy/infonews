@@ -7,7 +7,14 @@ class Noticia extends Controller {
     }
 
     public function listado() {
-        $this->views->listado = $this->model->listadoNoticias();
+        $url = $this->helper->getUrl();
+        if (!empty($url[2])) {
+            $pagina = $url[2];
+        } else {
+            $pagina = 1;
+        }
+        
+        $this->view->listado = $this->model->listadoNoticias($pagina);
 
         $this->view->title = SITE_TITLE . 'Noticias';
         $this->view->description = 'Listado de Noticias';
