@@ -134,6 +134,9 @@ switch ($page[0]) {
                                     <a href="<?= URL; ?>promocion/listado">Promociones</a> 
                                 </li>                                 
                                 <li>
+                                    <a href="<?= URL; ?>variedad/listado">Variedades</a> 
+                                </li>                                 
+                                <li>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>
                                 </li>                                 
                             </ul>                             
@@ -161,7 +164,10 @@ switch ($page[0]) {
                                 </li>
                                 <li>
                                     <a href="<?= URL; ?>promocion/listado">Promociones</a> 
-                                </li>                                 
+                                </li>    
+                                <li>
+                                    <a href="<?= URL; ?>variedad/listado">Variedades</a> 
+                                </li> 
                                 <li>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>
                                 </li>                                 

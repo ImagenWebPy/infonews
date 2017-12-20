@@ -273,7 +273,7 @@ $helper = new Helper();
                     <!-- Begin .news -->                                 
                     <div class="news"> 
                         <div class="module-title"> 
-                            <h3 class="title"><span class="bg-1">Variedad</span></h3> 
+                            <h3 class="title"><span class="bg-1">Variedades</span></h3> 
                             <h3 class="subtitle">Últimas novedades</h3> 
                         </div>
                         <?php
