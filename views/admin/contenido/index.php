@@ -130,5 +130,19 @@
             }
             e.handled = true;
         });
+        $(document).on("submit", "#frmEditarContenido", function (e) {
+            var url = "<?= URL ?>admin/editarContenido"; // the script where you handle the form input.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#frmEditarContenido").serialize(), // serializes the form's elements.
+                success: function (data)
+                {
+                    $("#contenido_" + data.id).html(data.content);
+                    $(".genericModal").modal("toggle");
+                }
+            });
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
     });
 </script>

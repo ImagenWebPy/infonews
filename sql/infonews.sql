@@ -10,13 +10,31 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-19 18:19:58
+Date: 2017-12-21 09:15:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `categoria`
+-- Table structure for admin_usuario
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_usuario`;
+CREATE TABLE `admin_usuario` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(80) DEFAULT NULL,
+  `pass` varchar(160) DEFAULT NULL,
+  `nombre` varchar(80) DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_usuario
+-- ----------------------------
+INSERT INTO `admin_usuario` VALUES ('1', 'raul.ramirez@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Raúl Ramírez', '1');
+
+-- ----------------------------
+-- Table structure for categoria
 -- ----------------------------
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
@@ -35,7 +53,7 @@ INSERT INTO `categoria` VALUES ('3', 'Recursos Humanos', '1');
 INSERT INTO `categoria` VALUES ('4', 'Video', '1');
 
 -- ----------------------------
--- Table structure for `clipping`
+-- Table structure for clipping
 -- ----------------------------
 DROP TABLE IF EXISTS `clipping`;
 CREATE TABLE `clipping` (
@@ -53,7 +71,7 @@ CREATE TABLE `clipping` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `marca`
+-- Table structure for marca
 -- ----------------------------
 DROP TABLE IF EXISTS `marca`;
 CREATE TABLE `marca` (
@@ -79,7 +97,7 @@ INSERT INTO `marca` VALUES ('10', 'Mopar', '1');
 INSERT INTO `marca` VALUES ('11', 'División Usados', '1');
 
 -- ----------------------------
--- Table structure for `noticia`
+-- Table structure for noticia
 -- ----------------------------
 DROP TABLE IF EXISTS `noticia`;
 CREATE TABLE `noticia` (
@@ -125,7 +143,24 @@ INSERT INTO `noticia` VALUES ('20', '2', null, 'Lorem ipsum dolor sit amet', '<p
 INSERT INTO `noticia` VALUES ('21', '2', null, 'Praesent egestas volutpat lectus', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed porttitor massa. In mollis sollicitudin tortor non aliquam. Nulla ut maximus leo, ac faucibus est. Vivamus tristique, tortor in venenatis ultrices, nisi urna porttitor purus, sed sollicitudin tortor metus in diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam ultrices ligula at velit sollicitudin faucibus. Cras vulputate iaculis libero ut rutrum. Aliquam scelerisque nunc vel libero aliquet, et ultricies lectus tincidunt. Vestibulum egestas consequat varius. Cras id enim et neque sollicitudin luctus. Aenean sagittis, erat et porttitor congue, erat turpis consequat turpis, eu tempor orci velit quis leo. Cras et diam libero. Aenean a feugiat ipsum. Vestibulum tristique aliquet elit ac pharetra. Praesent a elit at dui imperdiet sagittis.</p>\r\n<p>Praesent egestas volutpat lectus, et aliquam ipsum rutrum et. Sed laoreet interdum libero. Etiam id justo id nisl lobortis sodales. Mauris vel metus finibus justo placerat eleifend ut sed quam. Nulla facilisi. Nulla imperdiet feugiat est, in accumsan sapien accumsan eget. Sed dapibus felis ultricies turpis maximus aliquam. Curabitur euismod iaculis nibh, vitae vehicula turpis auctor at. Duis pellentesque rutrum nulla. Nam diam lorem, finibus vel sem et, ultrices vestibulum urna. Fusce laoreet, justo nec pulvinar sodales, magna velit malesuada ipsum, nec porttitor libero quam hendrerit lorem. Quisque ut rutrum justo, id rhoncus risus. Ut et orci ultricies, sodales dolor id, facilisis odio. Nullam quis sollicitudin erat.</p>\r\n<p>Vivamus ante orci, maximus a est ac, interdum dapibus nulla. Sed vestibulum vitae elit et maximus. Sed finibus, arcu ac hendrerit elementum, odio urna cursus est, sed malesuada turpis orci eu turpis. Aenean posuere fermentum lacus a consectetur. Pellentesque commodo ex id cursus sagittis. Praesent et tristique nunc. Nulla facilisi. Nullam orci elit, sollicitudin nec malesuada nec, mollis ac magna. Sed dictum justo ac mauris aliquam scelerisque. Nullam ultricies, erat id vestibulum fringilla, mi mi ultricies velit, vestibulum convallis eros est et est. Ut dolor tellus, facilisis non elementum eget, interdum id metus.</p>\r\n<p>In sodales et dui sit amet pharetra. Phasellus neque erat, efficitur eu porta vel, porta ac massa. Vestibulum porta nulla leo, at luctus erat ultricies quis. Phasellus non nulla ac ante condimentum sollicitudin. Ut vitae enim nulla. Quisque accumsan, nisi eu hendrerit eleifend, nisi elit fringilla orci, sed tristique ipsum est in ante. Quisque tincidunt eleifend leo, in cursus felis sollicitudin aliquet. Etiam ornare velit a nisl vestibulum, at lacinia tortor luctus. Mauris non ornare ante. Nullam nisi risus, consectetur eget pretium quis, bibendum at mi. In rutrum urna varius quam porttitor, in posuere odio rhoncus. Donec volutpat, lorem at molestie fringilla, ipsum sapien maximus lectus, sed ultricies ante urna et enim. Proin vel iaculis dolor, quis varius dui. Quisque ultrices lorem nec iaculis posuere. Phasellus eu sollicitudin massa, vitae venenatis nisi. Nullam vehicula tincidunt laoreet.</p>\r\n<p>Etiam sollicitudin nibh accumsan, tristique leo eu, porta quam. Integer lacinia nulla ac ex congue, accumsan condimentum tellus eleifend. Vivamus pharetra magna eu diam finibus, eu pellentesque diam viverra. Sed pulvinar ullamcorper magna efficitur consectetur. Duis accumsan et nunc finibus rutrum. Pellentesque convallis tincidunt vestibulum. Mauris congue dapibus diam. Vivamus porta consectetur dignissim.</p>', 'index_800x400-image17.jpg', 'loremp, ipsum, tag, etiqueta', null, '2017-12-18 10:29:05', '2017-12-18 10:28:49', 'VARIOS', '5', '1');
 
 -- ----------------------------
--- Table structure for `promocion`
+-- Table structure for noticia_img
+-- ----------------------------
+DROP TABLE IF EXISTS `noticia_img`;
+CREATE TABLE `noticia_img` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_noticia` int(11) unsigned DEFAULT NULL,
+  `id_tipo_archivo` int(11) unsigned DEFAULT NULL,
+  `img` varchar(80) DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of noticia_img
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for promocion
 -- ----------------------------
 DROP TABLE IF EXISTS `promocion`;
 CREATE TABLE `promocion` (
@@ -153,3 +188,21 @@ INSERT INTO `promocion` VALUES ('5', '8', 'Promo Especial', '<p>BT-50, Mantenimi
 INSERT INTO `promocion` VALUES ('6', '2', 'Prisma Joy', '<p>Prisma Joy entrega de $1.000 y cuotas desde Gs. 1.145.000</p>', 'Chevrolet_Prisma-Joy-6x12.jpg', 'chevrolet, prisma', '0', null, '2017-12-18 11:21:13', '1');
 INSERT INTO `promocion` VALUES ('7', '5', 'Jeep Compass', '<p>Llega donde otros solo sueñan. Contado desde $28.990, cuotas desde $458</p>', 'COMPASS_6x12.jpg', 'jeep,compass', '0', null, '2017-12-18 11:24:15', '1');
 INSERT INTO `promocion` VALUES ('8', '2', 'New Tracker', '<p>All-New Tracker. Entrega desde $2.700, cuotas desde $405</p>', 'Tracker_6x12_APP.jpg', 'chevrolet,tracker', '0', null, '2017-12-18 11:24:46', '1');
+
+-- ----------------------------
+-- Table structure for tipo_archivo
+-- ----------------------------
+DROP TABLE IF EXISTS `tipo_archivo`;
+CREATE TABLE `tipo_archivo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tipo_archivo
+-- ----------------------------
+INSERT INTO `tipo_archivo` VALUES ('1', 'Imagen', '1');
+INSERT INTO `tipo_archivo` VALUES ('2', 'Video', '1');
+SET FOREIGN_KEY_CHECKS=1;
