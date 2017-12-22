@@ -33,7 +33,7 @@ class Helper {
         $String = str_replace("ý", "y", $String);
 
         $String = str_replace("'", "", $String);
-        $String = str_replace(".", "_", $String);
+        //$String = str_replace(".", "_", $String);
         $String = str_replace(" ", "_", $String);
         $String = str_replace("/", "_", $String);
 
@@ -608,5 +608,27 @@ class Helper {
                                 $from");
         return $sql;
     }
-
+    
+    /**
+     * Funcion que retorna un string html con la imagen formateada para ser cargada en la galeria
+     * @param int $id
+     * @return string
+     */
+    public function loadImage($id) {
+        $item = $this->getImage($id);
+        $id = $item[0]['id'];
+        $mostrar = '<a class="pointer btnMostrarImg" id="mostrarImg' . $id . '" data-id="' . $id . '"><span class="label label-success">Mostrar</span></a>';
+        $contenido = '<div class="col-sm-3" id="imagenGaleria' . $id . '">
+                        <img class="img-responsive" src="' . URL . 'public/img/galeria/' . utf8_encode($item[0]['img']) . '" alt="Photo">
+                        <p>' . $mostrar . ' | <a class="pointer btnEliminarImg" data-id="' . $id . '" id="eliminarImg' . $id . '"><span class="label label-danger">Eliminar</span></a></p>
+                      </div>';
+        return $contenido;
+    }
+    
+    public function getImage($id) {
+        $item = $this->db->select("select ni.id, ni.img, ni.estado
+                                from noticia_img ni
+                                where ni.id = $id");
+        return $item;
+    }
 }

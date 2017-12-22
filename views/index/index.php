@@ -205,23 +205,23 @@ $helper = new Helper();
     </div>                 
     <!-- End #parallax-section1 -->                 
     <!--========== BEGIN .MODULE ==========-->                 
-    <section class="module"> 
-        <!-- Begin .title-style05-bg -->                     
+<!--    <section class="module"> 
+         Begin .title-style05-bg                      
         <div class="center-title"> 
             <span class="title-line-left"></span> 
             <h4 class="title-style05 style-01">Últimos contenidos en Video</h4> 
             <span class="title-line-right"></span> 
         </div>                     
-        <!-- End .title-style05-bg -->                     
-    </section>                 
+         End .title-style05-bg                      
+    </section>                 -->
     <!--========== END .MODULE ==========-->                 
     <!--========== BEGIN .MODULE ==========-->                 
-    <section class="module dark"> 
-        <!--========== BEGIN VIDEO ==========-->
-        <!-- Begin .container-->                     
+<!--    <section class="module dark"> 
+        ========== BEGIN VIDEO ==========
+         Begin .container                     
         <div class="container"> 
             <div class="row no-gutter"> 
-                <!-- Begin .col-md-9 -->                             
+                 Begin .col-md-9                              
                 <div class="col-sm-9 col-md-9"> 
                     <div class="video-full"> 
                         <div class="video-container"> 
@@ -232,8 +232,8 @@ $helper = new Helper();
                         </div>                                     
                     </div>                                 
                 </div>                             
-                <!-- End .col-md-9-->                             
-                <!-- Begin .col-md-3-->                             
+                 End .col-md-9                             
+                 Begin .col-md-3                             
                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                     <div class="title-left title-style03 underline03"> 
                         <h4><a href="">Ver Todos los Videos</a></h4> 
@@ -255,12 +255,12 @@ $helper = new Helper();
                         </div>                                     
                     </div>                                 
                 </div>                             
-                <!-- End .col-md-3-->                             
+                 End .col-md-3                             
             </div>                         
         </div>                     
-        <!--End .container-->                     
-        <!--========== END VIDEO ==========-->                     
-    </section>                 
+        End .container                     
+        ========== END VIDEO ==========                     
+    </section>                 -->
     <!--========== END .MODULE ==========-->                 
     <!--========== BEGIN .MODULE ==========-->                 
     <section class="module highlight"> 
@@ -283,18 +283,18 @@ $helper = new Helper();
                         <!-- Begin .item -->                                     
                         <div class="item"> 
                             <div class="item-image-1">
-                                <a class="img-link" href="#">
+                                <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>">
                                     <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($VariosPrincipal['img']); ?>" alt="">
                                 </a>
                             </div>                                         
                             <div class="item-content"> 
                                 <div class="title-left title-style04 underline04"> 
-                                    <h3><a href="#"><?= utf8_encode($VariosPrincipal['titulo']); ?></a></h3> 
+                                    <h3><a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><?= utf8_encode($VariosPrincipal['titulo']); ?></a></h3> 
                                 </div>                                             
                                 <br> 
                                 <p><?= utf8_encode($VariosPrincipal['contenido']); ?></p> 
                                 <div> 
-                                    <a href="#"><span class="read-more">Continuar Leyendo</span></a> 
+                                    <a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><span class="read-more">Continuar Leyendo</span></a> 
                                 </div>                                             
                             </div>                                         
                         </div>                                     
@@ -304,13 +304,13 @@ $helper = new Helper();
                             <?php foreach ($this->varios as $item): ?>
                                 <div class="item-block"> 
                                     <div class="item-image">
-                                        <a class="img-link" href="#">
+                                        <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
                                             <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
                                         </a>
                                     </div>                                             
                                     <div class="item-content">
                                         <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
-                                        <p><a href="#" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
+                                        <p><a href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
                                     </div>                                             
                                 </div>
                             <?php endforeach; ?>

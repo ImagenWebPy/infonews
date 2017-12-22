@@ -1,3 +1,6 @@
+<?php
+$helper = new Helper();
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -22,7 +25,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Listado de Vehículos</h3>
                         <div class="col-xs-6 pull-right">
-                            <button type="button" class="btn btn-block btn-primary btnAgregarMarca">Agregar Contenido</button>
+                            <button type="button" class="btn btn-block btn-primary btnAgregarContenido">Agregar Contenido</button>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -123,8 +126,8 @@
                     dataType: "json"
                 }).done(function (data) {
                     $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
-                    $(".genericModal .modal-title").html(data['titulo']);
-                    $(".genericModal .modal-body").html(data['contenido']);
+                    $(".genericModal .modal-title").html(data.titulo);
+                    $(".genericModal .modal-body").html(data.contenido);
                     $(".genericModal").modal("toggle");
                 });
             }
@@ -143,6 +146,60 @@
                 }
             });
             e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+        $(document).on("click", ".btnEliminarImg", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var id = $(this).attr("data-id");
+                $.ajax({
+                    url: "<?= URL; ?>admin/eliminarGaleriaIMG",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data.result != false) {
+                            $("#imagenGaleria" + data.id).remove();
+                        }
+                    }
+                }); //END AJAX
+            }
+            e.handled = true;
+        });
+        $(document).on("click", ".btnMostrarImg", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var id = $(this).attr("data-id");
+                $.ajax({
+                    url: "<?= URL; ?>admin/mostrarImgBtn",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        $('#mostrarImg' + data.id).html(data.content);
+                    }
+                }); //END AJAX
+            }
+            e.handled = true;
+        });
+        $(document).on("click", ".btnAgregarContenido", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                $.ajax({
+                    url: "<?= URL; ?>admin/modalAgregarContenido",
+                    type: "POST",
+                    dataType: "json"
+                }).done(function (data) {
+                    $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
+                    $(".genericModal .modal-title").html(data.titulo);
+                    $(".genericModal .modal-body").html(data.contenido);
+                    $(".genericModal").modal("toggle");
+                });
+            }
+            e.handled = true;
         });
     });
 </script>

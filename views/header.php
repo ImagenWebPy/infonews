@@ -5,6 +5,7 @@ $class = '';
 $classNoticia = '';
 $classRRHH = '';
 $classPromocion = '';
+$classVariedad = '';
 switch ($page[0]) {
     case 'noticia':
         $classNoticia = 'class="active"';
@@ -14,6 +15,9 @@ switch ($page[0]) {
         break;
     case 'promocion':
         $classPromocion = 'class="active"';
+        break;
+    case 'variedad':
+        $classVariedad = 'class="active"';
         break;
     default :
         $class = 'class="active"';
@@ -130,10 +134,10 @@ switch ($page[0]) {
                                 <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li> 
-                                <li>
+                                <li <?= $classPromocion; ?>>
                                     <a href="<?= URL; ?>promocion/listado">Promociones</a> 
                                 </li>                                 
-                                <li>
+                                <li <?= $classVariedad; ?>>
                                     <a href="<?= URL; ?>variedad/listado">Variedades</a> 
                                 </li>                                 
                                 <li>
@@ -162,10 +166,10 @@ switch ($page[0]) {
                                 <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li>
-                                <li>
+                                <li <?= $classPromocion; ?>>
                                     <a href="<?= URL; ?>promocion/listado">Promociones</a> 
                                 </li>    
-                                <li>
+                                <li <?= $classVariedad; ?>>
                                     <a href="<?= URL; ?>variedad/listado">Variedades</a> 
                                 </li> 
                                 <li>
