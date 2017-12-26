@@ -7,6 +7,8 @@ order allow,deny
 deny from all
 </files>
 
+<IfModule mod_rewrite.c>
+
 RewriteEngine On
 
 #Inyecciones SQL
@@ -41,6 +43,7 @@ RewriteCond %{REQUEST_FILENAME} !-l
 
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
+</IfModule>
 #CORS
 #<FilesMatch ".(eot|ttf|otf|woff|woff2)">
 #  Header set Access-Control-Allow-Origin "*"
