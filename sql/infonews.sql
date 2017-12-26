@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `admin_usuario`
 --
-
+DROP TABLE IF EXISTS `admin_usuario`;
 CREATE TABLE IF NOT EXISTS `admin_usuario` (
   `id` int(11) unsigned NOT NULL,
   `email` varchar(80) DEFAULT NULL,
@@ -51,7 +51,7 @@ INSERT INTO `admin_usuario` (`id`, `email`, `pass`, `nombre`, `estado`) VALUES
 --
 -- Estructura de tabla para la tabla `categoria`
 --
-
+DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id` int(11) unsigned NOT NULL,
   `descripcion` varchar(85) DEFAULT NULL,
@@ -73,7 +73,7 @@ INSERT INTO `categoria` (`id`, `descripcion`, `estado`) VALUES
 --
 -- Estructura de tabla para la tabla `clipping`
 --
-
+DROP TABLE IF EXISTS `clipping`;
 CREATE TABLE IF NOT EXISTS `clipping` (
   `id` int(11) unsigned NOT NULL,
   `titulo` varchar(160) DEFAULT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `clipping` (
 --
 -- Estructura de tabla para la tabla `marca`
 --
-
+DROP TABLE IF EXISTS `marca`;
 CREATE TABLE IF NOT EXISTS `marca` (
   `id` int(11) unsigned NOT NULL,
   `descripcion` varchar(30) NOT NULL,
@@ -117,7 +117,7 @@ INSERT INTO `marca` (`id`, `descripcion`, `estado`) VALUES
 --
 -- Estructura de tabla para la tabla `noticia`
 --
-
+DROP TABLE IF EXISTS `noticia`;
 CREATE TABLE IF NOT EXISTS `noticia` (
   `id` int(11) unsigned NOT NULL,
   `id_categoria` int(11) unsigned NOT NULL,
@@ -171,7 +171,7 @@ INSERT INTO `noticia` (`id`, `id_categoria`, `id_marca`, `titulo`, `contenido`, 
 --
 -- Estructura de tabla para la tabla `noticia_img`
 --
-
+DROP TABLE IF EXISTS `noticia_img`;
 CREATE TABLE IF NOT EXISTS `noticia_img` (
   `id` int(11) unsigned NOT NULL,
   `id_noticia` int(11) unsigned DEFAULT NULL,
@@ -225,7 +225,7 @@ INSERT INTO `noticia_img` (`id`, `id_noticia`, `id_tipo_archivo`, `img`, `estado
 --
 -- Estructura de tabla para la tabla `promocion`
 --
-
+DROP TABLE IF EXISTS `promocion`;
 CREATE TABLE IF NOT EXISTS `promocion` (
   `id` int(11) unsigned NOT NULL,
   `id_marca` int(11) unsigned DEFAULT NULL,
@@ -258,7 +258,7 @@ INSERT INTO `promocion` (`id`, `id_marca`, `titulo`, `contenido`, `img`, `tag`, 
 --
 -- Estructura de tabla para la tabla `tipo_archivo`
 --
-
+DROP TABLE IF EXISTS `tipo_archivo`;
 CREATE TABLE IF NOT EXISTS `tipo_archivo` (
   `id` int(11) unsigned NOT NULL,
   `descripcion` varchar(60) DEFAULT NULL,
