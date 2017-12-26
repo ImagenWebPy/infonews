@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-22 18:38:11
+Date: 2017-12-26 08:56:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,12 +26,17 @@ CREATE TABLE `admin_usuario` (
   `nombre` varchar(80) DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin_usuario
 -- ----------------------------
 INSERT INTO `admin_usuario` VALUES ('1', 'raul.ramirez@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Raúl Ramírez', '1');
+INSERT INTO `admin_usuario` VALUES ('2', 'jovino.prieto@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Jovino Prieto', '1');
+INSERT INTO `admin_usuario` VALUES ('3', 'ssosa@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Sheila Sosa', '1');
+INSERT INTO `admin_usuario` VALUES ('4', 'vvillalba@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Viviana Villalba', '1');
+INSERT INTO `admin_usuario` VALUES ('5', 'javeiro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'José Aveiro', '1');
+INSERT INTO `admin_usuario` VALUES ('6', 'dnavarro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Diego Navarro', '1');
 
 -- ----------------------------
 -- Table structure for `categoria`
@@ -60,8 +65,8 @@ CREATE TABLE `clipping` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `titulo` varchar(160) DEFAULT NULL,
   `img` varchar(120) DEFAULT NULL,
-  `fecha_visible` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_publicacion` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_visible` datetime DEFAULT NULL,
+  `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -115,7 +120,7 @@ CREATE TABLE `noticia` (
   `orden` int(1) unsigned DEFAULT NULL,
   `estado` int(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of noticia
@@ -143,6 +148,7 @@ INSERT INTO `noticia` VALUES ('20', '2', null, 'Lorem ipsum dolor sit amet', '<p
 INSERT INTO `noticia` VALUES ('21', '2', null, 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed porttitor massa. In mollis sollicitudin tortor non aliquam. Nulla ut maximus leo, ac faucibus est. Vivamus tristique, tortor in venenatis ultrices, nisi urna porttitor purus, sed sollicitudin tortor metus in diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam ultrices ligula at velit sollicitudin faucibus. Cras vulputate iaculis libero ut rutrum. Aliquam scelerisque nunc vel libero aliquet, et ultricies lectus tincidunt. Vestibulum egestas consequat varius. Cras id enim et neque sollicitudin luctus. Aenean sagittis, erat et porttitor congue, erat turpis consequat turpis, eu tempor orci velit quis leo. Cras et diam libero. Aenean a feugiat ipsum. Vestibulum tristique aliquet elit ac pharetra. Praesent a elit at dui imperdiet sagittis.</p>\r\n\r\n<p>Praesent egestas volutpat lectus, et aliquam ipsum rutrum et. Sed laoreet interdum libero. Etiam id justo id nisl lobortis sodales. Mauris vel metus finibus justo placerat eleifend ut sed quam. Nulla facilisi. Nulla imperdiet feugiat est, in accumsan sapien accumsan eget. Sed dapibus felis ultricies turpis maximus aliquam. Curabitur euismod iaculis nibh, vitae vehicula turpis auctor at. Duis pellentesque rutrum nulla. Nam diam lorem, finibus vel sem et, ultrices vestibulum urna. Fusce laoreet, justo nec pulvinar sodales, magna velit malesuada ipsum, nec porttitor libero quam hendrerit lorem. Quisque ut rutrum justo, id rhoncus risus. Ut et orci ultricies, sodales dolor id, facilisis odio. Nullam quis sollicitudin erat.</p>\r\n\r\n<p>Vivamus ante orci, maximus a est ac, interdum dapibus nulla. Sed vestibulum vitae elit et maximus. Sed finibus, arcu ac hendrerit elementum, odio urna cursus est, sed malesuada turpis orci eu turpis. Aenean posuere fermentum lacus a consectetur. Pellentesque commodo ex id cursus sagittis. Praesent et tristique nunc. Nulla facilisi. Nullam orci elit, sollicitudin nec malesuada nec, mollis ac magna. Sed dictum justo ac mauris aliquam scelerisque. Nullam ultricies, erat id vestibulum fringilla, mi mi ultricies velit, vestibulum convallis eros est et est. Ut dolor tellus, facilisis non elementum eget, interdum id metus.</p>\r\n\r\n<p>In sodales et dui sit amet pharetra. Phasellus neque erat, efficitur eu porta vel, porta ac massa. Vestibulum porta nulla leo, at luctus erat ultricies quis. Phasellus non nulla ac ante condimentum sollicitudin. Ut vitae enim nulla. Quisque accumsan, nisi eu hendrerit eleifend, nisi elit fringilla orci, sed tristique ipsum est in ante. Quisque tincidunt eleifend leo, in cursus felis sollicitudin aliquet. Etiam ornare velit a nisl vestibulum, at lacinia tortor luctus. Mauris non ornare ante. Nullam nisi risus, consectetur eget pretium quis, bibendum at mi. In rutrum urna varius quam porttitor, in posuere odio rhoncus. Donec volutpat, lorem at molestie fringilla, ipsum sapien maximus lectus, sed ultricies ante urna et enim. Proin vel iaculis dolor, quis varius dui. Quisque ultrices lorem nec iaculis posuere. Phasellus eu sollicitudin massa, vitae venenatis nisi. Nullam vehicula tincidunt laoreet.</p>\r\n\r\n<p>Etiam sollicitudin nibh accumsan, tristique leo eu, porta quam. Integer lacinia nulla ac ex congue, accumsan condimentum tellus eleifend. Vivamus pharetra magna eu diam finibus, eu pellentesque diam viverra. Sed pulvinar ullamcorper magna efficitur consectetur. Duis accumsan et nunc finibus rutrum. Pellentesque convallis tincidunt vestibulum. Mauris congue dapibus diam. Vivamus porta consectetur dignissim.</p>\r\n', '21_X-Trail_1200x628.jpg', 'loremp,ipsum,tag,etiqueta', '21_2017_NISSAN_KICKS.mp4', '2017-12-19 00:00:00', '2017-12-18 10:28:49', 'VARIOS', '5', '1');
 INSERT INTO `noticia` VALUES ('25', '1', '2', 'Contenido de Prueba', '<p>e&ntilde;e. acci&oacute;n</p>\r\n', '25_20108124_10209952939282262_5851007642021973967_n.jpg', '', null, '2017-12-27 00:00:00', '2017-12-22 18:23:10', null, null, '0');
 INSERT INTO `noticia` VALUES ('26', '1', '7', 'Titulo', '<p>Contenido e&ntilde;e</p>\r\n', '26_20525875_10154801049912644_8272335020126800527_n.png', 'tag', '26_CAMPEON_ABSOLUTO_-_NISSAN.mp4', '2017-12-27 00:00:00', '2017-12-22 18:29:41', null, null, '0');
+INSERT INTO `noticia` VALUES ('27', '1', '11', 'asasa', '<p>sasasa asd as dsad</p>\r\n', '27_17492918_631771397022770_157816233991534185_o.jpg', 'asdsadas', '27_2017_NISSAN_KICKS.mp4', '2017-12-13 00:00:00', '2017-12-22 18:44:28', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `noticia_img`
@@ -155,7 +161,7 @@ CREATE TABLE `noticia_img` (
   `img` varchar(80) DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of noticia_img
@@ -181,6 +187,13 @@ INSERT INTO `noticia_img` VALUES ('49', '26', '1', '26_18403630_1153342604769687
 INSERT INTO `noticia_img` VALUES ('50', '0', '1', '0_18156417_1142564709180810_6438240444276392576_o.jpg', '1');
 INSERT INTO `noticia_img` VALUES ('51', '0', '1', '0_18278580_1148103585293589_8271099072811413499_o.jpg', '1');
 INSERT INTO `noticia_img` VALUES ('52', '0', '1', '0_18403630_1153342604769687_5483513724743173388_n.jpg', '1');
+INSERT INTO `noticia_img` VALUES ('53', '0', '1', '0_19875576_832869306864772_5291028043127397126_n.png', '1');
+INSERT INTO `noticia_img` VALUES ('54', '0', '1', '0_20108124_10209952939282262_5851007642021973967_n.jpg', '1');
+INSERT INTO `noticia_img` VALUES ('55', '0', '1', '0_20525875_10154801049912644_8272335020126800527_n.png', '1');
+INSERT INTO `noticia_img` VALUES ('56', '27', '1', '27_19875576_832869306864772_5291028043127397126_n.png', '1');
+INSERT INTO `noticia_img` VALUES ('57', '27', '1', '27_20108124_10209952939282262_5851007642021973967_n.jpg', '1');
+INSERT INTO `noticia_img` VALUES ('58', '27', '1', '27_20525875_10154801049912644_8272335020126800527_n.png', '1');
+INSERT INTO `noticia_img` VALUES ('59', '27', '1', '27_acisa_logo.jpg', '1');
 
 -- ----------------------------
 -- Table structure for `promocion`
@@ -195,7 +208,7 @@ CREATE TABLE `promocion` (
   `tag` text,
   `destacado` int(1) unsigned DEFAULT '0',
   `orden` int(1) unsigned DEFAULT NULL,
-  `fecha_publicacion` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
