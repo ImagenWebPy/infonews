@@ -9,7 +9,7 @@
 $host = getHost();
 switch ($host) {
     case '192.168.10.99':
-        define('URL', '192.168.10.99/infonews/');
+        define('URL', 'http://192.168.10.99/infonews/');
         define('DB_USER', 'root');
         define('DB_PASS', 'G@rdenMKTWS3rv3r');
         define('DB_NAME', 'infonews');
