@@ -37,7 +37,8 @@ class Promocion_Model extends Model {
     }
 
     public function getDatosPromocion($id) {
-        $sql = $this->db->select("SELECT p.titulo,
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
                                         p.contenido,
                                         p.img,
                                         m.descripcion AS marca,

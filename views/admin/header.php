@@ -1,3 +1,28 @@
+<?php
+$helper = new Helper();
+$page = $helper->getPage();
+$classContenido = $classPromocion = $classClipping = $classDashboard = '';
+$classDashboard = 'class="active"';
+if (!empty($page[1])) {
+    switch ($page[1]) {
+        case 'contenido':
+            $classContenido = 'class="active"';
+            $classDashboard = '';
+            break;
+        case 'promocion':
+            $classPromocion = 'class="active"';
+            $classDashboard = '';
+            break;
+        case 'clipping':
+            $classClipping = 'class="active"';
+            $classDashboard = '';
+            break;
+        default :
+            $classDashboard = 'class="active"';
+            break;
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -97,9 +122,10 @@
                 <section class="sidebar">
                     <ul class="sidebar-menu">
                         <li class="header">MENU PRINCIPAL</li>
-                        <li class="active"><a href="<?= URL; ?>admin/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                        <li><a href="<?= URL; ?>admin/contenido"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Contenidos</span></a></li>
-                        <li><a href="<?= URL; ?>admin/clipping"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Clipping</span></a></li>
+                        <li <?= $classDashboard; ?>><a href="<?= URL; ?>admin/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                        <li <?= $classContenido; ?>><a href="<?= URL; ?>admin/contenido"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Contenidos</span></a></li>
+                        <li <?= $classPromocion; ?>><a href="<?= URL; ?>admin/promocion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Promociones</span></a></li>
+                        <li <?= $classClipping; ?>><a href="<?= URL; ?>admin/clipping"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Clipping</span></a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

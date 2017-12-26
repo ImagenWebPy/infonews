@@ -33,7 +33,7 @@ $helper = new Helper();
                                     <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
                                     <p><?= utf8_encode($val['titulo']) ?></p> 
                                 </div>                                         
-                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/<?= utf8_encode($val['img']); ?>" alt=""> 
+                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/thumb/<?= utf8_encode($val['img_destacado']); ?>" alt=""> 
                             </a>                                     
                         </div>                                                          
 

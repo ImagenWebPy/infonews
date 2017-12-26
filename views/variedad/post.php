@@ -67,4 +67,8 @@ $contenido = $this->contenido;
         <!--========== END .CONTAINER ==========-->
     </section>
     <!--========== END .MODULE ==========--> 
+    <?php
+    echo $helper->getPostGallery($contenido['id']);
+    echo $helper->getPostVideo($contenido['id']);
+    ?>
 </div>

@@ -340,11 +340,47 @@ class Admin_Model extends Model {
         $tag = (!empty($data['tag'])) ? utf8_decode($data['tag']) : NULL;
         $orden = (!empty($data['orden'])) ? utf8_decode($data['orden']) : NULL;
         $contenido = (!empty($data['contenido'])) ? utf8_decode($data['contenido']) : NULL;
+        $img_destacado = NULL;
+        if ($destacado == 'PRINCIPAL') {
+            $serverdir = 'public/img/slider/thumb/';
+            switch ($orden) {
+                case 1:
+                    //574x443
+                    $ancho = 574;
+                    $alto = 443;
+                    break;
+                case 2:
+                    //274x442
+                    $ancho = 274;
+                    $alto = 442;
+                    break;
+                case 3:
+                case 4:
+                    //374x215
+                    $ancho = 374;
+                    $alto = 215;
+                    break;
+                default :
+                    $ancho = 800;
+                    $alto = 400;
+                    break;
+            }
+            $sql = $this->db->select("select img from noticia where id = $id");
+            $imagen = $sql[0]['img'];
+            $nombre_img = explode('.', $imagen);
+            $extension = strtolower(end($nombre_img));
+            $img = $nombre_img[0] . '_thumb';
+            $imagen_final = $img . '.' . $extension;
+            $img_destacado = $imagen_final;
+            $imagen = 'public/img/slider/' . $imagen;
+            $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+        }
         $update = array(
             'id_categoria' => $data['id_categoria'],
             'id_marca' => $marca,
             'titulo' => utf8_decode($data['titulo']),
             'contenido' => $contenido,
+            'img_destacado' => $img_destacado,
             'tag' => $tag,
             'fecha_visible' => date('Y-m-d', strtotime($data['fecha_visible'])),
             'destacado' => $destacado,
