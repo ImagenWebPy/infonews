@@ -60,8 +60,8 @@ CREATE TABLE `clipping` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `titulo` varchar(160) DEFAULT NULL,
   `img` varchar(120) DEFAULT NULL,
-  `fecha_visible` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_publicacion` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_visible` datetime DEFAULT NULL,
+  `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -195,7 +195,7 @@ CREATE TABLE `promocion` (
   `tag` text,
   `destacado` int(1) unsigned DEFAULT '0',
   `orden` int(1) unsigned DEFAULT NULL,
-  `fecha_publicacion` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
