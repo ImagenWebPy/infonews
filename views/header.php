@@ -40,6 +40,7 @@ switch ($page[0]) {
         <!-- Stylesheets -->         
         <link rel="stylesheet" href="<?= URL; ?>public/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/main.css"> 
+        <link rel="stylesheet" href="<?= URL; ?>public/css/custom.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/style.css">
         <link rel="stylesheet" href="<?= URL; ?>public/css/colors.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/responsive.css"> 
@@ -49,6 +50,7 @@ switch ($page[0]) {
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->         
         <link rel="stylesheet" href="<?= URL; ?>public/font-awesome/css/font-awesome.min.css">
+        <script src="<?= URL; ?>public/js/jquery-3.1.1.min.js"></script> 
     </head>     
     <body> 
         <div id="pageloader"> 

@@ -117,7 +117,7 @@ $helper = new Helper();
 </div>
 <!-- /Modal -->
 <!-- External JavaScripts -->         
-<script src="<?= URL; ?>public/js/jquery-3.1.1.min.js"></script>         
+        
 <script src="<?= URL; ?>public/js/bootstrap.min.js"></script>         
 <script src="<?= URL; ?>public/js/jquery-ui.min.js"></script>         
 <script src="<?= URL; ?>public/js/plugins.js"></script>         

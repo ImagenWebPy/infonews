@@ -405,6 +405,7 @@ class Helper {
                                         n.titulo,
                                         n.contenido,
                                         n.img,
+                                        n.img_destacado,
                                         c.descripcion as categoria,
                                         m.descripcion as marca
                                 FROM noticia n
@@ -590,7 +591,7 @@ class Helper {
      * @return array
      */
     public function ultimosPost($tabla, $idCategoria, $limit) {
-        if($tabla == 'noticia')
+        if ($tabla == 'noticia')
             $from = "FROM $tabla n
                                 where n.id_categoria = $idCategoria
                                 and n.estado = 1
@@ -608,7 +609,7 @@ class Helper {
                                 $from");
         return $sql;
     }
-    
+
     /**
      * Funcion que retorna un string html con la imagen formateada para ser cargada en la galeria
      * @param int $id
@@ -624,11 +625,89 @@ class Helper {
                       </div>';
         return $contenido;
     }
-    
+
     public function getImage($id) {
         $item = $this->db->select("select ni.id, ni.img, ni.estado
                                 from noticia_img ni
                                 where ni.id = $id");
         return $item;
     }
+
+    public function getPostGallery($id) {
+        $sql = $this->db->select("select ni.img 
+                                from noticia_img ni 
+                                where ni.id_noticia = $id
+                                and ni.id_tipo_archivo = 1;");
+        $data = '';
+        if (!empty($sql)) {
+            $data = '<section class="module">
+                    <div class="container"> 
+                        <!--========== BEGIN .BIG-GALLERY ==========--> 
+                        <!-- Begin .carousel-title -->
+                        <h3><a href="#" class="carousel-title">Galería de Imagenes</a></h3>
+                        <!-- End .carousel-title --> 
+                        <!-- Begin .gallery-slider owl-carousel -->
+                        <div id="big-gallery-slider-3" class="owl-carousel">';
+            foreach ($sql as $item) {
+                $data .= '  <div class = "big-gallery">
+                                <a class = "pointer clickGaleria" data-src = "' . URL . 'public/img/galeria/' . $item['img'] . '">
+                                    <img src = "' . URL . 'public/img/galeria/' . $item['img'] . '" alt = "' . $item['img'] . '">
+                                </a>
+                            </div>';
+            }
+            $data .= '  </div>
+                        <!-- End .gallery-slider owl-carousel --> 
+                        <!--========== END .BIG-GALLERY ==========--> 
+                    </div>
+                </section>
+                <!-- Creates the bootstrap modal where the image will appear -->
+                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Imagen de la Galería</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img src="" class="imagepreview">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $(".clickGaleria").on("click", function() {
+                            $(\'.imagepreview\').html("");
+                            $(\'.imagepreview\').attr(\'src\', $(this).attr(\'data-src\')); // here asign the image to the modal when the user click the enlarge link
+                            $(\'#imagemodal\').modal(\'show\'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+                         });
+                    });
+                </script>';
+        }
+        return $data;
+    }
+
+    public function getPostVideo($id) {
+        $sql = $this->db->select("select n.video 
+                                from noticia n
+                                where n.id = $id");
+        $data = '';
+        if (!empty($sql[0]['video'])) {
+            $data = '<section class="module">
+                        <div class="container">
+                            <h3><a href="#" class="carousel-title">Video</a></h3>
+                            <div class="col-md-12">
+                                <video class="videoPlayer" controls>
+                                    <source src="' . URL . 'public/videos/' . $sql[0]['video'] . '" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </section>';
+        }
+        return $data;
+    }
+
 }

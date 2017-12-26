@@ -36,7 +36,7 @@ class Variedad_Model extends Model {
     }
     
      public function getDatosVariedad($id) {
-        $sql = $this->db->select("select titulo, contenido, img, tag, fecha_visible from noticia where id = $id");
+        $sql = $this->db->select("select id, titulo, contenido, img, tag, fecha_visible from noticia where id = $id");
         return $sql[0];
     }
 
