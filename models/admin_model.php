@@ -434,7 +434,8 @@ class Admin_Model extends Model {
         $sql = '';
         if ($galeria == FALSE) {
             $sql = $this->db->select("select img from noticia where id = $idPost");
-            unlink($dir . $sql[0]['img']);
+            if (file_exists($dir . $sql[0]['img']))
+                unlink($dir . $sql[0]['img']);
         }
     }
 
