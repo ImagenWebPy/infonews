@@ -1,6 +1,9 @@
 <?php
 $helper = new Helper();
 $contenido = $this->contenido;
+$carpeta = "marca";
+if($contenido['destacado'] == 'PRINCIPAL')
+    $carpeta = "slider";
 ?>
 <div id="main-section"> 
     <!--========== BEGIN .CONTAINER ==========-->
@@ -15,7 +18,11 @@ $contenido = $this->contenido;
                 <div class="col-md-8"> 
                     <!--========== BEGIN .POST ==========-->
                     <div class="post post-full clearfix">
-                        <div class="entry-media"> <a href="#"><img src="<?= URL; ?>public/img/marcas/<?= utf8_encode($contenido['img']); ?>" alt="<?= utf8_encode($contenido['img']); ?>" class="img-responsive"></a></div>
+                        <div class="entry-media"> 
+                            <a href="#">
+                                <img src="<?= URL; ?>public/img/<?= $carpeta; ?>/<?= utf8_encode($contenido['img']); ?>" alt="<?= utf8_encode($contenido['img']); ?>" class="img-responsive">
+                            </a>
+                        </div>
                         <div class="entry-main">
                             <div class="entry-title">
                                 <h4 class="entry-title"><a href="#"><?= utf8_encode($contenido['titulo']); ?></a></h4>
@@ -67,5 +74,5 @@ $contenido = $this->contenido;
         <!--========== END .CONTAINER ==========-->
     </section>
     <!--========== END .MODULE ==========--> 
-    
+
 </div>

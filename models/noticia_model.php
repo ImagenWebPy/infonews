@@ -41,7 +41,7 @@ class Noticia_Model extends Model {
 
 
     public function getDatosNoticia($id) {
-        $sql = $this->db->select("select id, titulo, contenido, img, tag, fecha_visible from noticia where id = $id");
+        $sql = $this->db->select("select id, titulo, contenido, img, tag, fecha_visible, destacado from noticia where id = $id");
         return $sql[0];
     }
 
