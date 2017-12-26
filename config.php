@@ -8,6 +8,12 @@
 // Always provide a TRAILING SLASH (/) AFTER A PATH
 $host = getHost();
 switch ($host) {
+    case 'www.garden.com.py':
+        define('URL', 'http://www.garden.com.py/infogarden2017/');
+        define('DB_USER', 'web');
+        define('DB_PASS', 'WebG@rdenMKT');
+        define('DB_NAME', 'infonews');
+        break;
     case 'garden.com.py':
         define('URL', 'http://www.garden.com.py/infogarden2017/');
         define('DB_USER', 'web');
