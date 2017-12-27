@@ -497,6 +497,7 @@ class Helper {
                                         n.tag
                                 FROM noticia n
                                 where n.destacado = 'VARIOS'
+                                and n.estado = 1
                                 ORDER BY n.orden ASC");
         return $sql;
     }

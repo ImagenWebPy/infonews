@@ -27,9 +27,26 @@ class Admin extends Controller {
             unset($_SESSION['message']);
     }
 
+    public function promocion() {
+        $this->view->public_css = array("admin/plugins/datatables/dataTables.bootstrap.css", "admin/plugins/html5fileupload/html5fileupload.css", "admin/plugins/datepicker/datepicker3.css", "admin/plugins/jquery.tagsinput/jquery.tagsinput.css");
+        $this->view->public_js = array("admin/plugins/datatables/jquery.dataTables.min.js", "admin/plugins/datatables/dataTables.bootstrap.min.js", "admin/plugins/html5fileupload/html5fileupload.min.js", "admin/plugins/datepicker/bootstrap-datepicker.js", "admin/plugins/jquery.tagsinput/jquery.tagsinput.js", "admin/plugins/ckeditor/ckeditor.js");
+        $this->view->title = 'Promociones';
+        $this->view->render('admin/header');
+        $this->view->render('admin/promocion/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
     public function listadoDTContenidos() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTContenidos();
+        echo $data;
+    }
+
+    public function listadoDTPromociones() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTPromociones();
         echo $data;
     }
 
@@ -43,12 +60,31 @@ class Admin extends Controller {
         echo json_encode($data);
     }
 
+    public function cambiarEstadoPromocion() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->modifcarEstadoPromocion($datos);
+        echo json_encode($data);
+    }
+
     public function editarDTContenido() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
             'id' => $this->helper->cleanInput($_POST['id'])
         );
         $datos = $this->model->editarDTContenido($data);
+        echo $datos;
+    }
+
+    public function editarDTPromocion() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->editarDTPromocion($data);
         echo $datos;
     }
 
@@ -67,6 +103,22 @@ class Admin extends Controller {
             'estado' => (!empty($_POST['contenido']['mostrar'])) ? $_POST['contenido']['mostrar'] : 0
         );
         $datos = $this->model->editarContenido($data);
+        echo json_encode($datos);
+    }
+
+    public function editarPromocion() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['promocion']['id']),
+            'id_marca' => $this->helper->cleanInput($_POST['promocion']['marca']),
+            'titulo' => $this->helper->cleanInput($_POST['promocion']['titulo']),
+            'contenido' => $_POST['promocion']['contenido'],
+            'tag' => $this->helper->cleanInput($_POST['promocion']['tag']),
+            'orden' => $this->helper->cleanInput($_POST['promocion']['orden']),
+            'destacado' => (!empty($_POST['promocion']['destacado'])) ? $_POST['promocion']['destacado'] : 0,
+            'estado' => (!empty($_POST['promocion']['mostrar'])) ? $_POST['promocion']['mostrar'] : 0
+        );
+        $datos = $this->model->editarPromocion($data);
         echo json_encode($datos);
     }
 
@@ -252,6 +304,12 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function modalAgregarPromocion() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarPromocion();
+        echo $datos;
+    }
+
     public function frmAgregarContenido() {
         if (!empty($_POST)) {
             $id_categoria = $this->helper->cleanInput($_POST['contenido']['categoria']);
@@ -364,6 +422,55 @@ class Admin extends Controller {
                 'mensaje' => 'Se ha agregado correctamente el contenido'
             ));
             header('Location:' . URL . 'admin/contenido/');
+        }
+    }
+
+    public function frmAgregarPromocion() {
+        if (!empty($_POST)) {
+            $data = array(
+                'id_marca' => (!empty($_POST['promocion']['marca'])) ? $this->helper->cleanInput($_POST['promocion']['marca']) : NULL,
+                'estado' => (!empty($_POST['promocion']['mostrar'])) ? $_POST['promocion']['mostrar'] : 0,
+                'titulo' => $this->helper->cleanInput($_POST['promocion']['titulo']),
+                'contenido' => $_POST['promocion']['contenido'],
+                'tag' => $this->helper->cleanInput($_POST['promocion']['tag'])
+            );
+            $idPost = $this->model->frmAgregarPromocion($data);
+            
+            #IMAGENES
+            if (!empty($_FILES['file_archivo'])) {
+                $error = false;
+                $dir = 'public/img/promociones/';
+                $serverdir = $dir;
+                #IMAGENES
+                $newname = $idPost . '_' . $_FILES['file_archivo']['name'];
+                $fname = $this->helper->cleanUrl($newname);
+                $contents = file_get_contents($_FILES['file_archivo']['tmp_name']);
+
+                $handle = fopen($serverdir . $fname, 'w');
+                fwrite($handle, $contents);
+                fclose($handle);
+                #############
+                #SE REDIMENSIONA LA IMAGEN
+                #############
+                # ruta de la imagen a redimensionar 
+                $imagen = $serverdir . $fname;
+                # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
+                $imagen_final = $fname;
+                $ancho = 1200;
+                $alto = 500;
+                $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+                #############
+                $imagenes = array(
+                    'id' => $idPost,
+                    'imagenes' => $fname
+                );
+                $this->model->frmAddPromocionImg($imagenes);
+            }
+            Session::set('message', array(
+                'type' => 'success',
+                'mensaje' => 'Se ha agregado correctamente el contenido'
+            ));
+            header('Location:' . URL . 'admin/promocion/');
         }
     }
 

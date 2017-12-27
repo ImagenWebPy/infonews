@@ -42,6 +42,42 @@ class Admin_Model extends Model {
         return $json;
     }
 
+    public function listadoDTPromociones() {
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        p.fecha_publicacion,
+                                        p.destacado,
+                                        p.orden,
+                                        p.estado,
+                                        p.img
+                                FROM promocion p
+                                ORDER BY p.id DESC");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $img = '<img src="' . URL . 'public/img/promociones/' . $item['img'] . '" style="width: 160px;">';
+            $btnEditar = '<a class="editDTPromocion pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "promocion_$id",
+                'id' => $item['id'],
+                'imagen' => $img,
+                'titulo' => utf8_encode($item['titulo']),
+                'destacado' => (!empty($item['destacado'])) ? 'Sí' : '-',
+                'orden' => (!empty($item['orden'])) ? $item['orden'] : '-',
+                'fecha' => date('d-m-Y', strtotime($item['fecha_publicacion'])),
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
     public function modifcarEstadoDetalle($datos) {
         $id = $datos['id'];
         $estado = $datos['estado'];
@@ -87,6 +123,60 @@ class Admin_Model extends Model {
                 <td>' . $destacado . '</td>
                 <td>' . $orden . '</td>
                 <td>' . date('d-m-Y', strtotime($sql[0]['fecha_visible'])) . '</td>
+                <td>' . $estado . '</td>
+                <td>' . $btnEditar . '</td>';
+        $data = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $data;
+    }
+
+    public function modifcarEstadoPromocion($datos) {
+        $id = $datos['id'];
+        $estado = $datos['estado'];
+        #Actualizamos el estado de acuerdo al valor actual
+        if ($estado == 1)
+            $newEstado = 0;
+        else
+            $newEstado = 1;
+        $update = array(
+            'estado' => $newEstado
+        );
+        $this->db->update('promocion', $update, "id = $id");
+        #retornamos la fila
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        p.fecha_publicacion,
+                                        p.destacado,
+                                        p.orden,
+                                        p.estado,
+                                        p.img
+                                FROM promocion p
+                                where p.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        if (!empty($sql[0]['destacado'])) {
+            $destacado = 'Sí';
+        } else {
+            $destacado = '-';
+        }
+        if (!empty($sql[0]['orden'])) {
+            $orden = $sql[0]['orden'];
+        } else {
+            $orden = '-';
+        }
+        $img = '<img src="' . URL . 'public/img/promociones/' . $sql[0]['img'] . '" style="width: 160px;">';
+        $btnEditar = '<a class="editDTPromocion pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>
+                <td>' . $img . '</td>
+                <td>' . utf8_encode($sql[0]['titulo']) . '</td>
+                <td>' . $destacado . '</td>
+                <td>' . $orden . '</td>
+                <td>' . date('d-m-Y', strtotime($sql[0]['fecha_publicacion'])) . '</td>
                 <td>' . $estado . '</td>
                 <td>' . $btnEditar . '</td>';
         $data = array(
@@ -310,10 +400,124 @@ class Admin_Model extends Model {
         return json_encode($datos);
     }
 
+    public function editarDTPromocion($data) {
+        $id = $data['id'];
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        p.contenido,
+                                        p.fecha_publicacion,
+                                        p.destacado,
+                                        p.orden,
+                                        p.estado,
+                                        p.img,
+                                        p.tag,
+                                        m.id as id_marca,
+                                        m.descripcion as marca
+                                FROM promocion p
+                                LEFT JOIN marca m on m.id = p.id_marca
+                                where p.id = $id");
+        $mostrarPromocion = ($sql[0]['estado'] == 1) ? 'checked' : '';
+        $destacarPromocion = (!empty($sql[0]['destacado'])) ? 'checked' : '';
+        $sqlMarca = $this->db->select("select id, descripcion from marca where estado = 1 ORDER BY descripcion ASC");
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Promocion</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarPromocion" method="POST">
+                            <input type="hidden" name="promocion[id]" value="' . utf8_encode($sql[0]['id']) . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="promocion[mostrar]" ' . $mostrarPromocion . ' value="1">
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="promocion[destacado]" ' . $destacarPromocion . ' value="1">
+                                            Destacar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Marca</label>
+                                    <select class="form-control" name="promocion[marca]">
+                                        <option value="">Seleccione una Marca</option>';
+        foreach ($sqlMarca as $item) {
+            $selected = ($item['id'] == $sql[0]['id_marca']) ? 'selected' : '';
+            $form .= '                  <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Orden</label><span class="help-block" style="display: initial; font-size:12px;">(Completar solo si el campo Destacar ese encuentra marcado)</span>
+                                    <input type="numer" name="promocion[orden]" class="form-control" placeholder="#" value="' . $sql[0]['orden'] . '">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input type="text" name="promocion[titulo]" class="form-control" placeholder="Tags" value="' . utf8_encode($sql[0]['titulo']) . '">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea name="promocion[contenido]" class="form-control" rows="10" cols="80">
+                                        ' . utf8_encode($sql[0]['contenido']) . '
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tags</label><span> Ingrese las palabras separadas por comas(,)</span>
+                                    <input type="text" name="promocion[tag]" class="form-control tags" placeholder="Tags" value="' . utf8_encode($sql[0]['tag']) . '">
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg btnSubmitEditForm">Guardar Cambios</button>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Imagen Principal</label>
+                                    <div class="html5fileupload fileImagen" data-url="' . URL . 'admin/uploadImgPromocion" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                        <input type="file" name="file_archivo" />
+                                    </div>
+                                    <script>
+                                        $(".html5fileupload.fileImagen").html5fileupload({
+                                            data:{id:' . $id . '},
+                                            onAfterStartSuccess: function(response) {
+                                                $("#imgPromocion" + response.id).html(response.content);
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                <div class col-md-12 id="imgPromocion' . $id . '">';
+        if (!empty($sql[0]['img'])) {
+            $form .= '              <img class="img-responsive" src="' . URL . 'public/img/promociones/' . $sql[0]['img'] . '">';
+        }
+        $form .= '              </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        CKEDITOR.replace("promocion[contenido]");
+                        $(".tags").tagsInput();
+                    });
+                </script>
+                ';
+        $datos = array(
+            'titulo' => utf8_encode($sql[0]['marca']) . ' - ' . utf8_encode($sql[0]['titulo']),
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
     public function editarContenido($data) {
         $id = $data['id'];
         $destacado = NULL;
-        if ($data['destacado']) {
+        if (!empty($data['destacado'])) {
             switch ($data['id_categoria']) {
                 case 1: #Marca
                     if (($data['orden'] >= 1) && ($data['orden'] <= 4))
@@ -420,6 +624,67 @@ class Admin_Model extends Model {
                 <td>' . $destacado . '</td>
                 <td>' . $orden . '</td>
                 <td>' . date('d-m-Y', strtotime($sql[0]['fecha_visible'])) . '</td>
+                <td>' . $estado . '</td>
+                <td>' . $btnEditar . '</td>';
+        $datos = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $datos;
+    }
+
+    public function editarPromocion($data) {
+        $id = $data['id'];
+        $estado = 1;
+        if (empty($data['estado'])) {
+            $estado = 0;
+        }
+        $marca = (!empty($data['id_marca'])) ? $data['id_marca'] : NULL;
+        $tag = (!empty($data['tag'])) ? utf8_decode($data['tag']) : NULL;
+        $orden = (!empty($data['orden'])) ? utf8_decode($data['orden']) : NULL;
+        $contenido = (!empty($data['contenido'])) ? utf8_decode($data['contenido']) : NULL;
+        $update = array(
+            'id_marca' => $marca,
+            'titulo' => utf8_decode($data['titulo']),
+            'contenido' => $contenido,
+            'tag' => $tag,
+            'destacado' => $data['destacado'],
+            'orden' => $orden,
+            'estado' => $estado
+        );
+        $db = $this->db->update('promocion', $update, "id = $id");
+        $sql = $this->db->select("SELECT p.id,
+                                        p.titulo,
+                                        p.fecha_publicacion,
+                                        p.destacado,
+                                        p.orden,
+                                        p.estado,
+                                        p.img
+                                FROM promocion p
+                                where p.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        if (!empty($sql[0]['destacado'])) {
+            $destacado = 'Sí';
+        } else {
+            $destacado = '-';
+        }
+        if (!empty($sql[0]['orden'])) {
+            $orden = $sql[0]['orden'];
+        } else {
+            $orden = '-';
+        }
+        $img = '<img src="' . URL . 'public/img/promociones/' . $sql[0]['img'] . '" style="width: 160px;">';
+        $btnEditar = '<a class="editDTPromocion pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>
+                <td>' . $img . '</td>
+                <td>' . utf8_encode($sql[0]['titulo']) . '</td>
+                <td>' . $destacado . '</td>
+                <td>' . $orden . '</td>
+                <td>' . date('d-m-Y', strtotime($sql[0]['fecha_publicacion'])) . '</td>
                 <td>' . $estado . '</td>
                 <td>' . $btnEditar . '</td>';
         $datos = array(
@@ -688,8 +953,93 @@ class Admin_Model extends Model {
         return json_encode($datos);
     }
 
+    public function modalAgregarPromocion() {
+        $sqlMarca = $this->db->select("select id, descripcion from marca where estado = 1 ORDER BY descripcion ASC");
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Promocion</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmAgregarPromocion" action="' . URL . '/admin/frmAgregarPromocion" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="promocion[mostrar]" value="1" checked>
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="promocion[destacado]" value="1">
+                                            Destacar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Marca</label>
+                                    <select class="form-control" name="promocion[marca]">
+                                        <option value="">Seleccione una Marca</option>';
+        foreach ($sqlMarca as $item) {
+            $form .= '                  <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Orden</label><span class="help-block" style="display: initial; font-size:12px;">(Completar solo si el campo Destacar ese encuentra marcado)</span>
+                                    <input type="numer" name="promocion[orden]" class="form-control" placeholder="#" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input type="text" name="promocion[titulo]" class="form-control" placeholder="Título" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea name="promocion[contenido]" class="form-control" rows="10" cols="80">
+                                        
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tags</label><span> Ingrese las palabras separadas por comas(,)</span>
+                                    <input type="text" name="promocion[tag]" class="form-control tags" placeholder="Tags" value="">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Imagen Principal</label>
+                                    <div class="html5fileupload filePromocion" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                        <input type="file" name="file_archivo" />
+                                    </div>
+                                    <script>
+                                        $(".html5fileupload.filePromocion").html5fileupload();
+                                    </script>
+                                </div>
+                                <hr>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg btnSubmitEditForm">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        CKEDITOR.replace("promocion[contenido]");
+                        $(".tags").tagsInput();
+                    });
+                </script>
+                ';
+        $datos = array(
+            'titulo' => 'Agegar Promocion',
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
     public function frmAgregarContenido($data) {
-        var_dump($data);
         $this->db->insert('noticia', array(
             'id_categoria' => $data['id_categoria'],
             'id_marca' => $data['id_marca'],
@@ -704,12 +1054,33 @@ class Admin_Model extends Model {
         return $id;
     }
 
+    public function frmAgregarPromocion($data) {
+        $this->db->insert('promocion', array(
+            'id_marca' => $data['id_marca'],
+            'titulo' => utf8_decode($data['titulo']),
+            'contenido' => utf8_decode($data['contenido']),
+            'tag' => utf8_decode($data['tag']),
+            'fecha_publicacion' => date('Y-m-d H:i:s'),
+            'estado' => $data['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        return $id;
+    }
+
     public function frmAddNoticiaImg($img) {
         $id = $img['id'];
         $update = array(
             'img' => $img['imagenes']
         );
         $this->db->update('noticia', $update, "id = $id");
+    }
+
+    public function frmAddPromocionImg($img) {
+        $id = $img['id'];
+        $update = array(
+            'img' => $img['imagenes']
+        );
+        $this->db->update('promocion', $update, "id = $id");
     }
 
     public function frmAddNoticiaImgGaleria($imagenes) {
