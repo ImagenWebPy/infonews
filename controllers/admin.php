@@ -324,7 +324,7 @@ class Admin extends Controller {
             );
             $idPost = $this->model->frmAgregarContenido($data);
             #IMAGENES
-            if (!empty($_FILES['file_imagen'])) {
+            if (!empty($_FILES['file_imagen']['name'])) {
                 $error = false;
                 switch ($id_categoria) {
                     case 1: #Marca
@@ -364,7 +364,7 @@ class Admin extends Controller {
                 );
                 $this->model->frmAddNoticiaImg($imagenes);
             }
-            if (!empty($_FILES['file_galeria'])) {
+            if (!empty($_FILES['file_galeria']['name'])) {
                 $filename = array();
                 $dir = 'public/img/galeria/';
                 $serverdir = $dir;
@@ -398,7 +398,7 @@ class Admin extends Controller {
                 );
                 $this->model->frmAddNoticiaImgGaleria($imagenes);
             }
-            if (!empty($_FILES['file_video'])) {
+            if (!empty($_FILES['file_video']['name'])) {
                 $error = false;
                 $dir = 'public/videos/';
                 $serverdir = $dir;
@@ -435,7 +435,7 @@ class Admin extends Controller {
                 'tag' => $this->helper->cleanInput($_POST['promocion']['tag'])
             );
             $idPost = $this->model->frmAgregarPromocion($data);
-            
+
             #IMAGENES
             if (!empty($_FILES['file_archivo'])) {
                 $error = false;

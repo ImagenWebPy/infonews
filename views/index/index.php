@@ -35,7 +35,7 @@ $helper = new Helper();
                         }
                         ?>
                         <div class="news-slider-layer <?= $position; ?>" > 
-                            <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>" target="_blank"> 
+                            <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"> 
                                 <div class="content"> 
                                     <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
                                     <p><?= utf8_encode($val['titulo']) ?></p> 

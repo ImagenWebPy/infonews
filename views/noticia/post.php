@@ -1,8 +1,8 @@
 <?php
 $helper = new Helper();
 $contenido = $this->contenido;
-$carpeta = "marca";
-if($contenido['destacado'] == 'PRINCIPAL')
+$carpeta = "marcas";
+if ($contenido['destacado'] == 'PRINCIPAL')
     $carpeta = "slider";
 ?>
 <div id="main-section"> 
@@ -74,5 +74,8 @@ if($contenido['destacado'] == 'PRINCIPAL')
         <!--========== END .CONTAINER ==========-->
     </section>
     <!--========== END .MODULE ==========--> 
-
+    <?php
+    echo $helper->getPostGallery($contenido['id']);
+    echo $helper->getPostVideo($contenido['id']);
+    ?>
 </div>
