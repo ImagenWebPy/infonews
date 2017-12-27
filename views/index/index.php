@@ -12,28 +12,35 @@ $helper = new Helper();
                     <?php
                     foreach ($this->slider as $key => $val):
                         $position = '';
+                        $style0 = "";
+                        $style1 = "";
+                        $style23 = "";
                         switch ($key) {
                             case 0:
                                 $position = 'first';
+                                $style0 = 'style="width: 574px; height: 442px;"';
                                 break;
                             case 1:
                                 $position = 'second';
+                                $style1 = 'style="width: 274px; height: 442px;"';
                                 break;
                             case 2:
                                 $position = 'third';
+                                $style23 = 'style="width: 374px; height: 215px;"';
                                 break;
                             case 3:
                                 $position = 'fourth';
+                                $style23 = 'style="width: 374px; height: 215px;"';
                                 break;
                         }
                         ?>
-                        <div class="news-slider-layer <?= $position; ?>"> 
+                        <div class="news-slider-layer <?= $position; ?>" > 
                             <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>" target="_blank"> 
                                 <div class="content"> 
                                     <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
                                     <p><?= utf8_encode($val['titulo']) ?></p> 
                                 </div>                                         
-                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/thumb/<?= utf8_encode($val['img_destacado']); ?>" alt=""> 
+                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/thumb/<?= utf8_encode($val['img_destacado']); ?>" alt="<?= utf8_encode($val['img_destacado']); ?>" <?= $style0 . $style1 . $style23; ?>> 
                             </a>                                     
                         </div>                                                          
 
@@ -138,7 +145,7 @@ $helper = new Helper();
                             <div class="item"> 
                                 <div class="item-image-2">
                                     <a class="img-link" href="<?= URL; ?>rrhh/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/rrhh/<?= utf8_encode($item['img']) ?>" alt="">
+                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/rrhh/<?= utf8_encode($item['img']) ?>" alt="" style="width: 372px; height: 186px;">
                                     </a>
                                 </div>                                         
                                 <div class="item-content"> 

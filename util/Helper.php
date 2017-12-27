@@ -558,7 +558,7 @@ class Helper {
         $sql = $this->db->select("select tag 
                                 from noticia
                                 ORDER BY fecha_visible DESC
-                                LIMIT 10");
+                                LIMIT 4");
         $tags = array();
         foreach ($sql as $item) {
             $val = explode(',', $item['tag']);
