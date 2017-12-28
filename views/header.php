@@ -96,7 +96,7 @@ switch ($page[0]) {
                     <!-- Begin .header-logo -->                     
                     <div class="header-logo">
                         <a href="<?= URL; ?>">
-                            <img src="<?= URL; ?>public/img/logo.png" alt="Info-News" /> 
+                            <img src="<?= URL; ?>public/img/Garden_Grupo_sin fondo.png" alt="Info-News" style="width: 65px;" /> 
                             <h1>Info <span>News</span></h1> 
                             <h4>Portal Interno del Grupo Garden</h4>
                         </a>

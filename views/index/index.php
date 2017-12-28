@@ -56,7 +56,7 @@ $helper = new Helper();
         <div class="container"> 
             <div class="module-title"> 
                 <h3 class="title"><span class="bg-1">Clasificados</span></h3> 
-                <h3 class="subtitle">Vé los últimos clasificados de las marcas</h3> 
+                <h3 class="subtitle">Ve los últimos clasificados de las marcas</h3> 
             </div>                         
             <!--========== BEGIN .ROW ==========-->                         
             <div class="row no-gutter"> 
