@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-28 17:37:46
+Date: 2017-12-28 18:29:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,7 +74,7 @@ CREATE TABLE `clipping` (
   `tipo` enum('Garden','Competencia') DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of clipping
@@ -112,6 +112,14 @@ INSERT INTO `clipping` VALUES ('31', '5', '2', null, '31_IMG_20171228_170614.jpg
 INSERT INTO `clipping` VALUES ('32', '5', '15', null, '32_IMG_20171228_170645.jpg', '32_IMG_20171228_170645_thumb.jpg', null, '2017-12-27', '2017-12-28 17:27:26', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('33', '3', '2', null, '33_IMG_20171228_172316.jpg', '33_IMG_20171228_172316_thumb.jpg', '21', '2017-12-27', '2017-12-28 17:33:27', 'Garden', '1');
 INSERT INTO `clipping` VALUES ('34', '3', '2', null, '34_IMG_20171228_172324.jpg', '34_IMG_20171228_172324_thumb.jpg', '23', '2017-12-27', '2017-12-28 17:33:47', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('35', '3', '2', null, '35_IMG_20171228_180331.jpg', '35_IMG_20171228_180331_thumb.jpg', '21', '2017-12-28', '2017-12-28 18:16:21', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('36', '3', '2', null, '36_IMG_20171228_180339.jpg', '36_IMG_20171228_180339_thumb.jpg', '23', '2017-12-28', '2017-12-28 18:16:49', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('37', '5', '13', null, '37_IMG_20171228_181229.jpg', '37_IMG_20171228_181229_thumb.jpg', null, '2017-12-28', '2017-12-28 18:22:23', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('38', '5', '2', null, '38_IMG_20171228_181333.jpg', '38_IMG_20171228_181333_thumb.jpg', '25', '2017-12-28', '2017-12-28 18:22:49', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('39', '5', '15', null, '39_IMG_20171228_181355.jpg', '39_IMG_20171228_181355_thumb.jpg', null, '2017-12-28', '2017-12-28 18:23:16', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('40', '4', '16', null, '40_IMG_20171228_181741.jpg', '40_IMG_20171228_181741_thumb.jpg', '3', '2017-12-28', '2017-12-28 18:26:50', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('41', '4', '14', null, '41_IMG_20171228_181808.jpg', '41_IMG_20171228_181808_thumb.jpg', '17', '2017-12-28', '2017-12-28 18:28:07', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('42', '4', '8', null, '42_IMG_20171228_181822.jpg', '42_IMG_20171228_181822_thumb.jpg', '23', '2017-12-28', '2017-12-28 18:28:40', 'Competencia', '1');
 
 -- ----------------------------
 -- Table structure for `marca`
@@ -297,7 +305,7 @@ CREATE TABLE `seccion_medio` (
   `descripcion` varchar(60) DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of seccion_medio
@@ -317,6 +325,7 @@ INSERT INTO `seccion_medio` VALUES ('12', 'Empresas', '1');
 INSERT INTO `seccion_medio` VALUES ('13', 'Portada', '1');
 INSERT INTO `seccion_medio` VALUES ('14', 'Clasificados', '1');
 INSERT INTO `seccion_medio` VALUES ('15', 'Contratapa', '1');
+INSERT INTO `seccion_medio` VALUES ('16', 'País', '1');
 
 -- ----------------------------
 -- Table structure for `tipo_archivo`
