@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-28 15:37:33
+Date: 2017-12-28 15:48:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -241,8 +241,6 @@ INSERT INTO `noticia_img` VALUES ('74', '2', '1', '2_EuroNcap.jpg', '0');
 INSERT INTO `noticia_img` VALUES ('75', '2', '1', '2_EuroNcap.jpg', '1');
 INSERT INTO `noticia_img` VALUES ('72', '27', '1', '27_audi.png', '1');
 INSERT INTO `noticia_img` VALUES ('76', '2', '1', '2_Stonic.jpg', '1');
-INSERT INTO `noticia_img` VALUES ('77', '28', '1', '28_', '1');
-INSERT INTO `noticia_img` VALUES ('78', '29', '1', '29_', '1');
 
 -- ----------------------------
 -- Table structure for `promocion`

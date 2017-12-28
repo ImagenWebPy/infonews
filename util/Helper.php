@@ -641,8 +641,8 @@ class Helper {
                         <!-- Begin .gallery-slider owl-carousel -->
                         <div id="big-gallery-slider-3" class="owl-carousel">';
             foreach ($sql as $item) {
-                $data .= '  <div class = "big-gallery">
-                                <a class = "pointer clickGaleria" data-src = "' . URL . 'public/img/galeria/' . $item['img'] . '">
+                $data .= '  <div class="big-gallery">
+                                <a href="' . URL . 'public/img/galeria/' . $item['img'] . '" data-lightbox="clipping">
                                     <img src = "' . URL . 'public/img/galeria/' . $item['img'] . '" alt = "' . $item['img'] . '">
                                 </a>
                             </div>';
@@ -651,33 +651,7 @@ class Helper {
                         <!-- End .gallery-slider owl-carousel --> 
                         <!--========== END .BIG-GALLERY ==========--> 
                     </div>
-                </section>
-                <!-- Creates the bootstrap modal where the image will appear -->
-                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Imagen de la Galería</h4>
-                            </div>
-                            <div class="modal-body">
-                                <img src="" class="imagepreview">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $(".clickGaleria").on("click", function() {
-                            $(\'.imagepreview\').html("");
-                            $(\'.imagepreview\').attr(\'src\', $(this).attr(\'data-src\')); // here asign the image to the modal when the user click the enlarge link
-                            $(\'#imagemodal\').modal(\'show\'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
-                         });
-                    });
-                </script>';
+                </section>';
         }
         return $data;
     }
