@@ -103,7 +103,7 @@ switch ($page[0]) {
                     </div>                     
                     <!-- End .header-logo -->                     
                     <!--========== BEGIN .NAVBAR #MOBILE-NAV ==========-->                     
-                    <nav class="navbar navbar-default" id="mobile-nav"> 
+                    <nav class="navbar navbar-default" id="mobile-nav" style="z-index: 9999;"> 
                         <div class="navbar-header"> 
                             <button type="button" class="navbar-toggle" data-toggle="collapse" id="sidenav-toggle"> 
                                 <span class="icon-bar"></span> 
@@ -159,7 +159,7 @@ switch ($page[0]) {
                 </div>                 
                 <!-- End .container -->                 
                 <!--========== BEGIN .NAVBAR #FIXED-NAVBAR ==========-->                 
-                <div class="navbar" id="fixed-navbar"> 
+                <div class="navbar" id="fixed-navbar" style="z-index: 9999;"> 
                     <!--========== BEGIN MAIN-MENU .NAVBAR-COLLAPSE COLLAPSE #FIXED-NAVBAR-TOOGLE ==========-->                     
                     <div class="main-menu nav navbar-collapse collapse" id="fixed-navbar-toggle"> 
                         <!--========== BEGIN .CONTAINER ==========-->                         
