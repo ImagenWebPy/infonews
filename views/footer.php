@@ -123,6 +123,9 @@ $helper = new Helper();
 <script src="<?= URL; ?>public/js/plugins.js"></script>         
 <!-- JavaScripts -->         
 <script src="<?= URL; ?>public/js/functions.js"></script>         
+<script src="<?= URL; ?>public/js/lightbox.js"></script>  
+<!-- bootstrap datepicker -->
+<script src="<?= URL; ?>public/js/bootstrap-datepicker.js"></script>
 </body>     
 
 <!-- Mirrored from via-theme.com/24hNews/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Dec 2017 19:15:24 GMT -->

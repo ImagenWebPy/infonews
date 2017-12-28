@@ -6,6 +6,7 @@ $classNoticia = '';
 $classRRHH = '';
 $classPromocion = '';
 $classVariedad = '';
+$classClipping = '';
 switch ($page[0]) {
     case 'noticia':
         $classNoticia = 'class="active"';
@@ -18,6 +19,9 @@ switch ($page[0]) {
         break;
     case 'variedad':
         $classVariedad = 'class="active"';
+        break;
+    case 'clipping':
+        $classClipping = 'class="active"';
         break;
     default :
         $class = 'class="active"';
@@ -46,6 +50,9 @@ switch ($page[0]) {
         <link rel="stylesheet" href="<?= URL; ?>public/css/responsive.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/jquery-ui.min.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/weather-icons.min.css"> 
+        <link rel="stylesheet" href="<?= URL; ?>public/css/lightbox.css"> 
+        <!-- bootstrap datepicker -->
+        <link rel="stylesheet" href="<?= URL; ?>public/css/datepicker3.css">
         <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->         
@@ -129,22 +136,22 @@ switch ($page[0]) {
                             <ul class="sidenav-menu"> 
                                 <li <?= $class ?>>
                                     <a href="<?= URL; ?>">Inicio</a>
-                                </li>                                 
+                                </li>      
+                                <li <?= $classPromocion; ?>>
+                                    <a href="<?= URL; ?>promocion/listado">Clasificados</a> 
+                                </li>
                                 <li <?= $classNoticia ?>>
                                     <a href="<?= URL; ?>noticia/listado">Noticias</a> 
-                                </li>  
-                                <li <?= $classRRHH; ?>>
-                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
-                                </li> 
-                                <li <?= $classPromocion; ?>>
-                                    <a href="<?= URL; ?>promocion/listado">Promociones</a> 
-                                </li>                                 
+                                </li>   
+                                <li <?= $classClipping; ?>>
+                                    <a href="<?= URL; ?>clipping/listado">Clipping</a>
+                                </li>    
                                 <li <?= $classVariedad; ?>>
                                     <a href="<?= URL; ?>variedad/listado">Variedades</a> 
-                                </li>                                 
-                                <li>
-                                    <a href="<?= URL; ?>clipping/listado">Clipping</a>
-                                </li>                                 
+                                </li> 
+                                <li <?= $classRRHH; ?>>
+                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
+                                </li>                            
                             </ul>                             
                         </div>                         
                     </nav>                     
@@ -161,22 +168,22 @@ switch ($page[0]) {
                             <ul class="nav navbar-nav"> 
                                 <li <?= $class ?>>
                                     <a href="<?= URL; ?>">Inicio</a>
-                                </li>                                 
+                                </li>      
+                                <li <?= $classPromocion; ?>>
+                                    <a href="<?= URL; ?>promocion/listado">Clasificados</a> 
+                                </li>
                                 <li <?= $classNoticia ?>>
                                     <a href="<?= URL; ?>noticia/listado">Noticias</a> 
                                 </li>   
-                                <li <?= $classRRHH; ?>>
-                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
-                                </li>
-                                <li <?= $classPromocion; ?>>
-                                    <a href="<?= URL; ?>promocion/listado">Promociones</a> 
+                                <li <?= $classClipping; ?>>
+                                    <a href="<?= URL; ?>clipping/listado">Clipping</a>
                                 </li>    
                                 <li <?= $classVariedad; ?>>
                                     <a href="<?= URL; ?>variedad/listado">Variedades</a> 
                                 </li> 
-                                <li>
-                                    <a href="<?= URL; ?>clipping/listado">Clipping</a>
-                                </li>                                 
+                                <li <?= $classRRHH; ?>>
+                                    <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
+                                </li>
                             </ul>                             
                             <!--========== END .NAV NAVBAR-NAV ==========-->                             
                         </div>                         

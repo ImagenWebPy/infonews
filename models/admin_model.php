@@ -78,6 +78,41 @@ class Admin_Model extends Model {
         return $json;
     }
 
+    public function listadoDTClipping() {
+        $sql = $this->db->select("SELECT c.id,
+                                        c.img_thumb as img,
+                                        m.descripcion as medio,
+                                        c.tipo,
+                                        c.fecha_visible,
+                                        c.estado
+                                FROM clipping c
+                                LEFT JOIN medio m on m.id = c.id_medio
+                                ORDER BY fecha_visible , id DESC");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $img = '<img src="' . URL . 'public/img/clipping/thumb/' . $item['img'] . '" style="width: 160px;">';
+            $btnEditar = '<a class="editDTClipping pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "clipping_$id",
+                'id' => $item['id'],
+                'imagen' => $img,
+                'medio' => utf8_encode($item['medio']),
+                'tipo' => utf8_encode($item['tipo']),
+                'fecha' => date('d-m-Y', strtotime($item['fecha_visible'])),
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
     public function modifcarEstadoDetalle($datos) {
         $id = $datos['id'];
         $estado = $datos['estado'];
@@ -177,6 +212,59 @@ class Admin_Model extends Model {
                 <td>' . $destacado . '</td>
                 <td>' . $orden . '</td>
                 <td>' . date('d-m-Y', strtotime($sql[0]['fecha_publicacion'])) . '</td>
+                <td>' . $estado . '</td>
+                <td>' . $btnEditar . '</td>';
+        $data = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $data;
+    }
+
+    public function modifcarEstadoClipping($datos) {
+        $id = $datos['id'];
+        $estado = $datos['estado'];
+        #Actualizamos el estado de acuerdo al valor actual
+        if ($estado == 1)
+            $newEstado = 0;
+        else
+            $newEstado = 1;
+        $update = array(
+            'estado' => $newEstado
+        );
+        $this->db->update('clipping', $update, "id = $id");
+        #retornamos la fila
+        $sql = $this->db->select("SELECT c.id,
+                                        c.img_thumb as img,
+                                        m.descripcion as medio,
+                                        c.tipo,
+                                        c.fecha_visible,
+                                        c.estado
+                                FROM clipping c
+                                LEFT JOIN medio m on m.id = c.id_medio
+                                where c.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        if (!empty($sql[0]['destacado'])) {
+            $destacado = 'Sí';
+        } else {
+            $destacado = '-';
+        }
+        if (!empty($sql[0]['orden'])) {
+            $orden = $sql[0]['orden'];
+        } else {
+            $orden = '-';
+        }
+        $img = '<img src="' . URL . 'public/img/clipping/thumb/' . $sql[0]['img'] . '" style="width: 160px;">';
+        $btnEditar = '<a class="editDTClipping pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>
+                <td>' . $img . '</td>
+                <td>' . utf8_encode($sql[0]['medio']) . '</td>
+                <td>' . utf8_encode($sql[0]['tipo']) . '</td>
+                <td>' . date('d-m-Y', strtotime($sql[0]['fecha_visible'])) . '</td>
                 <td>' . $estado . '</td>
                 <td>' . $btnEditar . '</td>';
         $data = array(
@@ -395,6 +483,134 @@ class Admin_Model extends Model {
                 ';
         $datos = array(
             'titulo' => utf8_encode($sql[0]['categoria']) . ' - ' . utf8_encode($sql[0]['titulo']),
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
+    public function editarDTClipping($data) {
+        $id = $data['id'];
+        $sql = $this->db->select("SELECT c.id,
+                                        m.id as id_medio,
+                                        m.descripcion as medio,
+                                        sm.id as id_seccion_medio,
+                                        sm.descripcion as seccion_medio,
+                                        c.tipo,
+                                        c.img_thumb as img,
+                                        c.pagina,
+                                        c.fecha_visible,
+                                        c.estado
+                                FROM clipping c
+                                LEFT JOIN medio m on m.id = c.id_medio
+                                LEFT JOIN seccion_medio sm on sm.id = c.id_seccion_medio
+                                where c.id = $id");
+        $mostrarClipping = ($sql[0]['estado'] == 1) ? 'checked' : '';
+        $sqlMedio = $this->db->select("select id, descripcion from medio where estado = 1 ORDER BY descripcion ASC");
+        $sqlSeccionMedio = $this->db->select("select id, descripcion from seccion_medio where estado = 1 ORDER BY descripcion ASC");
+        $enumClipping = $this->helper->getEnumOptions('clipping', 'tipo');
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarClipping" method="POST">
+                            <input type="hidden" name="clipping[id]" value="' . utf8_encode($sql[0]['id']) . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Medio</label>
+                                    <select class="form-control" name="clipping[medio]" required>
+                                        <option value="">Seleccione un Medio</option>';
+        foreach ($sqlMedio as $item) {
+            $selected = ($item['id'] == $sql[0]['id_medio']) ? 'selected' : '';
+            $form .= '                   <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                   </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="clipping[mostrar]" ' . $mostrarClipping . ' value="1">
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sección Medio</label>
+                                    <select class="form-control" name="clipping[seccion_medio]">
+                                        <option value="">Seleccione una Sección</option>';
+        foreach ($sqlSeccionMedio as $item) {
+            $selected = ($item['id'] == $sql[0]['id_seccion_medio']) ? 'selected' : '';
+            $form .= '                  <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Página</label>
+                                    <input type="text" name="clipping[pagina]" class="form-control" placeholder="Tags" value="' . $sql[0]['pagina'] . '">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo</label>
+                                    <select class="form-control" name="clipping[tipo]">
+                                        <option value="">Seleccione una opción</option>';
+        foreach ($enumClipping as $item) {
+            $selected = (utf8_encode($item) == utf8_encode($sql[0]['tipo'])) ? 'selected' : '';
+            $form .= '                  <option value="' . utf8_encode($item) . '" ' . $selected . '>' . utf8_encode($item) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha Publicación:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="clipping[fecha_visible]" class="form-control pull-right fechaVisibleContenido" value="' . date('d-m-Y', strtotime($sql[0]['fecha_visible'])) . '">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg btnSubmitEditForm">Guardar Cambios</button>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Imagen</label>
+                                    <div class="html5fileupload fileImagen" data-url="' . URL . 'admin/uploadImgClipping" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                        <input type="file" name="file_archivo" />
+                                    </div>
+                                    <script>
+                                        $(".html5fileupload.fileImagen").html5fileupload({
+                                            data:{id:' . $id . '},
+                                            onAfterStartSuccess: function(response) {
+                                                $("#imgClipping" + response.id).html(response.content);
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                <div class col-md-12 id="imgClipping' . $id . '">';
+        if (!empty($sql[0]['img'])) {
+            $form .= '              <img class="img-responsive" src="' . URL . 'public/img/clipping/thumb/' . $sql[0]['img'] . '">';
+        }
+        $form .= '              </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        //Date picker
+                        $(".fechaVisibleContenido").datepicker({
+                            autoclose: true,
+                            format: "dd-mm-yyyy"
+                        });
+                    });
+                </script>
+                ';
+        $datos = array(
+            'titulo' => utf8_encode($sql[0]['medio']) . ' - ' . utf8_encode($sql[0]['seccion_medio']),
             'contenido' => $form
         );
         return json_encode($datos);
@@ -694,6 +910,63 @@ class Admin_Model extends Model {
         return $datos;
     }
 
+    public function editarClipping($data) {
+        $id = $data['id'];
+        $estado = 1;
+        if (empty($data['estado'])) {
+            $estado = 0;
+        }
+        $medio = (!empty($data['id_medio'])) ? $data['id_medio'] : NULL;
+        $seccion_medio = (!empty($data['id_seccion_medio'])) ? $data['id_seccion_medio'] : NULL;
+        $update = array(
+            'id_medio' => $medio,
+            'id_seccion_medio' => $seccion_medio,
+            'pagina' => $data['pagina'],
+            'fecha_visible' => date('Y-m-d', strtotime($data['fecha_visible'])),
+            'tipo' => $data['tipo'],
+            'estado' => $estado
+        );
+        $db = $this->db->update('clipping', $update, "id = $id");
+        $sql = $this->db->select("SELECT c.id,
+                                        c.img_thumb as img,
+                                        m.descripcion as medio,
+                                        c.tipo,
+                                        c.fecha_visible,
+                                        c.estado
+                                FROM clipping c
+                                LEFT JOIN medio m on m.id = c.id_medio
+                                where c.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        if (!empty($sql[0]['destacado'])) {
+            $destacado = 'Sí';
+        } else {
+            $destacado = '-';
+        }
+        if (!empty($sql[0]['orden'])) {
+            $orden = $sql[0]['orden'];
+        } else {
+            $orden = '-';
+        }
+        $img = '<img src="' . URL . 'public/img/clipping/thumb/' . $sql[0]['img'] . '" style="width: 160px;">';
+        $btnEditar = '<a class="editDTClipping pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>
+                <td>' . $img . '</td>
+                <td>' . utf8_encode($sql[0]['medio']) . '</td>
+                <td>' . utf8_encode($sql[0]['tipo']) . '</td>
+                <td>' . date('d-m-Y', strtotime($sql[0]['fecha_visible'])) . '</td>
+                <td>' . $estado . '</td>
+                <td>' . $btnEditar . '</td>';
+        $datos = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $datos;
+    }
+
     public function unlinkActualImg($idPost, $carpeta, $galeria = FALSE) {
         $dir = 'public/img/' . $carpeta . '/';
         $sql = '';
@@ -702,6 +975,17 @@ class Admin_Model extends Model {
             if (file_exists($dir . $sql[0]['img']))
                 unlink($dir . $sql[0]['img']);
         }
+    }
+
+    public function unlinkActualImgClipping($idPost) {
+        $dir = 'public/img/clipping/';
+        $dirThumb = 'public/img/clipping/thumb/';
+        $sql = '';
+        $sql = $this->db->select("select img, img_thumb from clipping where id = $idPost");
+        if (file_exists($dir . $sql[0]['img']))
+            unlink($dir . $sql[0]['img']);
+        if (file_exists($dirThumb . $sql[0]['img_thumb']))
+            unlink($dirThumb . $sql[0]['img_thumb']);
     }
 
     public function unlinkActualVideo($idPost) {
@@ -718,6 +1002,22 @@ class Admin_Model extends Model {
         );
         $this->db->update('noticia', $update, "id = $id");
         $contenido = '<img class="img-responsive" src="' . URL . 'public/img/' . $carpeta . '/' . $data['img'] . '">';
+        $datos = array(
+            "result" => true,
+            'id' => $id,
+            'content' => $contenido
+        );
+        return $datos;
+    }
+
+    public function uploadImgClipping($data) {
+        $id = $data['id'];
+        $update = array(
+            'img' => $data['img'],
+            'img_thumb' => $data['img_thumb']
+        );
+        $this->db->update('clipping', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/img/clipping/thumb/' . $data['img_thumb'] . '">';
         $datos = array(
             "result" => true,
             'id' => $id,
@@ -1039,6 +1339,104 @@ class Admin_Model extends Model {
         return json_encode($datos);
     }
 
+    public function modalAgregarClipping() {
+        $sqlMedio = $this->db->select("select id, descripcion from medio where estado = 1 ORDER BY descripcion ASC");
+        $sqlSeccionMedio = $this->db->select("select id, descripcion from seccion_medio where estado = 1 ORDER BY descripcion ASC");
+        $enumClipping = $this->helper->getEnumOptions('clipping', 'tipo');
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Publicacion</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" action="' . URL . '/admin/frmAgregarClipping" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Medio</label>
+                                    <select class="form-control" name="clipping[medio]" required>
+                                        <option value="">Seleccione un Medio</option>';
+        foreach ($sqlMedio as $item) {
+            $form .= '                   <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                   </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="clipping[mostrar]" value="1">
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sección Medio</label>
+                                    <select class="form-control" name="clipping[seccion_medio]">
+                                        <option value="">Seleccione una Sección</option>';
+        foreach ($sqlSeccionMedio as $item) {
+            $form .= '                  <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Página</label>
+                                    <input type="text" name="clipping[pagina]" class="form-control" placeholder="Tags" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo</label>
+                                    <select class="form-control" name="clipping[tipo]">
+                                        <option value="">Seleccione una opción</option>';
+        foreach ($enumClipping as $item) {
+            $form .= '                  <option value="' . utf8_encode($item) . '">' . utf8_encode($item) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha Publicación:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="clipping[fecha_visible]" class="form-control pull-right fechaVisibleContenido" value="">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <div class="form-group">
+                                    <label>Imagen</label>
+                                    <div class="html5fileupload fileImagen" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                        <input type="file" name="file_archivo" />
+                                    </div>
+                                    <script>
+                                        $(".html5fileupload.fileImagen").html5fileupload();
+                                    </script>
+                                </div>
+                                <hr>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg btnSubmitEditForm">Guardar Cambios</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        //Date picker
+                        $(".fechaVisibleContenido").datepicker({
+                            autoclose: true,
+                            format: "dd-mm-yyyy"
+                        });
+                    });
+                </script>
+                ';
+        $datos = array(
+            'titulo' => 'Agegar Publicación',
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
     public function frmAgregarContenido($data) {
         $this->db->insert('noticia', array(
             'id_categoria' => $data['id_categoria'],
@@ -1067,6 +1465,20 @@ class Admin_Model extends Model {
         return $id;
     }
 
+    public function frmAgregarClipping($data) {
+        $this->db->insert('clipping', array(
+            'id_medio' => $data['id_medio'],
+            'id_seccion_medio' => $data['id_seccion_medio'],
+            'pagina' => $data['pagina'],
+            'fecha_visible' => date('Y-m-d', strtotime($data['fecha_visible'])),
+            'fecha_publicacion' => date('Y-m-d H:i:s'),
+            'tipo' => $data['tipo'],
+            'estado' => $data['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        return $id;
+    }
+
     public function frmAddNoticiaImg($img) {
         $id = $img['id'];
         $update = array(
@@ -1081,6 +1493,15 @@ class Admin_Model extends Model {
             'img' => $img['imagenes']
         );
         $this->db->update('promocion', $update, "id = $id");
+    }
+
+    public function frmAddClippingImg($img) {
+        $id = $img['id'];
+        $update = array(
+            'img' => $img['img'],
+            'img_thumb' => $img['img_thumb']
+        );
+        $this->db->update('clipping', $update, "id = $id");
     }
 
     public function frmAddNoticiaImgGaleria($imagenes) {

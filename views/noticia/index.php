@@ -22,7 +22,6 @@ $listado = $this->listado;
                         <h3 class="subtitle">Todas las marcas</h3>
                     </div>
                     <!--========== BEGIN .ARTICLE ==========-->
-
                     <div class="article">
                         <?php foreach ($listado['listado'] as $item): ?>
                             <div class="entry-block-small">

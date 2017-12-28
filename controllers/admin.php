@@ -38,6 +38,17 @@ class Admin extends Controller {
             unset($_SESSION['message']);
     }
 
+    public function clipping() {
+        $this->view->public_css = array("admin/plugins/datatables/dataTables.bootstrap.css", "admin/plugins/html5fileupload/html5fileupload.css", "admin/plugins/datepicker/datepicker3.css", "admin/plugins/jquery.tagsinput/jquery.tagsinput.css");
+        $this->view->public_js = array("admin/plugins/datatables/jquery.dataTables.min.js", "admin/plugins/datatables/dataTables.bootstrap.min.js", "admin/plugins/html5fileupload/html5fileupload.min.js", "admin/plugins/datepicker/bootstrap-datepicker.js", "admin/plugins/jquery.tagsinput/jquery.tagsinput.js", "admin/plugins/ckeditor/ckeditor.js");
+        $this->view->title = 'Clipping de Medios';
+        $this->view->render('admin/header');
+        $this->view->render('admin/clipping/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
     public function listadoDTContenidos() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTContenidos();
@@ -47,6 +58,12 @@ class Admin extends Controller {
     public function listadoDTPromociones() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTPromociones();
+        echo $data;
+    }
+
+    public function listadoDTClipping() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTClipping();
         echo $data;
     }
 
@@ -70,6 +87,16 @@ class Admin extends Controller {
         echo json_encode($data);
     }
 
+    public function cambiarEstadoClipping() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->modifcarEstadoClipping($datos);
+        echo json_encode($data);
+    }
+
     public function editarDTContenido() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -88,6 +115,15 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function editarDTClipping() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->editarDTClipping($data);
+        echo $datos;
+    }
+
     public function editarContenido() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -103,6 +139,21 @@ class Admin extends Controller {
             'estado' => (!empty($_POST['contenido']['mostrar'])) ? $_POST['contenido']['mostrar'] : 0
         );
         $datos = $this->model->editarContenido($data);
+        echo json_encode($datos);
+    }
+
+    public function editarClipping() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['clipping']['id']),
+            'id_medio' => $this->helper->cleanInput($_POST['clipping']['medio']),
+            'id_seccion_medio' => $this->helper->cleanInput($_POST['clipping']['seccion_medio']),
+            'pagina' => $this->helper->cleanInput($_POST['clipping']['pagina']),
+            'fecha_visible' => $this->helper->cleanInput($_POST['clipping']['fecha_visible']),
+            'tipo' => $this->helper->cleanInput($_POST['clipping']['tipo']),
+            'estado' => (!empty($_POST['clipping']['mostrar'])) ? $_POST['clipping']['mostrar'] : 0
+        );
+        $datos = $this->model->editarClipping($data);
         echo json_encode($datos);
     }
 
@@ -180,6 +231,66 @@ class Admin extends Controller {
                 'img' => $filename
             );
             $response = $this->model->uploadImgNoticia($data, $carpeta);
+            echo json_encode($response);
+            //echo json_encode(array('result'=>true));
+        } else {
+            $filename = basename($_SERVER['QUERY_STRING']);
+            $file_url = '/public/archivos/' . $filename;
+            header('Content-Type: 				application/octet-stream');
+            header("Content-Transfer-Encoding: 	Binary");
+            header("Content-disposition: 		attachment; filename=\"" . basename($file_url) . "\"");
+            readfile($file_url);
+            exit();
+        }
+    }
+
+    public function uploadImgClipping() {
+        if (!empty($_POST)) {
+            $idPost = $_POST['data']['id'];
+            $this->model->unlinkActualImgClipping($idPost);
+            $error = false;
+            $absolutedir = dirname(__FILE__);
+            $dir = 'public/img/clipping/';
+            $dirThumb = 'public/img/clipping/thumb/';
+            $serverdir = $dir;
+            $serverdirThumb = $dirThumb;
+            $tmp = explode(',', $_POST['file']);
+            $file = base64_decode($tmp[1]);
+            $ext = explode('.', $_POST['filename']);
+            $extension = strtolower(end($ext));
+            $name = $_POST['name'];
+            $filename = $this->helper->cleanUrl($idPost . '_' . $name);
+            $filename_thumb = $this->helper->cleanUrl($idPost . '_' . $name);
+            $filename = $filename . '.' . $extension;
+            $filename_thumb = $filename_thumb . '_thumb.' . $extension;
+            //$filename				= $file.'.'.substr(sha1(time()),0,6).'.'.$extension;
+            $handle = fopen($serverdir . $filename, 'w');
+            fwrite($handle, $file);
+            fclose($handle);
+            #############
+            #SE REDIMENSIONA LA IMAGEN
+            #############
+            # ruta de la imagen a redimensionar 
+            $imagen = $serverdir . $filename;
+            # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
+            $imagen_final = $filename;
+            $imagen_final_thumb = $filename_thumb;
+            #redimensionamos la imagen original
+            $ancho = 1280;
+            $alto = 720;
+            $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+            #creamos la miniatura
+            $ancho = 420;
+            $alto = 420;
+            $this->helper->redimensionar($imagen, $imagen_final_thumb, $ancho, $alto, $serverdirThumb);
+            #############
+            header('Content-type: application/json; charset=utf-8');
+            $data = array(
+                'id' => $idPost,
+                'img' => $filename,
+                'img_thumb' => $filename_thumb
+            );
+            $response = $this->model->uploadImgClipping($data);
             echo json_encode($response);
             //echo json_encode(array('result'=>true));
         } else {
@@ -307,6 +418,12 @@ class Admin extends Controller {
     public function modalAgregarPromocion() {
         header('Content-type: application/json; charset=utf-8');
         $datos = $this->model->modalAgregarPromocion();
+        echo $datos;
+    }
+
+    public function modalAgregarClipping() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarClipping();
         echo $datos;
     }
 
@@ -471,6 +588,68 @@ class Admin extends Controller {
                 'mensaje' => 'Se ha agregado correctamente el contenido'
             ));
             header('Location:' . URL . 'admin/promocion/');
+        }
+    }
+
+    public function frmAgregarClipping() {
+        if (!empty($_POST)) {
+            $data = array(
+                'id_medio' => (!empty($_POST['clipping']['medio'])) ? $this->helper->cleanInput($_POST['clipping']['medio']) : NULL,
+                'id_seccion_medio' => (!empty($_POST['clipping']['seccion_medio'])) ? $this->helper->cleanInput($_POST['clipping']['seccion_medio']) : NULL,
+                'estado' => (!empty($_POST['clipping']['mostrar'])) ? $_POST['clipping']['mostrar'] : 0,
+                'pagina' => $this->helper->cleanInput($_POST['clipping']['pagina']),
+                'tipo' => $_POST['clipping']['tipo'],
+                'fecha_visible' => $_POST['clipping']['fecha_visible']
+            );
+            $idPost = $this->model->frmAgregarClipping($data);
+
+            #IMAGENES
+            if (!empty($_FILES['file_archivo'])) {
+                $error = false;
+                $dir = 'public/img/clipping/';
+                $dirThumb = 'public/img/clipping/thumb/';
+                $serverdir = $dir;
+                $serverdirThumb = $dirThumb;
+                #IMAGENES
+                $newname = $idPost . '_' . $_FILES['file_archivo']['name'];
+                $newnameThumb = $idPost . '_' . $_FILES['file_archivo']['name'];
+                $fname = $this->helper->cleanUrl($newname);
+                $fnameThumb = $this->helper->cleanUrl($newnameThumb);
+                $fnameThumb = explode('.', $fnameThumb);
+                $newNameThumb = $fnameThumb[0] . '_thumb.' . $fnameThumb[1];
+                $contents = file_get_contents($_FILES['file_archivo']['tmp_name']);
+
+                $handle = fopen($serverdir . $fname, 'w');
+                fwrite($handle, $contents);
+                fclose($handle);
+                #############
+                #SE REDIMENSIONA LA IMAGEN
+                #############
+                # ruta de la imagen a redimensionar 
+                $imagen = $serverdir . $fname;
+                # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
+                $imagen_final = $fname;
+                $imagen_final_thumb = $newNameThumb;
+                $ancho = 1280;
+                $alto = 720;
+                $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+                #creamos la miniatura
+                $ancho = 420;
+                $alto = 420;
+                $this->helper->redimensionar($imagen, $imagen_final_thumb, $ancho, $alto, $serverdirThumb);
+                #############
+                $imagenes = array(
+                    'id' => $idPost,
+                    'img' => $fname,
+                    'img_thumb' => $imagen_final_thumb
+                );
+                $this->model->frmAddClippingImg($imagenes);
+            }
+            Session::set('message', array(
+                'type' => 'success',
+                'mensaje' => 'Se ha agregado correctamente el contenido'
+            ));
+            header('Location:' . URL . 'admin/clipping/');
         }
     }
 

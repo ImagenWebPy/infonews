@@ -4766,7 +4766,6 @@ textarea {
 	background-attachment: fixed!important;
 	background-repeat: no-repeat!important;
 	background-size: cover!important;
-	background: url(../img/parallax-image01.jpg);
 }
 
 /* Captions */
@@ -4790,9 +4789,6 @@ textarea {
 }
 
 /* Parallax Images */
-.image1 {
-	background: url(../img/parallax-image01.jpg) center fixed;
-}
 .image2 {
 	background: url(../img/parallax-image02.jpg) center fixed;
 }
