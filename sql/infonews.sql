@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-28 11:58:47
+Date: 2017-12-28 15:37:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -105,6 +105,8 @@ DROP TABLE IF EXISTS `marca`;
 CREATE TABLE `marca` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(30) NOT NULL,
+  `img` varchar(120) DEFAULT NULL,
+  `orden` int(2) unsigned DEFAULT NULL,
   `estado` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
@@ -112,17 +114,17 @@ CREATE TABLE `marca` (
 -- ----------------------------
 -- Records of marca
 -- ----------------------------
-INSERT INTO `marca` VALUES ('1', 'Kia', '1');
-INSERT INTO `marca` VALUES ('2', 'Chevrolet', '1');
-INSERT INTO `marca` VALUES ('3', 'BMW Motorrad', '1');
-INSERT INTO `marca` VALUES ('4', 'MINI', '1');
-INSERT INTO `marca` VALUES ('5', 'Jeep', '1');
-INSERT INTO `marca` VALUES ('6', 'Dodge', '1');
-INSERT INTO `marca` VALUES ('7', 'Chrysler', '1');
-INSERT INTO `marca` VALUES ('8', 'Mazda', '1');
-INSERT INTO `marca` VALUES ('9', 'Nissan', '1');
-INSERT INTO `marca` VALUES ('10', 'Mopar', '1');
-INSERT INTO `marca` VALUES ('11', 'División Usados', '1');
+INSERT INTO `marca` VALUES ('1', 'Kia', 'kia.png', '1', '1');
+INSERT INTO `marca` VALUES ('2', 'Chevrolet', 'chevrolet.png', '4', '1');
+INSERT INTO `marca` VALUES ('3', 'BMW Motorrad', 'bmw.png', '7', '1');
+INSERT INTO `marca` VALUES ('4', 'MINI', 'mini.png', '8', '1');
+INSERT INTO `marca` VALUES ('5', 'Jeep', 'jeep.png', '3', '1');
+INSERT INTO `marca` VALUES ('6', 'Dodge', 'dodge.png', '6', '1');
+INSERT INTO `marca` VALUES ('7', 'Chrysler', 'chrysler.png', '9', '1');
+INSERT INTO `marca` VALUES ('8', 'Mazda', 'mazda.png', '5', '1');
+INSERT INTO `marca` VALUES ('9', 'Nissan', 'nissan.png', '2', '1');
+INSERT INTO `marca` VALUES ('10', 'Mopar', 'mopar.png', '11', '1');
+INSERT INTO `marca` VALUES ('11', 'División Usados', 'usados.png', '10', '1');
 
 -- ----------------------------
 -- Table structure for `medio`

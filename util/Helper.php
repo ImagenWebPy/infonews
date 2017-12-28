@@ -422,16 +422,7 @@ class Helper {
      * @return array
      */
     public function getHomePromociones() {
-        $sql = $this->db->select("SELECT p.id,
-                                        p.titulo, 
-                                        p.contenido,
-                                        p.img,
-                                        m.descripcion as marca
-                                FROM promocion p
-                                LEFT JOIN marca m on m.id = p.id_marca
-                                WHERE p.estado = 1
-                                and p.destacado = 1
-                                ORDER BY p.orden ASC");
+        $sql = $this->db->select("select id, descripcion, img from marca where estado = 1 ORDER BY orden ASC LIMIT 4");
         return $sql;
     }
 

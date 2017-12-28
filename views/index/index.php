@@ -55,8 +55,8 @@ $helper = new Helper();
     <section class="module highlight" wp-site-content wp-body-class wp-site-name wp-title wp-site-desc wp-header-image> 
         <div class="container"> 
             <div class="module-title"> 
-                <h3 class="title"><span class="bg-1">Promociones</span></h3> 
-                <h3 class="subtitle">Enterate de las últimas promociones del grupo</h3> 
+                <h3 class="title"><span class="bg-1">Clasificados</span></h3> 
+                <h3 class="subtitle">Vé los últimos clasificados de las marcas</h3> 
             </div>                         
             <!--========== BEGIN .ROW ==========-->                         
             <div class="row no-gutter"> 
@@ -71,16 +71,15 @@ $helper = new Helper();
                                 <!-- Begin .item -->                                     
                                 <div class="item"> 
                                     <div class="item-image-1">
-                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($val['img']) ?>" alt="">
+                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['descripcion'])); ?>">
+                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/logos_marcas/<?= utf8_encode($val['img']) ?>" alt="">
                                         </a>
-                                        <span><a class="label-5" href="tech-science.html"><?= utf8_encode($val['marca']) ?></a></span>
                                     </div>                                         
                                     <div class="item-content"> 
                                         <div class="title-left title-style04 underline04"> 
-                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
+                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['descripcion'])); ?>"><strong><?= utf8_encode($val['descripcion']) ?></strong></a></h3> 
                                         </div>                                             
-                                        <?= utf8_encode($val['contenido']) ?>
+                                        <p>Ver clasificados de la marca.</p>
                                     </div>                                         
                                 </div>                                     
                                 <!-- End .item -->
@@ -103,18 +102,17 @@ $helper = new Helper();
                                 <!-- Begin .item-->                                     
                                 <div class="item"> 
                                     <div class="item-image-1">
-                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>">
-                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($val['img']) ?>" alt="">
+                                        <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['descripcion'])); ?>">
+                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/logos_marcas/<?= utf8_encode($val['img']) ?>" alt="">
                                         </a>
-                                        <span><a class="label-5" href="tech-science.html"><?= utf8_encode($val['marca']) ?></a></span>
                                     </div>                                         
                                     <div class="item-content"> 
                                         <div class="title-left title-style04 underline04"> 
-                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><strong><?= utf8_encode($val['marca']) ?></strong></a></h3> 
+                                            <h3><a href="<?= URL; ?>promocion/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['descripcion'])); ?>"><strong><?= utf8_encode($val['descripcion']) ?></strong></a></h3> 
                                         </div>                                             
-                                        <?= utf8_encode($val['contenido']) ?>
+                                        <p>Ver clasificados de la marca.</p>
                                     </div>                                         
-                                </div>                                     
+                                </div>                                      
                                 <!-- End .item-->                                     
                                 <?php
                             endif;
