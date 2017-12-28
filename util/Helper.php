@@ -666,7 +666,7 @@ class Helper {
                         <div class="container">
                             <h3><a href="#" class="carousel-title">Video</a></h3>
                             <div class="col-md-12">
-                                <video class="videoPlayer" controls>
+                                <video class="videoPlayer" controls style="width: 80%; margin: 0 auto; display: block;">
                                     <source src="' . URL . 'public/videos/' . $sql[0]['video'] . '" type="video/mp4">
                                 </video>
                             </div>
