@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-27 11:39:46
+Date: 2017-12-28 11:58:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,17 +63,40 @@ INSERT INTO `categoria` VALUES ('4', 'Video', '1');
 DROP TABLE IF EXISTS `clipping`;
 CREATE TABLE `clipping` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_medio` int(11) unsigned DEFAULT NULL,
+  `id_seccion_medio` int(11) unsigned DEFAULT NULL,
   `titulo` varchar(160) DEFAULT NULL,
-  `img` varchar(120) DEFAULT NULL,
-  `fecha_visible` datetime DEFAULT NULL,
+  `img` varchar(140) DEFAULT NULL,
+  `img_thumb` varchar(140) DEFAULT NULL,
+  `pagina` int(3) unsigned DEFAULT NULL,
+  `fecha_visible` date DEFAULT NULL,
   `fecha_publicacion` datetime DEFAULT NULL,
-  `estado` int(1) unsigned DEFAULT NULL,
+  `tipo` enum('Garden','Competencia') DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of clipping
 -- ----------------------------
+INSERT INTO `clipping` VALUES ('1', '5', '2', null, '5dias_economia_17_IMG_20171227_141508.jpg', '5dias_economia_17_IMG_20171227_141508_thumb.jpg', '17', '2017-12-26', '2017-12-27 15:42:45', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('2', '5', '13', null, '5dias_portada_IMG_20171227_141540.jpg', '5dias_portada_IMG_20171227_141540_thumb.jpg', null, '2017-12-26', '2017-12-27 15:46:04', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('3', '1', '14', null, 'abc_clasificados_1_IMG_20171227_142205.jpg', 'abc_clasificados_1_IMG_20171227_142205_thumb.jpg', '1', '2017-12-26', '2017-12-27 15:47:16', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('4', '1', '14', null, 'abc_clasificados_1IMG_20171227_142214.jpg', 'abc_clasificados_1IMG_20171227_142214_thumb.jpg', '1', '2017-12-26', '2017-12-27 15:47:40', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('5', '1', '14', null, 'abc_clasificados_2IMG_20171227_142227.jpg', 'abc_clasificados_2IMG_20171227_142227_thumb.jpg', '2', '2017-12-26', '2017-12-27 15:48:48', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('6', '1', '14', null, 'abc_clasificados_2IMG_20171227_151629.jpg', 'abc_clasificados_2IMG_20171227_151629_thumb.jpg', '2', '2017-12-26', '2017-12-27 15:50:53', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('7', '1', '14', null, 'abc_clasificados_3IMG_20171227_142243.jpg', 'abc_clasificados_3IMG_20171227_142243_thumb.jpg', '3', '2017-12-26', '2017-12-27 15:51:23', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('8', '1', '14', null, 'abc_clasificados_5_IMG_20171227_142255.jpg', 'abc_clasificados_5_IMG_20171227_142255_thumb.jpg', '5', '2017-12-26', '2017-12-27 15:51:51', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('9', '1', '14', null, 'abc_clasificados_7IMG_20171227_142307.jpg', 'abc_clasificados_7IMG_20171227_142307_thumb.jpg', '7', '2017-12-26', '2017-12-27 15:52:30', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('10', '1', '14', null, 'abc_clasificados_7IMG_20171227_142313.jpg', 'abc_clasificados_7IMG_20171227_142313_thumb.jpg', '7', '2017-12-26', '2017-12-27 15:52:56', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('11', '1', '2', null, 'abc_economia_17_IMG_20171227_142144.jpg', 'abc_economia_17_IMG_20171227_142144_thumb.jpg', '17', '2017-12-26', '2017-12-27 15:53:33', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('12', '1', '2', null, 'abc_economia_15_IMG_20171227_142134.jpg', 'abc_economia_15_IMG_20171227_142134_thumb.jpg', '15', '2017-12-26', '2017-12-27 15:54:54', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('13', '4', null, null, 'adn_5_IMG_20171227_142010.jpg', 'adn_5_IMG_20171227_142010_thumb.jpg', '5', '2017-12-26', '2017-12-27 15:55:37', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('14', '4', '14', null, 'adn_clasificados_17_IMG_20171227_150355.jpg', 'adn_clasificados_17_IMG_20171227_150355_thumb.jpg', '17', '2017-12-26', '2017-12-27 15:56:07', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('15', '4', '8', null, 'adn_deportes_23IMG_20171227_142056.jpg', 'adn_deportes_23IMG_20171227_142056_thumb.jpg', '23', '2017-12-26', '2017-12-27 15:56:53', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('16', '3', '2', null, 'lanacion_economia_15_IMG_20171227_141702.jpg', 'lanacion_economia_15_IMG_20171227_141702_thumb.jpg', '15', '2017-12-26', '2017-12-27 15:57:40', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('17', '3', '2', null, 'lanacion_economia_17_IMG_20171227_141712.jpg', 'lanacion_economia_17_IMG_20171227_141712_thumb.jpg', '17', '2017-12-26', '2017-12-27 15:58:14', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('18', '2', '2', null, '18_UH_economia_17_IMG_20171227_141836.jpg', '18_UH_economia_17_IMG_20171227_141836_thumb.jpg', '17', '2017-12-26', '2017-12-27 15:58:44', 'Competencia', '1');
 
 -- ----------------------------
 -- Table structure for `marca`
@@ -100,6 +123,26 @@ INSERT INTO `marca` VALUES ('8', 'Mazda', '1');
 INSERT INTO `marca` VALUES ('9', 'Nissan', '1');
 INSERT INTO `marca` VALUES ('10', 'Mopar', '1');
 INSERT INTO `marca` VALUES ('11', 'División Usados', '1');
+
+-- ----------------------------
+-- Table structure for `medio`
+-- ----------------------------
+DROP TABLE IF EXISTS `medio`;
+CREATE TABLE `medio` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of medio
+-- ----------------------------
+INSERT INTO `medio` VALUES ('1', 'ABC', '1');
+INSERT INTO `medio` VALUES ('2', 'Última Hora', '1');
+INSERT INTO `medio` VALUES ('3', 'La Nación', '1');
+INSERT INTO `medio` VALUES ('4', 'ADN', '1');
+INSERT INTO `medio` VALUES ('5', '5Dias', '1');
 
 -- ----------------------------
 -- Table structure for `noticia`
@@ -229,6 +272,35 @@ INSERT INTO `promocion` VALUES ('6', '2', 'Prisma Joy', '<p>Prisma Joy entrega d
 INSERT INTO `promocion` VALUES ('7', '5', 'Jeep Compass', '<p>Llega donde otros solo sueñan. Contado desde $28.990, cuotas desde $458</p>', 'COMPASS_6x12.jpg', 'jeep,compass', '0', null, '2017-12-18 11:24:15', '1');
 INSERT INTO `promocion` VALUES ('8', '2', 'New Tracker', '<p>All-New Tracker. Entrega desde $2.700, cuotas desde $405</p>\r\n', 'Tracker_6x12_APP.jpg', 'chevrolet,tracker,all new tracker', '0', null, '2017-12-18 11:24:46', '1');
 INSERT INTO `promocion` VALUES ('9', '1', 'Sorento 2018', '<p>La espera termin&oacute;. Sorento 2018</p>\r\n', '9_Sorento_2018_6x12.jpg', 'sorento 2018', '0', null, '2017-12-27 11:15:56', '1');
+
+-- ----------------------------
+-- Table structure for `seccion_medio`
+-- ----------------------------
+DROP TABLE IF EXISTS `seccion_medio`;
+CREATE TABLE `seccion_medio` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of seccion_medio
+-- ----------------------------
+INSERT INTO `seccion_medio` VALUES ('1', 'Política', '1');
+INSERT INTO `seccion_medio` VALUES ('2', 'Economía', '1');
+INSERT INTO `seccion_medio` VALUES ('3', 'Locales', '1');
+INSERT INTO `seccion_medio` VALUES ('4', 'Interior', '1');
+INSERT INTO `seccion_medio` VALUES ('5', 'Judiciales', '1');
+INSERT INTO `seccion_medio` VALUES ('6', 'Arte y Espectáculos', '1');
+INSERT INTO `seccion_medio` VALUES ('7', 'Sociales', '1');
+INSERT INTO `seccion_medio` VALUES ('8', 'Deportes', '1');
+INSERT INTO `seccion_medio` VALUES ('9', 'Internacionales', '1');
+INSERT INTO `seccion_medio` VALUES ('10', 'Ciencia y Tecnolgía', '1');
+INSERT INTO `seccion_medio` VALUES ('11', 'Finanzas', '1');
+INSERT INTO `seccion_medio` VALUES ('12', 'Empresas', '1');
+INSERT INTO `seccion_medio` VALUES ('13', 'Portada', '1');
+INSERT INTO `seccion_medio` VALUES ('14', 'Clasificados', '1');
 
 -- ----------------------------
 -- Table structure for `tipo_archivo`
