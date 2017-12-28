@@ -1363,7 +1363,7 @@ class Admin_Model extends Model {
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="clipping[mostrar]" value="1">
+                                            <input type="checkbox" name="clipping[mostrar]" value="1" checked>
                                             Mostrar
                                         </label>
                                     </div>

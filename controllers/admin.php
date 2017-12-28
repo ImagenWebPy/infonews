@@ -597,9 +597,9 @@ class Admin extends Controller {
                 'id_medio' => (!empty($_POST['clipping']['medio'])) ? $this->helper->cleanInput($_POST['clipping']['medio']) : NULL,
                 'id_seccion_medio' => (!empty($_POST['clipping']['seccion_medio'])) ? $this->helper->cleanInput($_POST['clipping']['seccion_medio']) : NULL,
                 'estado' => (!empty($_POST['clipping']['mostrar'])) ? $_POST['clipping']['mostrar'] : 0,
-                'pagina' => $this->helper->cleanInput($_POST['clipping']['pagina']),
-                'tipo' => $_POST['clipping']['tipo'],
-                'fecha_visible' => $_POST['clipping']['fecha_visible']
+                'pagina' => (!empty($_POST['clipping']['pagina'])) ? $this->helper->cleanInput($_POST['clipping']['pagina']) : NULL,
+                'tipo' => (!empty($_POST['clipping']['tipo'])) ? $_POST['clipping']['tipo'] : NULL,
+                'fecha_visible' => (!empty($_POST['clipping']['fecha_visible'])) ? $_POST['clipping']['fecha_visible'] : NULL
             );
             $idPost = $this->model->frmAgregarClipping($data);
 
