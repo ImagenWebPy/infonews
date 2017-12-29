@@ -395,7 +395,7 @@ class Admin_Model extends Model {
                                 <hr>
                                 <div class="form-group">
                                     <label>Imagen Principal</label>
-                                    <div class="html5fileupload fileImagen" data-url="' . URL . 'admin/uploadImgNoticia" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagen" data-max-filesize="6144000" data-url="' . URL . 'admin/uploadImgNoticia" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -414,7 +414,7 @@ class Admin_Model extends Model {
         $form .= '              </div>
                                 <div class="form-group">
                                     <label>Imagenes</label>
-                                    <div class="html5fileupload fileImagenes" data-url="' . URL . 'admin/uploadImagenesNoticia" data-multiple="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagenes" data-max-filesize="6144000" data-url="' . URL . 'admin/uploadImagenesNoticia" data-multiple="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -445,7 +445,7 @@ class Admin_Model extends Model {
                                 <div class="clearfix"></div>
                                 <div class="form-group">
                                     <label>Video</label>
-                                    <div class="html5fileupload fileVideo" data-url="' . URL . 'admin/uploadVideoNoticia" data-valid-extensions="mp4,avi,mpg,mov" style="width: 100%;">
+                                    <div class="html5fileupload fileVideo" data-max-filesize="6144000" data-max-filesize="40960000" data-url="' . URL . 'admin/uploadVideoNoticia" data-valid-extensions="mp4,avi,mpg,mov" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -577,7 +577,7 @@ class Admin_Model extends Model {
                                 <hr>
                                 <div class="form-group">
                                     <label>Imagen</label>
-                                    <div class="html5fileupload fileImagen" data-url="' . URL . 'admin/uploadImgClipping" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagen" data-max-filesize="6144000" data-url="' . URL . 'admin/uploadImgClipping" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -696,7 +696,7 @@ class Admin_Model extends Model {
                                 <hr>
                                 <div class="form-group">
                                     <label>Imagen Principal</label>
-                                    <div class="html5fileupload fileImagen" data-url="' . URL . 'admin/uploadImgPromocion" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagen" data-max-filesize="6144000" data-url="' . URL . 'admin/uploadImgPromocion" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -1193,7 +1193,7 @@ class Admin_Model extends Model {
                                 
                                 <div class="form-group">
                                     <label>Imagen Principal</label>
-                                    <div class="html5fileupload fileImagen"  data-form="true" style="width: 100%;">
+                                    <div class="html5fileupload fileImagen" data-max-filesize="6144000"  data-form="true" style="width: 100%;">
                                         <input type="file" name="file_imagen" />
                                     </div>
                                     <script>
@@ -1205,7 +1205,7 @@ class Admin_Model extends Model {
                                 <div class col-md-12 id="imgNoticia"></div>
                                 <div class="form-group">
                                     <label>Imagenes</label>
-                                    <div class="html5fileupload fileImagenes" data-form="true"  data-multiple="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagenes" data-max-filesize="6144000" data-form="true"  data-multiple="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_galeria[]" />
                                     </div>
                                     <script>
@@ -1218,7 +1218,7 @@ class Admin_Model extends Model {
                                 <div class="clearfix"></div>
                                 <div class="form-group">
                                     <label>Video</label>
-                                    <div class="html5fileupload fileVideo" data-form="true" data-valid-extensions="mp4,avi,mpg,mov" style="width: 100%;">
+                                    <div class="html5fileupload fileVideo" data-max-filesize="40960000" data-form="true" data-valid-extensions="mp4,avi,mpg,mov" style="width: 100%;">
                                         <input type="file" name="file_video" />
                                     </div>
                                     <script>
@@ -1313,7 +1313,7 @@ class Admin_Model extends Model {
                                 
                                 <div class="form-group">
                                     <label>Imagen Principal</label>
-                                    <div class="html5fileupload filePromocion" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload filePromocion" data-max-filesize="6144000" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>
@@ -1406,7 +1406,7 @@ class Admin_Model extends Model {
                                 </div>
                                 <div class="form-group">
                                     <label>Imagen</label>
-                                    <div class="html5fileupload fileImagen" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
+                                    <div class="html5fileupload fileImagen" data-max-filesize="6144000" data-form="true" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,gif,PNG,bmp,BMP" style="width: 100%;">
                                         <input type="file" name="file_archivo" />
                                     </div>
                                     <script>

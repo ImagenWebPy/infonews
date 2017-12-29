@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-28 18:29:08
+Date: 2017-12-29 08:31:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `admin_usuario` (
   `nombre` varchar(80) DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin_usuario
@@ -37,6 +37,7 @@ INSERT INTO `admin_usuario` VALUES ('3', 'ssosa@garden.com.py', '4530ad981d5c02d
 INSERT INTO `admin_usuario` VALUES ('4', 'vvillalba@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Viviana Villalba', '1');
 INSERT INTO `admin_usuario` VALUES ('5', 'javeiro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'José Aveiro', '1');
 INSERT INTO `admin_usuario` VALUES ('6', 'dnavarro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Diego Navarro', '1');
+INSERT INTO `admin_usuario` VALUES ('7', 'jose.silvero@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'José Silvero', '1');
 
 -- ----------------------------
 -- Table structure for `categoria`
@@ -74,7 +75,7 @@ CREATE TABLE `clipping` (
   `tipo` enum('Garden','Competencia') DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of clipping
@@ -120,6 +121,16 @@ INSERT INTO `clipping` VALUES ('39', '5', '15', null, '39_IMG_20171228_181355.jp
 INSERT INTO `clipping` VALUES ('40', '4', '16', null, '40_IMG_20171228_181741.jpg', '40_IMG_20171228_181741_thumb.jpg', '3', '2017-12-28', '2017-12-28 18:26:50', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('41', '4', '14', null, '41_IMG_20171228_181808.jpg', '41_IMG_20171228_181808_thumb.jpg', '17', '2017-12-28', '2017-12-28 18:28:07', 'Garden', '1');
 INSERT INTO `clipping` VALUES ('42', '4', '8', null, '42_IMG_20171228_181822.jpg', '42_IMG_20171228_181822_thumb.jpg', '23', '2017-12-28', '2017-12-28 18:28:40', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('43', '2', '2', null, '43_IMG_20171229_080231.jpg', '43_IMG_20171229_080231_thumb.jpg', '16', '2017-12-28', '2017-12-29 08:12:46', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('44', '1', '1', null, '44_IMG_20171229_080734.jpg', '44_IMG_20171229_080734_thumb.jpg', '5', '2017-12-28', '2017-12-29 08:25:39', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('45', '1', '1', null, '45_IMG_20171229_080753.jpg', '45_IMG_20171229_080753_thumb.jpg', '9', '2017-12-28', '2017-12-29 08:26:05', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('46', '1', '14', null, '46_IMG_20171229_080841.jpg', '46_IMG_20171229_080841_thumb.jpg', '1', '2017-12-28', '2017-12-29 08:26:35', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('47', '1', '14', null, '47_IMG_20171229_080904.jpg', '47_IMG_20171229_080904_thumb.jpg', '2', '2017-12-28', '2017-12-29 08:26:56', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('48', '1', '14', null, '48_IMG_20171229_080914.jpg', '48_IMG_20171229_080914_thumb.jpg', '2', '2017-12-28', '2017-12-29 08:27:15', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('49', '1', '14', null, '49_IMG_20171229_080920.jpg', '49_IMG_20171229_080920_thumb.jpg', '3', '2017-12-28', '2017-12-29 08:27:56', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('50', '1', '14', null, '50_IMG_20171229_080939.jpg', '50_IMG_20171229_080939_thumb.jpg', '5', '2017-12-28', '2017-12-29 08:28:17', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('51', '1', '14', null, '51_IMG_20171229_080947.jpg', '51_IMG_20171229_080947_thumb.jpg', '5', '2017-12-28', '2017-12-29 08:28:32', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('52', '1', '8', null, '52_IMG_20171229_081110.jpg', '52_IMG_20171229_081110_thumb.jpg', '47', '2017-12-28', '2017-12-29 08:28:57', 'Competencia', '1');
 
 -- ----------------------------
 -- Table structure for `marca`
