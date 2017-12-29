@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-12-29 08:31:05
+Date: 2017-12-29 08:47:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,13 +31,13 @@ CREATE TABLE `admin_usuario` (
 -- ----------------------------
 -- Records of admin_usuario
 -- ----------------------------
-INSERT INTO `admin_usuario` VALUES ('1', 'raul.ramirez@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Raúl Ramírez', '1');
-INSERT INTO `admin_usuario` VALUES ('2', 'jovino.prieto@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Jovino Prieto', '1');
-INSERT INTO `admin_usuario` VALUES ('3', 'ssosa@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Sheila Sosa', '1');
-INSERT INTO `admin_usuario` VALUES ('4', 'vvillalba@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Viviana Villalba', '1');
-INSERT INTO `admin_usuario` VALUES ('5', 'javeiro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'José Aveiro', '1');
-INSERT INTO `admin_usuario` VALUES ('6', 'dnavarro@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'Diego Navarro', '1');
-INSERT INTO `admin_usuario` VALUES ('7', 'jose.silvero@garden.com.py', '4530ad981d5c02d9cb0456c360fae460803922f556c56022e1dc0187c16ced50', 'José Silvero', '1');
+INSERT INTO `admin_usuario` VALUES ('1', 'raul.ramirez@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'Raúl Ramírez', '1');
+INSERT INTO `admin_usuario` VALUES ('2', 'jovino.prieto@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'Jovino Prieto', '1');
+INSERT INTO `admin_usuario` VALUES ('3', 'ssosa@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'Sheila Sosa', '1');
+INSERT INTO `admin_usuario` VALUES ('4', 'vvillalba@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'Viviana Villalba', '1');
+INSERT INTO `admin_usuario` VALUES ('5', 'javeiro@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'José Aveiro', '1');
+INSERT INTO `admin_usuario` VALUES ('6', 'dnavarro@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'Diego Navarro', '1');
+INSERT INTO `admin_usuario` VALUES ('7', 'jose.silvero@garden.com.py', '2f93817ce98bb682b9332a7671105bdee03b262d3168eaed8ec5bc6a96e719a9', 'José Silvero', '1');
 
 -- ----------------------------
 -- Table structure for `categoria`

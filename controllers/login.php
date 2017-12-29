@@ -4,7 +4,7 @@ class Login extends Controller {
 
     function __construct() {
         parent::__construct();
-        //echo Hash::create('sha256', 'garden2017', HASH_PASSWORD_KEY);
+        //echo Hash::create('sha256', 'garden2018', HASH_PASSWORD_KEY);
     }
 
     public function index() {
