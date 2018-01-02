@@ -498,16 +498,7 @@ class Helper {
      * @return array
      */
     public function getHomeListadoPromociones() {
-        $sql = $this->db->select("SELECT p.id,
-                                        p.titulo,
-                                        SUBSTRING(p.contenido,1,60) as contenido,
-                                        p.img,
-                                        m.descripcion as marca
-                                FROM promocion p 
-                                LEFT JOIN marca m on m.id = p.id_marca
-                                WHERE p.destacado = 0
-                                ORDER BY p.fecha_publicacion DESC 
-                                LIMIT 4");
+        $sql = $this->db->select("select id, descripcion, img from marca where estado = 1 ORDER BY orden ASC LIMIT 6");
         return $sql;
     }
 
