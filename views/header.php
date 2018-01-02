@@ -78,10 +78,10 @@ switch ($page[0]) {
                             <li> 
                                 <div class="search-container"> 
                                     <div class="search-icon-btn"> 
-                                        <span style="cursor:pointer"><i class="fa fa-search"></i></span> 
+                                        <span style="cursor:pointer" class="btnBusqueda"><i class="fa fa-search"></i></span> 
                                     </div>                                     
                                     <div class="search-input"> 
-                                        <input type="search" class="search-bar" placeholder="Buscar..." title="Buscar" /> 
+                                        <input type="search" class="search-bar inputBusqueda" placeholder="Buscar..." title="Buscar" /> 
                                     </div>                                     
                                 </div>                                 
                             </li>                             
