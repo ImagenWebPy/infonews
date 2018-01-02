@@ -117,7 +117,7 @@ $helper = new Helper();
 </div>
 <!-- /Modal -->
 <!-- External JavaScripts -->         
-        
+
 <script src="<?= URL; ?>public/js/bootstrap.min.js"></script>         
 <script src="<?= URL; ?>public/js/jquery-ui.min.js"></script>         
 <script src="<?= URL; ?>public/js/plugins.js"></script>         
@@ -126,7 +126,29 @@ $helper = new Helper();
 <script src="<?= URL; ?>public/js/lightbox.js"></script>  
 <!-- bootstrap datepicker -->
 <script src="<?= URL; ?>public/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btnBusqueda").click(function () {
+            busqueda();
+        });
+        $(".inputBusqueda").keypress(function (e) {
+            if (e.which == 13) {
+                busqueda();
+            }
+        });
+        function busqueda() {
+            var texto = $(".inputBusqueda");
+            if (texto.val().trim().length > 0) {
+                $.ajax({
+                    url: "<?= URL; ?>busqueda/listado",
+                    type: "POST",
+                    data: {texto: texto.val()}
+                }).done(function (data) {
+                    $('body').html(data);
+                });
+            }
+        }
+    });
+</script>
 </body>     
-
-<!-- Mirrored from via-theme.com/24hNews/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Dec 2017 19:15:24 GMT -->
 </html>
