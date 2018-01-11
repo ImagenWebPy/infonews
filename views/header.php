@@ -174,8 +174,10 @@ switch ($page[0]) {
                                     <a href="<?= URL; ?>noticia/listado" class="dropdown-toggle" data-toggle="dropdown">Noticias</a> 
                                     <ul class="dropdown-menu mega-dropdown-menu"> 
                                         <!-- Begin col-sm-4-->                                         
-                                        <li class="col-sm-4"> 
-                                            <a href="<?= URL; ?>noticia/publicacion/<?= $megaMenu['principal']['id'] ?>/<?= $helper->cleanUrl($megaMenu['principal']['titulo']) ?>"><h3 class="title"><?= $megaMenu['principal']['titulo'] ?></h3></a>
+                                        <li class="col-sm-4" style="overflow: hidden"> 
+                                            <a href="<?= URL; ?>noticia/publicacion/<?= $megaMenu['principal']['id'] ?>/<?= $helper->cleanUrl($megaMenu['principal']['titulo']) ?>">
+                                                <h3 class="title"><?= $megaMenu['principal']['titulo'] ?></h3>
+                                            </a>
                                             <!-- Begin carousel-1-->                                             
                                             <div id="carousel-1" class="nav-slider carousel slide slide-carousel" data-ride="carousel"> 
                                                 <!-- Begin carousel-inner-->                                                 
