@@ -275,8 +275,8 @@ $helper = new Helper();
             <div class="row no-gutter"> 
                 <!--========== BEGIN .C0L-MD-8 ==========-->
                 <?php if (!empty($this->varios[0])): ?>
-                    <div class="col-md-8"> 
-                        <!-- Begin .news -->                                 
+<!--                    <div class="col-md-8"> 
+                         Begin .news                                  
                         <div class="news"> 
                             <div class="module-title"> 
                                 <h3 class="title"><span class="bg-1">Variedades</span></h3> 
@@ -286,7 +286,7 @@ $helper = new Helper();
                             $VariosPrincipal = $this->varios[0];
                             unset($this->varios[0]);
                             ?>
-                            <!-- Begin .item -->                                     
+                             Begin .item                                      
                             <div class="item"> 
                                 <div class="item-image-1">
                                     <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>">
@@ -304,8 +304,8 @@ $helper = new Helper();
                                     </div>                                             
                                 </div>                                         
                             </div>
-                            <!-- End .item -->                                     
-                            <!-- Begin .news-block" -->                                     
+                             End .item                                      
+                             Begin .news-block"                                      
                             <div class="news-block">
                                 <?php foreach ($this->varios as $item): ?>
                                     <div class="item-block"> 
@@ -321,10 +321,10 @@ $helper = new Helper();
                                     </div>
                                 <?php endforeach; ?>
                             </div>                                     
-                            <!-- End .news-block" -->                                     
+                             End .news-block"                                      
                         </div>                                 
-                        <!-- End .news -->                                 
-                    </div>     
+                         End .news                                  
+                    </div>     -->
                 <?php endif; ?>
                 <!--========== END .C0L-MD-8 ==========-->                             
                 <!--========== BEGIN .C0L-MD-4 ==========-->  
