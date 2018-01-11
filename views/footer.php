@@ -28,7 +28,7 @@ $helper = new Helper();
                             </ul>                                         
                         </div>                                     
                     </div>                                 
-                    <div class="col-sm-6 col-md-3"> 
+<!--                    <div class="col-sm-6 col-md-3"> 
                         <h3 class="title-left title-style03 underline03">Promociones</h3> 
                         <div class="footer-post"> 
                             <ul>
@@ -48,7 +48,7 @@ $helper = new Helper();
                                 <?php endforeach; ?>
                             </ul>                                         
                         </div>                                     
-                    </div>                                 
+                    </div>                                 -->
                     <div class="col-sm-6 col-md-3"> 
                         <h3 class="title-left title-style03 underline03">Recursos Humanos</h3> 
                         <div class="footer-post"> 
@@ -70,7 +70,7 @@ $helper = new Helper();
                             </ul>                                         
                         </div>                                     
                     </div>                                 
-                    <div class="col-sm-6 col-md-3"> 
+                    <div class="col-sm-6 col-md-6"> 
                         <h3 class="title-left title-style03 underline03">Tags</h3> 
                         <div class="tagcloud">
                             <?php foreach ($helper->getFooterTags() as $item): ?>
