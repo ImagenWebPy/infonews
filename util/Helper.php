@@ -667,4 +667,24 @@ class Helper {
         return $data;
     }
 
+    public function getHeaderMenuNews() {
+        $data = array('principal' => '', 'noticias' => array());
+        $sqlPrincipal = $this->db->select("SELECT id, titulo, img FROM noticia where destacado = 'PRINCIPAL' and orden = 1 and estado = 1 and id_categoria = 1");
+        $sqlUltimas = $this->db->select("SELECT n.id, n.titulo, n.img, m.descripcion as marca FROM noticia n LEFT JOIN marca m on m.id = n.id_marca where n.estado = 1 and n.orden != 1 and n.id_categoria = 1 ORDER BY n.fecha_visible DESC LIMIT 4");
+        $data['principal'] = array(
+            'id' => $sqlPrincipal[0]['id'],
+            'titulo' => utf8_encode($sqlPrincipal[0]['titulo']),
+            'img' => $sqlPrincipal[0]['img']
+        );
+        foreach ($sqlUltimas as $item) {
+            array_push($data['noticias'], array(
+                'id' => $item['id'],
+                'titulo' => $item['titulo'],
+                'img' => $item['img'],
+                'marca' => $item['marca']
+            ));
+        }
+        return $data;
+    }
+
 }

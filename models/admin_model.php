@@ -792,7 +792,7 @@ class Admin_Model extends Model {
             $img = $nombre_img[0] . '_thumb';
             $imagen_final = $img . '.' . $extension;
             $img_destacado = $imagen_final;
-            $imagen = 'public/img/slider/' . $imagen;
+            $imagen = 'public/img/marcas/' . $imagen;
             $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
         }
         $update = array(
