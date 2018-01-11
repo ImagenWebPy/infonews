@@ -181,7 +181,7 @@ $helper = new Helper();
                                             </div>                                                     
                                             <div class="item-content"> 
                                                 <h4 class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></h4> 
-                                                <p class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= substr(utf8_encode($item['contenido']), 0, 100); ?>...</a></p> 
+                                                <p class="ellipsis"><a href="<?= URL; ?>noticia/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= substr(utf8_encode(strip_tags($item['contenido'])), 0, 100); ?>...</a></p> 
                                             </div>                                                     
                                         </div>                                                 
                                     </li>

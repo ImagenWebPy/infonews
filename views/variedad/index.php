@@ -18,7 +18,7 @@ $listado = $this->listado;
                 <!--========== BEGIN .COL-MD-12 ==========-->
                 <div class="col-md-12">
                     <div class="module-title">
-                        <h3 class="title"><span class="bg-1">Variedades</span></h3>
+                        <h3 class="title"><span class="bg-1">Proximamente</span></h3>
                         <h3 class="subtitle">Últimas novedades</h3>
                     </div>
                     <!--========== BEGIN .ARTICLE ==========-->

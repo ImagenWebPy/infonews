@@ -147,9 +147,9 @@ switch ($page[0]) {
                                 <li <?= $classClipping; ?>>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>
                                 </li>    
-<!--                                <li <?= $classVariedad; ?>>
-                                    <a href="<?= URL; ?>variedad/listado">Variedades</a> 
-                                </li> -->
+                                <li <?= $classVariedad; ?>>
+                                    <a href="<?= URL; ?>variedad/listado">Proximamente</a> 
+                                </li> 
                                 <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li>                            
@@ -224,9 +224,9 @@ switch ($page[0]) {
                                 <li <?= $classClipping; ?>>
                                     <a href="<?= URL; ?>clipping/listado">Clipping</a>
                                 </li>    
-<!--                                <li <?= $classVariedad; ?>>
-                                    <a href="<?= URL; ?>variedad/listado">Variedades</a> 
-                                </li> -->
+                                <li <?= $classVariedad; ?>>
+                                    <a href="<?= URL; ?>variedad/listado">Proximamente</a> 
+                                </li> 
                                 <li <?= $classRRHH; ?>>
                                     <a href="<?= URL; ?>rrhh/listado">Recursos Humanos</a> 
                                 </li>
