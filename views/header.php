@@ -41,7 +41,7 @@ switch ($page[0]) {
         <!-- Favicon -->         
         <link rel="shortcut icon" href="<?= URL; ?>public/<?= URL; ?>public/img/favicon.png" type="image/x-icon" /> 
         <!-- Web Fonts  -->         
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed%7CRoboto+Slab:300,400,700%7CRoboto:300,400,500,700" rel="stylesheet"> 
+        <!--<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed%7CRoboto+Slab:300,400,700%7CRoboto:300,400,500,700" rel="stylesheet">--> 
         <!-- Stylesheets -->         
         <link rel="stylesheet" href="<?= URL; ?>public/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="<?= URL; ?>public/css/main.css"> 
