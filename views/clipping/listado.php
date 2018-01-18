@@ -92,7 +92,6 @@
             if (e.handled !== true) // This will prevent event triggering more then once
             {
                 var fecha = $(this).val();
-                alert(fecha);
                 $.ajax({
                     url: "<?= URL; ?>clipping/filtrarClippingRevista",
                     type: "post",
