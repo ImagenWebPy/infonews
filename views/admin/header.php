@@ -1,7 +1,7 @@
 <?php
 $helper = new Helper();
 $page = $helper->getPage();
-$classContenido = $classPromocion = $classClipping = $classDashboard = '';
+$classContenido = $classPromocion = $classClipping = $classDashboard = $classClippingRevista = '';
 $classDashboard = 'class="active"';
 if (!empty($page[1])) {
     switch ($page[1]) {
@@ -15,6 +15,10 @@ if (!empty($page[1])) {
             break;
         case 'clipping':
             $classClipping = 'class="active"';
+            $classDashboard = '';
+            break;
+        case 'clipping_revista':
+            $classClippingRevista = 'class="active"';
             $classDashboard = '';
             break;
         default :
@@ -126,6 +130,7 @@ if (!empty($page[1])) {
                         <li <?= $classContenido; ?>><a href="<?= URL; ?>admin/contenido"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Contenidos</span></a></li>
                         <li <?= $classPromocion; ?>><a href="<?= URL; ?>admin/promocion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Promociones</span></a></li>
                         <li <?= $classClipping; ?>><a href="<?= URL; ?>admin/clipping"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Clipping</span></a></li>
+                        <li <?= $classClippingRevista; ?>><a href="<?= URL; ?>admin/clipping_revista"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Clipping Revistas</span></a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

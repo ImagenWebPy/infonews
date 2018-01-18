@@ -16,6 +16,7 @@ class Login_Model extends Model {
                 ':password' => $pass
             ));
             $data = $sth->fetch();
+            var_dump($data);
             $count = $sth->rowCount();
             if ($count > 0) {
                 Session::set('usuario', array(
@@ -25,6 +26,9 @@ class Login_Model extends Model {
                 ));
                 Session::set('loggedIn', TRUE);
                 header('location: ' . URL . 'admin');
+            } else {
+                Session::set('loggedInError', TRUE);
+                header('location: ' . URL . 'login/');
             }
         } else {
             header('location: ' . URL . 'login/');

@@ -5,6 +5,13 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Inicie Sesión para Ingresar</p>
+        <?php if (isset($_SESSION['loggedInError'])): ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                Lo sentimos, el usuario o la contraseña ingresada no coinciden.
+            </div>
+        <?php endif; ?>
         <form action="<?= URL; ?>login/iniciar" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="login[email]" placeholder="Email">
@@ -26,3 +33,6 @@
     <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
+<?php
+$_SESSION['loggedInError'] = NULL;
+?>

@@ -34,6 +34,7 @@ class Helper {
 
         $String = str_replace("'", "", $String);
         //$String = str_replace(".", "_", $String);
+        $String = str_replace("#", "_", $String);
         $String = str_replace(" ", "_", $String);
         $String = str_replace("/", "_", $String);
 
@@ -393,6 +394,97 @@ class Helper {
                 $mes = 'Dic';
                 break;
         }
+        return $mes;
+    }
+
+    public function TranslateDate($format, $month) {
+        $mes = '';
+        switch ($format) {
+            case 'F':
+                switch ($month) {
+                    case 'January':
+                        $mes = 'Enero';
+                        break;
+                    case 'February':
+                        $mes = 'Febrero';
+                        break;
+                    case 'March':
+                        $mes = 'Marzo';
+                        break;
+                    case 'April':
+                        $mes = 'Abril';
+                        break;
+                    case 'May':
+                        $mes = 'Mayo';
+                        break;
+                    case 'June':
+                        $mes = 'Junio';
+                        break;
+                    case 'July':
+                        $mes = 'Julio';
+                        break;
+                    case 'August':
+                        $mes = 'Agosto';
+                        break;
+                    case 'September':
+                        $mes = 'Septiembre';
+                        break;
+                    case 'October':
+                        $mes = 'Octubre';
+                        break;
+                    case 'November':
+                        $mes = 'Noviembre';
+                        break;
+                    case 'December':
+                        $mes = 'Diciembre';
+                        break;
+                }
+                break;
+            case 'M':
+                switch ($month) {
+                    case 'Jan':
+                        $mes = 'Ene';
+                        break;
+                    case 'Feb':
+                        $mes = 'Feb';
+                        break;
+                    case 'Mar':
+                        $mes = 'Mar';
+                        break;
+                    case 'Apr':
+                        $mes = 'Abr';
+                        break;
+                    case 'May':
+                        $mes = 'May';
+                        break;
+                    case 'Jun':
+                        $mes = 'Jun';
+                        break;
+                    case 'Jul':
+                        $mes = 'Jul';
+                        break;
+                    case 'Aug':
+                        $mes = 'Ago';
+                        break;
+                    case 'Sept':
+                        $mes = 'Set';
+                        break;
+                    case 'Sep':
+                        $mes = 'Set';
+                        break;
+                    case 'Oct':
+                        $mes = 'Oct';
+                        break;
+                    case 'Nov':
+                        $mes = 'Nov';
+                        break;
+                    case 'Dec':
+                        $mes = 'Dic';
+                        break;
+                }
+                break;
+        }
+
         return $mes;
     }
 
