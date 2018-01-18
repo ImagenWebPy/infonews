@@ -27,6 +27,17 @@ class Admin extends Controller {
             unset($_SESSION['message']);
     }
 
+    public function medio() {
+        $this->view->public_css = array("admin/plugins/datatables/dataTables.bootstrap.css", "admin/plugins/html5fileupload/html5fileupload.css");
+        $this->view->public_js = array("admin/plugins/datatables/jquery.dataTables.min.js", "admin/plugins/datatables/dataTables.bootstrap.min.js");
+        $this->view->title = 'Contenido';
+        $this->view->render('admin/header');
+        $this->view->render('admin/medio/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
     public function promocion() {
         $this->view->public_css = array("admin/plugins/datatables/dataTables.bootstrap.css", "admin/plugins/html5fileupload/html5fileupload.css", "admin/plugins/datepicker/datepicker3.css", "admin/plugins/jquery.tagsinput/jquery.tagsinput.css");
         $this->view->public_js = array("admin/plugins/datatables/jquery.dataTables.min.js", "admin/plugins/datatables/dataTables.bootstrap.min.js", "admin/plugins/html5fileupload/html5fileupload.min.js", "admin/plugins/datepicker/bootstrap-datepicker.js", "admin/plugins/jquery.tagsinput/jquery.tagsinput.js", "admin/plugins/ckeditor/ckeditor.js");
@@ -48,7 +59,7 @@ class Admin extends Controller {
         if (!empty($_SESSION['message']))
             unset($_SESSION['message']);
     }
-    
+
     public function clipping_revista() {
         $this->view->public_css = array("admin/plugins/datatables/dataTables.bootstrap.css", "admin/plugins/html5fileupload/html5fileupload.css", "admin/plugins/datepicker/datepicker3.css", "admin/plugins/jquery.tagsinput/jquery.tagsinput.css");
         $this->view->public_js = array("admin/plugins/datatables/jquery.dataTables.min.js", "admin/plugins/datatables/dataTables.bootstrap.min.js", "admin/plugins/html5fileupload/html5fileupload.min.js", "admin/plugins/datepicker/bootstrap-datepicker.js", "admin/plugins/jquery.tagsinput/jquery.tagsinput.js", "admin/plugins/ckeditor/ckeditor.js", "admin/plugins/datepicker/locales/bootstrap-datepicker.es.js");
@@ -66,6 +77,12 @@ class Admin extends Controller {
         echo $data;
     }
 
+    public function listadoDTMedios() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTMedios();
+        echo $data;
+    }
+
     public function listadoDTPromociones() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTPromociones();
@@ -77,7 +94,7 @@ class Admin extends Controller {
         $data = $this->model->listadoDTClipping();
         echo $data;
     }
-    
+
     public function listadoDTClippingRevista() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTClippingRevista();
@@ -91,6 +108,16 @@ class Admin extends Controller {
             'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
         );
         $data = $this->model->modifcarEstadoDetalle($datos);
+        echo json_encode($data);
+    }
+
+    public function cambiarEstadoMedios() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->cambiarEstadoMedios($datos);
         echo json_encode($data);
     }
 
@@ -113,7 +140,7 @@ class Admin extends Controller {
         $data = $this->model->modifcarEstadoClipping($datos);
         echo json_encode($data);
     }
-    
+
     public function cambiarEstadoClippingRevista() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -130,6 +157,15 @@ class Admin extends Controller {
             'id' => $this->helper->cleanInput($_POST['id'])
         );
         $datos = $this->model->editarDTContenido($data);
+        echo $datos;
+    }
+
+    public function editarDTMedio() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->editarDTMedio($data);
         echo $datos;
     }
 
@@ -150,7 +186,7 @@ class Admin extends Controller {
         $datos = $this->model->editarDTClipping($data);
         echo $datos;
     }
-    
+
     public function editarDTClippingRevista() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -178,6 +214,18 @@ class Admin extends Controller {
         echo json_encode($datos);
     }
 
+    public function editarMedio() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['medio']['id']),
+            'id_tipo_medio' => $this->helper->cleanInput($_POST['medio']['id_tipo_medio']),
+            'descripcion' => $this->helper->cleanInput($_POST['medio']['descripcion']),
+            'estado' => (!empty($_POST['medio']['mostrar'])) ? $_POST['medio']['mostrar'] : 0
+        );
+        $datos = $this->model->editarMedio($data);
+        echo json_encode($datos);
+    }
+
     public function editarClipping() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -192,7 +240,7 @@ class Admin extends Controller {
         $datos = $this->model->editarClipping($data);
         echo json_encode($datos);
     }
-    
+
     public function editarClippingRevista() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -353,11 +401,11 @@ class Admin extends Controller {
             exit();
         }
     }
-    
+
     public function uploadImgTapaClippingRevista() {
         if (!empty($_POST)) {
             $idPost = $_POST['data']['id'];
-            $this->model->unlinkActualImgClippingRevista($idPost,'tapa');
+            $this->model->unlinkActualImgClippingRevista($idPost, 'tapa');
             $error = false;
             $absolutedir = dirname(__FILE__);
             $dir = 'public/img/clipping_revistas/';
@@ -413,11 +461,11 @@ class Admin extends Controller {
             exit();
         }
     }
-    
+
     public function uploadImgClippingRevista() {
         if (!empty($_POST)) {
             $idPost = $_POST['data']['id'];
-            $this->model->unlinkActualImgClippingRevista($idPost,'publicacion');
+            $this->model->unlinkActualImgClippingRevista($idPost, 'publicacion');
             $error = false;
             $absolutedir = dirname(__FILE__);
             $dir = 'public/img/clipping_revistas/';
@@ -585,6 +633,12 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function modalAgregarMedio() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarMedio();
+        echo $datos;
+    }
+
     public function modalAgregarPromocion() {
         header('Content-type: application/json; charset=utf-8');
         $datos = $this->model->modalAgregarPromocion();
@@ -596,7 +650,7 @@ class Admin extends Controller {
         $datos = $this->model->modalAgregarClipping();
         echo $datos;
     }
-    
+
     public function modalAgregarClippingRevista() {
         header('Content-type: application/json; charset=utf-8');
         $datos = $this->model->modalAgregarClippingRevista();
@@ -767,6 +821,22 @@ class Admin extends Controller {
         }
     }
 
+    public function frmAgregarMedio() {
+        if (!empty($_POST)) {
+            $data = array(
+                'id_tipo_medio' => $this->helper->cleanInput($_POST['medio']['id_tipo_medio']),
+                'descripcion' => $this->helper->cleanInput($_POST['medio']['descripcion']),
+                'estado' => (!empty($_POST['medio']['mostrar'])) ? $_POST['medio']['mostrar'] : 0
+            );
+            $idPost = $this->model->frmAgregarMedio($data);
+            Session::set('message', array(
+                'type' => 'success',
+                'mensaje' => 'Se ha agregado correctamente el contenido'
+            ));
+            header('Location:' . URL . 'admin/medio/');
+        }
+    }
+
     public function frmAgregarClipping() {
         if (!empty($_POST)) {
             $data = array(
@@ -828,7 +898,7 @@ class Admin extends Controller {
             header('Location:' . URL . 'admin/clipping/');
         }
     }
-    
+
     public function frmAgregarClippingRevista() {
         if (!empty($_POST)) {
             $data = array(
@@ -880,7 +950,7 @@ class Admin extends Controller {
                     'img' => $fname,
                     'img_thumb' => $imagen_final_thumb
                 );
-                $this->model->frmAddClippingRevistaImg($imagenes,'tapa');
+                $this->model->frmAddClippingRevistaImg($imagenes, 'tapa');
             }
             #IMAGEN PUBLICACION
             if (!empty($_FILES['file_revista']['name'])) {
@@ -922,7 +992,7 @@ class Admin extends Controller {
                     'img' => $fname,
                     'img_thumb' => $imagen_final_thumb
                 );
-                $this->model->frmAddClippingRevistaImg($imagenes,'publicacion');
+                $this->model->frmAddClippingRevistaImg($imagenes, 'publicacion');
             }
             Session::set('message', array(
                 'type' => 'success',

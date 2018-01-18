@@ -42,6 +42,35 @@ class Admin_Model extends Model {
         return $json;
     }
 
+    public function listadoDTMedios() {
+        $sql = $this->db->select("SELECT m.id,
+                                        m.descripcion as medio,
+                                        tm.descripcion as tipo,
+                                        m.estado
+                                FROM medio m
+                                LEFT JOIN tipo_medio tm on tm.id = m.id_tipo_medio");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTMedio pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "medio_$id",
+                'id' => $item['id'],
+                'medio' => utf8_encode($item['medio']),
+                'tipo' => utf8_encode($item['tipo']),
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
     public function listadoDTPromociones() {
         $sql = $this->db->select("SELECT p.id,
                                         p.titulo,
@@ -364,6 +393,44 @@ class Admin_Model extends Model {
         return $data;
     }
 
+    public function cambiarEstadoMedios($datos) {
+        $id = $datos['id'];
+        $estado = $datos['estado'];
+        #Actualizamos el estado de acuerdo al valor actual
+        if ($estado == 1)
+            $newEstado = 0;
+        else
+            $newEstado = 1;
+        $update = array(
+            'estado' => $newEstado
+        );
+        $this->db->update('medio', $update, "id = $id");
+        #retornamos la fila
+        $sql = $this->db->select("SELECT m.id,
+                                    m.descripcion as medio,
+                                    tm.descripcion as tipo,
+                                    m.estado
+                                FROM medio m
+                                LEFT JOIN tipo_medio tm on tm.id = m.id_tipo_medio
+                                WHERE m.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $btnEditar = '<a class="editDTClipping pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>'
+                . '<td>' . utf8_encode($sql[0]['medio']) . '</td>'
+                . '<td>' . utf8_encode($sql[0]['tipo']) . '</td>'
+                . '<td>' . $estado . '</td>'
+                . '<td>' . $btnEditar . '</td>';
+        $data = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $data;
+    }
+
     public function editarDTContenido($data) {
         $id = $data['id'];
         $sql = $this->db->select("SELECT n.id,
@@ -573,6 +640,66 @@ class Admin_Model extends Model {
                 ';
         $datos = array(
             'titulo' => utf8_encode($sql[0]['categoria']) . ' - ' . utf8_encode($sql[0]['titulo']),
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
+    public function editarDTMedio($data) {
+        $id = $data['id'];
+        $sql = $this->db->select("SELECT m.id,
+                                        m.descripcion,
+                                        tm.id as id_tipo_medio,
+                                        tm.descripcion as tipo_medio,
+                                        m.estado
+                                FROM medio m
+                                LEFT JOIN tipo_medio tm on tm.id = m.id_tipo_medio
+                                where m.id = $id");
+        $mostrarMedio = ($sql[0]['estado'] == 1) ? 'checked' : '';
+        $destacarNoticia = (!empty($sql[0]['destacado'])) ? 'checked' : '';
+        $sqlTipo = $this->db->select("select id, descripcion from tipo_medio where estado = 1 ORDER BY descripcion ASC");
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarMedio" method="POST">
+                            <input type="hidden" name="medio[id]" value="' . utf8_encode($sql[0]['id']) . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tipo</label>
+                                    <select class="form-control" name="medio[id_tipo_medio]" required>
+                                        <option value="">Seleccione un tipo de medio</option>';
+        foreach ($sqlTipo as $item) {
+            $selected = ($item['id'] == $sql[0]['id_tipo_medio']) ? 'selected' : '';
+            $form .= '                   <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                   </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="medio[mostrar]" ' . $mostrarMedio . ' value="1">
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Medio</label>
+                                    <input type="text" name="medio[descripcion]" class="form-control" placeholder="#" value="' . $sql[0]['descripcion'] . '">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Guardar Cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>';
+        $datos = array(
+            'titulo' => 'Editar Medio',
             'contenido' => $form
         );
         return json_encode($datos);
@@ -1142,6 +1269,44 @@ class Admin_Model extends Model {
         return $datos;
     }
 
+    public function editarMedio($data) {
+        $id = $data['id'];
+        $estado = 1;
+        if (empty($data['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'id_tipo_medio' => $data['id_tipo_medio'],
+            'descripcion' => utf8_decode($data['descripcion']),
+            'estado' => $estado
+        );
+        $db = $this->db->update('medio', $update, "id = $id");
+        #retornamos la fila
+        $sql = $this->db->select("SELECT m.id,
+                                    m.descripcion as medio,
+                                    tm.descripcion as tipo,
+                                    m.estado
+                                FROM medio m
+                                LEFT JOIN tipo_medio tm on tm.id = m.id_tipo_medio
+                                WHERE m.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="1"><span class="label label-success">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $btnEditar = '<a class="editDTMedio pointer btn-xs" data-id="' . $id . '"><i class="fa fa-edit"></i> Editar </a>';
+        $fila = '<td>' . $id . '</td>'
+                . '<td>' . utf8_encode($sql[0]['medio']) . '</td>'
+                . '<td>' . utf8_encode($sql[0]['tipo']) . '</td>'
+                . '<td>' . $estado . '</td>'
+                . '<td>' . $btnEditar . '</td>';
+        $datos = array(
+            'id' => $id,
+            'content' => $fila
+        );
+        return $datos;
+    }
+
     public function editarClipping($data) {
         $id = $data['id'];
         $estado = 1;
@@ -1672,6 +1837,62 @@ class Admin_Model extends Model {
         return json_encode($datos);
     }
 
+    public function modalAgregarMedio() {
+        $sqlTipoMedio = $this->db->select("select id, descripcion from tipo_medio where estado = 1 ORDER BY descripcion ASC");
+        $form = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Medio</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmAgregarPromocion" action="' . URL . '/admin/frmAgregarMedio" method="POST">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tipo de medio</label>
+                                    <select class="form-control" name="medio[id_tipo_medio]">
+                                        <option value="">Seleccione un Tipo de Medio</option>';
+        foreach ($sqlTipoMedio as $item) {
+            $form .= '                  <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $form .= '                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="medio[mostrar]" value="1" checked>
+                                            Mostrar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nombre Medio</label>
+                                    <input type="text" name="medio[descripcion]" class="form-control" placeholder="Nombre Medio" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Agregar Medio</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        CKEDITOR.replace("promocion[contenido]");
+                        $(".tags").tagsInput();
+                    });
+                </script>
+                ';
+        $datos = array(
+            'titulo' => 'Agegar Promocion',
+            'contenido' => $form
+        );
+        return json_encode($datos);
+    }
+
     public function modalAgregarClipping() {
         $sqlMedio = $this->db->select("select id, descripcion from medio where estado = 1 and id_tipo_medio = 1 ORDER BY descripcion ASC");
         $sqlSeccionMedio = $this->db->select("select id, descripcion from seccion_medio where estado = 1 ORDER BY descripcion ASC");
@@ -1882,6 +2103,16 @@ class Admin_Model extends Model {
             'fecha_visible' => date('Y-m-d', strtotime($data['fecha_visible'])),
             'fecha_publicacion' => date('Y-m-d H:i:s'),
             'estado' => $data['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        return $id;
+    }
+
+    public function frmAgregarMedio($data) {
+        $this->db->insert('medio', array(
+            'descripcion' => utf8_decode($data['descripcion']),
+            'estado' => $data['estado'],
+            'id_tipo_medio' => $data['id_tipo_medio'],
         ));
         $id = $this->db->lastInsertId();
         return $id;
