@@ -48,6 +48,20 @@ class Clipping_Model extends Model {
                             </a>';
                 }
             }
+            $data .= '</div>
+                <!--========== END .ARTICLE ==========-->
+                <div class="module-title">
+                    <h3 class="title"><span class="bg-1">Noticias</span></h3>
+                </div><!--========== BEGIN .ARTICLE ==========-->
+                <div class="article">';
+            foreach ($sql as $item) {
+                if ($item['tipo'] == 'Noticia') {
+                    $caption = '<strong>Medio: </strong>' . utf8_encode($item['medio']) . '<br><strong>Sección: </strong>' . utf8_encode($item['seccion_medio']) . '<br><srtong>Página: </strong>' . utf8_encode($item['pagina']);
+                    $data .= '  <a href="' . URL . 'public/img/clipping/' . $item['img'] . '" data-lightbox="clipping" data-title="' . $caption . '">
+                                <img src="' . URL . 'public/img/clipping/thumb/' . $item['img_thumb'] . '" alt = "' . $item['img'] . '" />
+                            </a>';
+                }
+            }
             $data .= '</div>';
         } else {
             $data = '<h4 style="margin: 20px; font-weight: bold;">Aún no se han cargado datos en el periodo selecionado. Por favor seleccione otra fecha.</h4>';
