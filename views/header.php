@@ -63,6 +63,7 @@ switch ($page[0]) {
         <script type="text/javascript">
             var _paq = _paq || [];
             /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(['setRequestMethod', 'POST']);
             _paq.push(['trackPageView']);
             _paq.push(['enableLinkTracking']);
             (function () {
