@@ -835,13 +835,11 @@ class Admin_Model extends Model {
 
     public function editarDTClippingRevista($data) {
         $id = $data['id'];
-        var_dump($id);
         $sql = $this->db->select("SELECT cr.id,
                                         cr.id_medio,
                                         me.descripcion as medio,
                                         cr.id_marca,
                                         ma.descripcion as marca,
-                                        cr.titulo,
                                         cr.img_tapa_thumb as img_tapa,
                                         cr.img_thumb as img,
                                         cr.pagina,
@@ -1371,12 +1369,13 @@ class Admin_Model extends Model {
             $estado = 0;
         }
         $medio = (!empty($data['id_medio'])) ? $data['id_medio'] : NULL;
-        $seccion_medio = (!empty($data['id_marca'])) ? $data['id_marca'] : NULL;
+        $marca = (!empty($data['id_marca'])) ? $data['id_marca'] : NULL;
+        $pagina = (!empty($data['pagina'])) ? $data['pagina'] : NULL;
         $fechaCompleta = '01-' . $data['fecha_visible'];
         $update = array(
             'id_medio' => $medio,
-            'id_marca' => $seccion_medio,
-            'pagina' => $data['pagina'],
+            'id_marca' => $marca,
+            'pagina' => $pagina,
             'fecha_visible' => date('Y-m-d', strtotime($fechaCompleta)),
             'estado' => $estado
         );
@@ -2148,7 +2147,7 @@ class Admin_Model extends Model {
     public function frmAgregarClippingRevista($data) {
         $this->db->insert('clipping_revista', array(
             'id_medio' => $data['id_medio'],
-            'id_marca' => $data['id_seccion_medio'],
+            'id_marca' => $data['id_marca'],
             'pagina' => $data['pagina'],
             'fecha_visible' => date('Y-m-d', strtotime('01-' . $data['fecha_visible'])),
             'fecha_publicacion' => date('Y-m-d H:i:s'),

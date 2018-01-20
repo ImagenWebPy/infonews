@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2018-01-19 15:27:41
+Date: 2018-01-20 09:58:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,7 +75,7 @@ CREATE TABLE `clipping` (
   `tipo` enum('Garden','Competencia','Noticia') DEFAULT NULL,
   `estado` int(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=309 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=318 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of clipping
@@ -311,7 +311,7 @@ INSERT INTO `clipping` VALUES ('229', '1', '8', null, '229_20180115_085920.jpg',
 INSERT INTO `clipping` VALUES ('230', '1', '8', null, '230_20180115_085928.jpg', '230_20180115_085928_thumb.jpg', '45', '2018-01-15', '2018-01-15 09:18:31', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('231', '1', '8', null, '231_20180115_085936.jpg', '231_20180115_085936_thumb.jpg', '47', '2018-01-15', '2018-01-15 09:19:40', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('232', '3', '2', null, '232_20180115_085958.jpg', '232_20180115_085958_thumb.jpg', '15', '2018-01-15', '2018-01-15 09:20:10', 'Competencia', '1');
-INSERT INTO `clipping` VALUES ('233', '3', '2', null, '233_20180115_090049.jpg', '233_20180115_090049_thumb.jpg', '20', '2018-01-15', '2018-01-15 09:20:37', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('233', '3', '2', null, '233_20180115_090049.jpg', '233_20180115_090049_thumb.jpg', '20', '2018-01-15', '2018-01-15 09:20:37', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('234', '1', '1', null, '234_20180115_092439.jpg', '234_20180115_092439_thumb.jpg', '13', '2018-01-14', '2018-01-15 09:42:05', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('235', '1', '14', null, '235_20180115_092720.jpg', '235_20180115_092720_thumb.jpg', '1', '2018-01-14', '2018-01-15 09:42:37', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('236', '1', '14', null, '236_20180115_092817.jpg', '236_20180115_092817_thumb.jpg', '3', '2018-01-14', '2018-01-15 09:43:10', 'Garden', '1');
@@ -331,7 +331,7 @@ INSERT INTO `clipping` VALUES ('249', '1', '14', null, '249_20180116_090709.jpg'
 INSERT INTO `clipping` VALUES ('250', '1', '14', null, '250_20180116_090723.jpg', '250_20180116_090723_thumb.jpg', '9', '2018-01-16', '2018-01-16 09:16:53', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('251', '1', '8', null, '251_20180116_090823.jpg', '251_20180116_090823_thumb.jpg', '45', '2018-01-16', '2018-01-16 09:17:43', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('252', '3', '1', null, '252_20180116_090009.jpg', '252_20180116_090009_thumb.jpg', '7', '2018-01-16', '2018-01-16 09:18:22', 'Competencia', '1');
-INSERT INTO `clipping` VALUES ('253', '3', '7', null, '253_20180116_090423_Burst01.jpg', '253_20180116_090423_Burst01_thumb.jpg', '28', '2018-01-16', '2018-01-16 09:18:42', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('253', '3', '7', null, '253_20180116_090423_Burst01.jpg', '253_20180116_090423_Burst01_thumb.jpg', '28', '2018-01-16', '2018-01-16 09:18:42', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('254', '5', '2', null, '254_20180116_085816.jpg', '254_20180116_085816_thumb.jpg', '3', '2018-01-16', '2018-01-16 09:19:19', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('255', '5', '2', null, '255_20180116_085846.jpg', '255_20180116_085846_thumb.jpg', '15', '2018-01-16', '2018-01-16 09:20:00', 'Garden', '1');
 INSERT INTO `clipping` VALUES ('256', '4', '14', null, '256_20180116_085733.jpg', '256_20180116_085733_thumb.jpg', '17', '2018-01-16', '2018-01-16 09:20:38', 'Garden', '1');
@@ -367,15 +367,15 @@ INSERT INTO `clipping` VALUES ('285', '1', '14', null, '285_20180118_090712.jpg'
 INSERT INTO `clipping` VALUES ('286', '1', '14', null, '286_20180118_090722.jpg', '286_20180118_090722_thumb.jpg', '47', '2018-01-18', '2018-01-18 09:33:28', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('287', '2', '1', null, '287_20180118_085851.jpg', '287_20180118_085851_thumb.jpg', '7', '2018-01-18', '2018-01-18 09:33:59', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('288', '2', '7', null, '288_', '288__thumb.', '27', '2018-01-19', '2018-01-19 09:38:50', 'Garden', '0');
-INSERT INTO `clipping` VALUES ('289', '2', '7', null, '289_20180119_093801.jpg', '289_20180119_093801_thumb.jpg', '27', '2018-01-19', '2018-01-19 09:39:18', 'Garden', '0');
+INSERT INTO `clipping` VALUES ('289', '2', '7', null, '289_20180119_093801.jpg', '289_20180119_093801_thumb.jpg', '27', '2018-01-19', '2018-01-19 09:39:18', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('290', '5', '2', null, '290_20180119_091417.jpg', '290_20180119_091417_thumb.jpg', '9', '2018-01-19', '2018-01-19 09:40:07', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('291', '5', '2', null, '291_20180119_091439.jpg', '291_20180119_091439_thumb.jpg', '15', '2018-01-19', '2018-01-19 09:40:38', 'Garden', '1');
-INSERT INTO `clipping` VALUES ('292', '5', '7', null, '292_Untitled_1.jpg', '292_Untitled_1_thumb.jpg', '20', '2018-01-19', '2018-01-19 09:41:28', 'Garden', '0');
+INSERT INTO `clipping` VALUES ('292', '5', '7', null, '292_Untitled_1.jpg', '292_Untitled_1_thumb.jpg', '20', '2018-01-19', '2018-01-19 09:41:28', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('293', '5', '2', null, '293_20180119_091606.jpg', '293_20180119_091606_thumb.jpg', '29', '2018-01-19', '2018-01-19 09:42:07', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('294', '4', '7', null, '294_', '294__thumb.', '15', '2018-01-19', '2018-01-19 09:47:25', 'Garden', '0');
-INSERT INTO `clipping` VALUES ('295', '4', '7', null, '295_20180119_094515.jpg', '295_20180119_094515_thumb.jpg', '15', '2018-01-19', '2018-01-19 09:47:55', 'Garden', '0');
+INSERT INTO `clipping` VALUES ('295', '4', '7', null, '295_20180119_094515.jpg', '295_20180119_094515_thumb.jpg', '15', '2018-01-19', '2018-01-19 09:47:55', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('296', '4', '14', null, '296_20180119_092449.jpg', '296_20180119_092449_thumb.jpg', '17', '2018-01-19', '2018-01-19 09:48:25', 'Garden', '1');
-INSERT INTO `clipping` VALUES ('297', '3', '2', null, '297_Untitled.jpg', '297_Untitled_thumb.jpg', '20', '2018-01-19', '2018-01-19 09:49:12', 'Garden', '0');
+INSERT INTO `clipping` VALUES ('297', '3', '2', null, '297_Untitled.jpg', '297_Untitled_thumb.jpg', '20', '2018-01-19', '2018-01-19 09:49:12', 'Noticia', '1');
 INSERT INTO `clipping` VALUES ('298', '3', '7', null, '298_20180119_091305.jpg', '298_20180119_091305_thumb.jpg', '27', '2018-01-19', '2018-01-19 09:49:40', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('299', '1', '1', null, '299_20180119_091642.jpg', '299_20180119_091642_thumb.jpg', '9', '2018-01-19', '2018-01-19 09:50:43', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('300', '1', '14', null, '300_20180119_091729.jpg', '300_20180119_091729_thumb.jpg', '1', '2018-01-19', '2018-01-19 09:51:21', 'Competencia', '1');
@@ -387,6 +387,40 @@ INSERT INTO `clipping` VALUES ('305', '1', '14', null, '305_20180119_091823.jpg'
 INSERT INTO `clipping` VALUES ('306', '1', '14', null, '306_20180119_091837.jpg', '306_20180119_091837_thumb.jpg', '7', '2018-01-19', '2018-01-19 09:58:01', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('307', '1', '14', null, '307_20180119_091848.jpg', '307_20180119_091848_thumb.jpg', '9', '2018-01-19', '2018-01-19 09:58:25', 'Competencia', '1');
 INSERT INTO `clipping` VALUES ('308', '1', '8', null, '308_20180119_091939.jpg', '308_20180119_091939_thumb.jpg', '45', '2018-01-19', '2018-01-19 09:59:15', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('309', '1', '1', null, '309_20180120_091529.jpg', '309_20180120_091529_thumb.jpg', '9', '2018-01-20', '2018-01-20 09:29:21', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('310', '1', '14', null, '310_20180120_091746.jpg', '310_20180120_091746_thumb.jpg', '1', '2018-01-20', '2018-01-20 09:30:36', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('311', '1', '14', null, '311_20180120_091824.jpg', '311_20180120_091824_thumb.jpg', '2', '2018-01-20', '2018-01-20 09:33:22', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('312', '1', '14', null, '312_20180120_091829.jpg', '312_20180120_091829_thumb.jpg', '2', '2018-01-20', '2018-01-20 09:34:01', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('313', '1', '14', null, '313_20180120_091806.jpg', '313_20180120_091806_thumb.jpg', '3', '2018-01-20', '2018-01-20 09:34:22', 'Garden', '1');
+INSERT INTO `clipping` VALUES ('314', '1', '14', null, '314_20180120_091840.jpg', '314_20180120_091840_thumb.jpg', '5', '2018-01-20', '2018-01-20 09:34:44', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('315', '1', '14', null, '315_20180120_091845.jpg', '315_20180120_091845_thumb.jpg', '5', '2018-01-20', '2018-01-20 09:35:06', 'Competencia', '1');
+INSERT INTO `clipping` VALUES ('316', '1', '7', null, '316_20180120_091914.jpg', '316_20180120_091914_thumb.jpg', '25', '2018-01-20', '2018-01-20 09:35:38', 'Noticia', '1');
+INSERT INTO `clipping` VALUES ('317', '3', '7', null, '317_20180120_092055.jpg', '317_20180120_092055_thumb.jpg', '27', '2018-01-20', '2018-01-20 09:36:33', 'Competencia', '1');
+
+-- ----------------------------
+-- Table structure for clipping_revista
+-- ----------------------------
+DROP TABLE IF EXISTS `clipping_revista`;
+CREATE TABLE `clipping_revista` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_medio` int(11) unsigned DEFAULT NULL,
+  `id_marca` int(11) unsigned DEFAULT NULL,
+  `img_tapa` varchar(140) DEFAULT NULL,
+  `img_tapa_thumb` varchar(140) DEFAULT NULL,
+  `img` varchar(140) DEFAULT NULL,
+  `img_thumb` varchar(140) DEFAULT NULL,
+  `pagina` int(3) unsigned DEFAULT NULL,
+  `fecha_visible` date DEFAULT NULL,
+  `fecha_publicacion` datetime DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of clipping_revista
+-- ----------------------------
+INSERT INTO `clipping_revista` VALUES ('1', '7', null, '1_20180120_093720.jpg', '1_20180120_093720_thumb.jpg', '1_20180120_093742.jpg', '1_20180120_093742_thumb.jpg', null, '2018-01-01', '2018-01-20 09:49:14', '1');
+INSERT INTO `clipping_revista` VALUES ('2', '6', null, '2_20180120_093858.jpg', '2_20180120_093858_thumb.jpg', '2_20180120_093935.jpg', '2_20180120_093935_thumb.jpg', null, '2018-01-01', '2018-01-20 09:49:36', '1');
 
 -- ----------------------------
 -- Table structure for marca
@@ -427,7 +461,7 @@ CREATE TABLE `medio` (
   `estado` int(1) unsigned DEFAULT '1',
   `id_tipo_medio` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of medio
@@ -437,6 +471,8 @@ INSERT INTO `medio` VALUES ('2', 'Última Hora', '1', '1');
 INSERT INTO `medio` VALUES ('3', 'La Nación', '1', '1');
 INSERT INTO `medio` VALUES ('4', 'ADN', '1', '1');
 INSERT INTO `medio` VALUES ('5', '5Dias', '1', '1');
+INSERT INTO `medio` VALUES ('6', 'HIGH CLASS', '1', '2');
+INSERT INTO `medio` VALUES ('7', 'CHIC', '1', '2');
 
 -- ----------------------------
 -- Table structure for noticia

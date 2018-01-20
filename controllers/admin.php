@@ -246,8 +246,8 @@ class Admin extends Controller {
         $data = array(
             'id' => $this->helper->cleanInput($_POST['clippingRevista']['id']),
             'id_medio' => $this->helper->cleanInput($_POST['clippingRevista']['medio']),
-            'id_marca' => $this->helper->cleanInput($_POST['clippingRevista']['marca']),
-            'pagina' => $this->helper->cleanInput($_POST['clippingRevista']['pagina']),
+            'id_marca' => (!empty($_POST['clippingRevista']['marca'])) ? $this->helper->cleanInput($_POST['clippingRevista']['marca']) : NULL,
+            'pagina' => (!empty($_POST['clippingRevista']['pagina'])) ? $this->helper->cleanInput($_POST['clippingRevista']['pagina']) : NULL,
             'fecha_visible' => $this->helper->cleanInput($_POST['clippingRevista']['fecha_visible']),
             'estado' => (!empty($_POST['clippingRevista']['mostrar'])) ? $_POST['clippingRevista']['mostrar'] : 0
         );
