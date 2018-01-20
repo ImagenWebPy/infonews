@@ -1,27 +1,53 @@
 <?php
+
+//
+// Open Web Analytics - An Open Source Web Analytics Framework
+//
+// Copyright 2006 Peter Adams. All rights reserved.
+//
+// Licensed under GPL v2.0 http://www.gnu.org/copyleft/gpl.html
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// $Id$
+//
+
+require_once('owa_env.php');
+require_once(OWA_DIR.'owa_php.php');
+
 /**
- * Piwik - free/libre analytics platform
- *
- * @link http://piwik.org
- * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- *
- * @package Piwik
+ * Main Admin Page Wrapper Script
+ * 
+ * @author      Peter Adams <peter@openwebanalytics.com>
+ * @copyright   Copyright &copy; 2006 Peter Adams <peter@openwebanalytics.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GPL v2.0
+ * @category    owa
+ * @package     owa
+ * @version		$Revision$	      
+ * @since		owa 1.0.0
  */
 
-if (!defined('PIWIK_DOCUMENT_ROOT')) {
-    define('PIWIK_DOCUMENT_ROOT', dirname(__FILE__) == '/' ? '' : dirname(__FILE__));
-}
-if (file_exists(PIWIK_DOCUMENT_ROOT . '/bootstrap.php')) {
-    require_once PIWIK_DOCUMENT_ROOT . '/bootstrap.php';
-}
-if (!defined('PIWIK_INCLUDE_PATH')) {
-    define('PIWIK_INCLUDE_PATH', PIWIK_DOCUMENT_ROOT);
+// Initialize owa admin
+$owa = new owa_php;
+
+
+if (!$owa->isOwaInstalled()) {
+	// redirect to install
+	owa_lib::redirectBrowser(owa_coreAPI::getSetting('base','public_url').'install.php');
 }
 
-require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
+if ( $owa->isEndpointEnabled( basename( __FILE__ ) ) ) {
 
-if (!defined('PIWIK_PRINT_ERROR_BACKTRACE')) {
-    define('PIWIK_PRINT_ERROR_BACKTRACE', false);
+	// run controller or view and echo page content
+	echo $owa->handleRequestFromURL();
+} else {
+	
+	// unload owa
+	$owa->restInPeace();
 }
 
-require_once PIWIK_INCLUDE_PATH . '/core/dispatch.php';
+?>
