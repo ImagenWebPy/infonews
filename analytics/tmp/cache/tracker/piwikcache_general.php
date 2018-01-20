@@ -1,9 +1,9 @@
 <?php return array (
-  'lifetime' => 1516372509,
+  'lifetime' => 1516374265,
   'data' => 
   array (
     'isBrowserTriggerEnabled' => true,
-    'lastTrackerCronRun' => false,
+    'lastTrackerCronRun' => 1516373965,
     'allUrlsByHostAndIdSite' => 
     array (
       '192.168.10.99' => 
