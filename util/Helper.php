@@ -497,7 +497,6 @@ class Helper {
                                         n.titulo,
                                         n.contenido,
                                         n.img,
-                                        n.img_destacado,
                                         c.descripcion as categoria,
                                         m.descripcion as marca
                                 FROM noticia n

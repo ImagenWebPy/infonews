@@ -2,8 +2,6 @@
 $helper = new Helper();
 $contenido = $this->contenido;
 $carpeta = "marcas";
-if ($contenido['destacado'] == 'PRINCIPAL')
-    $carpeta = "slider";
 ?>
 <div id="main-section"> 
     <!--========== BEGIN .CONTAINER ==========-->

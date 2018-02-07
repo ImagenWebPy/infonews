@@ -171,54 +171,7 @@ switch ($page[0]) {
                                     <a href="<?= URL; ?>">Inicio</a>
                                 </li>   
                                 <li class="dropdown mega-dropdown <?= $classNoticia ?>">
-                                    <a href="<?= URL; ?>noticia/listado" class="dropdown-toggle" data-toggle="dropdown">Noticias</a> 
-                                    <ul class="dropdown-menu mega-dropdown-menu"> 
-                                        <!-- Begin col-sm-4-->                                         
-                                        <li class="col-sm-4" style="overflow: hidden"> 
-                                            <a href="<?= URL; ?>noticia/publicacion/<?= $megaMenu['principal']['id'] ?>/<?= $helper->cleanUrl($megaMenu['principal']['titulo']) ?>">
-                                                <h3 class="title"><?= $megaMenu['principal']['titulo'] ?></h3>
-                                            </a>
-                                            <!-- Begin carousel-1-->                                             
-                                            <div id="carousel-1" class="nav-slider carousel slide slide-carousel" data-ride="carousel"> 
-                                                <!-- Begin carousel-inner-->                                                 
-                                                <div class="carousel-inner"> 
-                                                    <div class="item active"> 
-                                                        <a href="<?= URL; ?>noticia/publicacion/<?= $megaMenu['principal']['id'] ?>/<?= $helper->cleanUrl($megaMenu['principal']['titulo']) ?>">
-                                                            <img src="<?= URL; ?>public/img/slider/<?= $megaMenu['principal']['img'] ?>" alt="<?= $megaMenu['principal']['img'] ?>" style=" width: 373px;">
-                                                        </a>                                                         
-                                                    </div>                                                     
-                                                </div>                                                 
-                                                <!-- End carousel-inner-->                                                 
-                                            </div>                                             
-                                            <!-- End carousel-1-->                                             
-                                        </li>                                         
-                                        <!-- End col-sm-4 -->                                         
-                                        <!-- Begin col-sm-4 -->                                         
-                                        <li class="col-sm-4"> 
-                                            <h3>Últimas noticias</h3> 
-                                            <ul class="media-list">
-                                                <?php foreach ($megaMenu['noticias'] as $item): ?>
-                                                    <li class="media"> 
-                                                        <a class="pull-right" href="<?= URL; ?>noticia/publicacion/<?= $item['id'] ?>/<?= $helper->cleanUrl($item['titulo']) ?>">
-                                                            <img class="img-responsive" alt="<?= $item['img'] ?>" src="<?= URL; ?>public/img/marcas/<?= $item['img'] ?>" style=" width: 76px;">
-                                                        </a>                                                     
-                                                        <div class="media-body"> 
-                                                            <p>
-                                                                <a href="<?= URL; ?>noticia/publicacion/<?= $item['id'] ?>/<?= $helper->cleanUrl($item['titulo']) ?>" target="_blank"><span class="bg-1"><?= utf8_encode($item['marca']) ?></span></a>
-                                                                <a href="<?= URL; ?>noticia/publicacion/<?= $item['id'] ?>/<?= $helper->cleanUrl($item['titulo']) ?>" target="_blank"><?= utf8_encode($item['titulo']) ?></a>
-                                                            </p> 
-                                                        </div>                                                     
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>                                             
-                                        </li>                                         
-                                        <!-- End col-sm-4 -->                                         
-                                        <!-- Begin col-sm-8 -->                                         
-                                        <li class="col-sm-10"> 
-                                            <a href="<?= URL; ?>noticia/listado"><h3>Ver todas las noticias</h3></a>
-                                        </li>                                         
-                                        <!-- End col-sm-8 -->                                         
-                                    </ul>   
+                                    <a href="<?= URL; ?>noticia/listado">Noticias</a>
                                 </li> 
                                 <li <?= $classPromocion; ?>>
                                     <a href="<?= URL; ?>promocion/listado">Clasificados</a> 

@@ -664,6 +664,8 @@ class Admin extends Controller {
                 'id_categoria' => $id_categoria,
                 'id_marca' => (!empty($_POST['contenido']['marca'])) ? $this->helper->cleanInput($_POST['contenido']['marca']) : NULL,
                 'estado' => (!empty($_POST['contenido']['mostrar'])) ? $_POST['contenido']['mostrar'] : 0,
+                'destacado' => (!empty($_POST['contenido']['destacado'])) ? $_POST['contenido']['destacado'] : NULL,
+                'orden' => (!empty($_POST['contenido']['orden'])) ? $_POST['contenido']['orden'] : NULL,
                 'titulo' => $this->helper->cleanInput($_POST['contenido']['titulo']),
                 'contenido' => $_POST['contenido']['contenido'],
                 'fecha_visible' => $_POST['contenido']['fecha_visible'],
@@ -711,7 +713,7 @@ class Admin extends Controller {
                 );
                 $this->model->frmAddNoticiaImg($imagenes);
             }
-            if (!empty($_FILES['file_galeria']['name'])) {
+            if (!empty($_FILES['file_galeria']['name'][0])) {
                 $filename = array();
                 $dir = 'public/img/galeria/';
                 $serverdir = $dir;
@@ -745,7 +747,7 @@ class Admin extends Controller {
                 );
                 $this->model->frmAddNoticiaImgGaleria($imagenes);
             }
-            if (!empty($_FILES['file_video']['name'])) {
+            if (!empty($_FILES['file_video']['name'][0])) {
                 $error = false;
                 $dir = 'public/videos/';
                 $serverdir = $dir;

@@ -1118,40 +1118,6 @@ class Admin_Model extends Model {
         $orden = (!empty($data['orden'])) ? utf8_decode($data['orden']) : NULL;
         $contenido = (!empty($data['contenido'])) ? utf8_decode($data['contenido']) : NULL;
         $img_destacado = NULL;
-        if ($destacado == 'PRINCIPAL') {
-            $serverdir = 'public/img/slider/thumb/';
-            switch ($orden) {
-                case 1:
-                    //574x443
-                    $ancho = 574;
-                    $alto = 443;
-                    break;
-                case 2:
-                    //274x442
-                    $ancho = 274;
-                    $alto = 442;
-                    break;
-                case 3:
-                case 4:
-                    //374x215
-                    $ancho = 374;
-                    $alto = 215;
-                    break;
-                default :
-                    $ancho = 800;
-                    $alto = 400;
-                    break;
-            }
-            $sql = $this->db->select("select img from noticia where id = $id");
-            $imagen = $sql[0]['img'];
-            $nombre_img = explode('.', $imagen);
-            $extension = strtolower(end($nombre_img));
-            $img = $nombre_img[0] . '_thumb';
-            $imagen_final = $img . '.' . $extension;
-            $img_destacado = $imagen_final;
-            $imagen = 'public/img/marcas/' . $imagen;
-            $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
-        }
         $update = array(
             'id_categoria' => $data['id_categoria'],
             'id_marca' => $marca,
@@ -1650,6 +1616,14 @@ class Admin_Model extends Model {
                                         </label>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="contenido[destacado]" value="1">
+                                            Destacar
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -1660,6 +1634,10 @@ class Admin_Model extends Model {
             $form .= '                  <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
         }
         $form .= '                      </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Orden</label><span class="help-block" style="display: initial; font-size:12px;">(Completar solo si el campo Destacar ese encuentra marcado)</span>
+                                    <input type="numer" name="contenido[orden]" class="form-control" placeholder="#" value="">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -2093,14 +2071,51 @@ class Admin_Model extends Model {
     }
 
     public function frmAgregarContenido($data) {
+        $categoria = $data['id_categoria'];
+        $destacado = $data['destacado'];
+        $orden = $data['orden'];
+        $destacadoEnum = '';
+        $desmarcar = FALSE;
+        if ($destacado == 1) {
+            switch ($categoria) {
+                case 1:
+                    if ($orden <= 4) {
+                        $destacadoEnum = 'PRINCIPAL';
+                        $desmarcar = TRUE;
+                    } else {
+                        $destacadoEnum = 'MARCAS';
+                        $desmarcar = TRUE;
+                    }
+                    break;
+                case 3:
+                    $destacadoEnum = 'RRHH';
+                    $desmarcar = TRUE;
+                    break;
+            }
+        }
+        #desmarcamos el destacado anterior si existe
+        if ($desmarcar == TRUE) {
+            $sqlDestacadoOld = $this->db->select("select id from noticia where destacado = '$destacadoEnum' and orden = $orden and estado = 1");
+            if (!empty($sqlDestacadoOld)) {
+                $idOld = $sqlDestacadoOld[0]['id'];
+                #desmarcamos el anterior
+                $update = array(
+                    'destacado' => NULL,
+                    'orden' => NULL
+                );
+                $this->db->update('noticia', $update, "id = $idOld");
+            }
+        }
         $this->db->insert('noticia', array(
-            'id_categoria' => $data['id_categoria'],
+            'id_categoria' => $categoria,
             'id_marca' => $data['id_marca'],
             'titulo' => utf8_decode($data['titulo']),
             'contenido' => utf8_decode($data['contenido']),
             'tag' => utf8_decode($data['tag']),
             'fecha_visible' => date('Y-m-d', strtotime($data['fecha_visible'])),
             'fecha_publicacion' => date('Y-m-d H:i:s'),
+            'destacado' => $destacadoEnum,
+            'orden' => $orden,
             'estado' => $data['estado']
         ));
         $id = $this->db->lastInsertId();

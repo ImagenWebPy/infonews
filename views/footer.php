@@ -1,5 +1,6 @@
 <?php
 $helper = new Helper();
+$page = $helper->getPage();
 ?>
 <footer id="footer"> 
     <!-- Begin .parallax -->                 
@@ -28,27 +29,27 @@ $helper = new Helper();
                             </ul>                                         
                         </div>                                     
                     </div>                                 
-<!--                    <div class="col-sm-6 col-md-3"> 
-                        <h3 class="title-left title-style03 underline03">Promociones</h3> 
-                        <div class="footer-post"> 
-                            <ul>
-                                <?php foreach ($helper->getFooterPromociones() as $item): ?>
-                                    <li> 
-                                        <div class="item"> 
-                                            <div class="item-image">
-                                                <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
-                                                    <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($item['img']); ?>" alt="<?= utf8_encode($item['img']); ?>">
-                                                </a>
-                                            </div>                                                     
-                                            <div class="item-content"> 
-                                                <p class="ellipsis"><a href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></p> 
-                                            </div>                                                     
-                                        </div>                                                 
-                                    </li>                                             
-                                <?php endforeach; ?>
-                            </ul>                                         
-                        </div>                                     
-                    </div>                                 -->
+                    <!--                    <div class="col-sm-6 col-md-3"> 
+                                            <h3 class="title-left title-style03 underline03">Promociones</h3> 
+                                            <div class="footer-post"> 
+                                                <ul>
+                    <?php foreach ($helper->getFooterPromociones() as $item): ?>
+                                                                <li> 
+                                                                    <div class="item"> 
+                                                                        <div class="item-image">
+                                                                            <a class="img-link" href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
+                                                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/promociones/<?= utf8_encode($item['img']); ?>" alt="<?= utf8_encode($item['img']); ?>">
+                                                                            </a>
+                                                                        </div>                                                     
+                                                                        <div class="item-content"> 
+                                                                            <p class="ellipsis"><a href="<?= URL; ?>promocion/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>"><?= utf8_encode($item['titulo']); ?></a></p> 
+                                                                        </div>                                                     
+                                                                    </div>                                                 
+                                                                </li>                                             
+                    <?php endforeach; ?>
+                                                </ul>                                         
+                                            </div>                                     
+                                        </div>                                 -->
                     <div class="col-sm-6 col-md-3"> 
                         <h3 class="title-left title-style03 underline03">Recursos Humanos</h3> 
                         <div class="footer-post"> 
@@ -117,7 +118,6 @@ $helper = new Helper();
 </div>
 <!-- /Modal -->
 <!-- External JavaScripts -->         
-
 <script src="<?= URL; ?>public/js/bootstrap.min.js"></script>         
 <script src="<?= URL; ?>public/js/jquery-ui.min.js"></script>         
 <script src="<?= URL; ?>public/js/plugins.js"></script>         

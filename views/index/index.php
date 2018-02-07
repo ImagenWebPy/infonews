@@ -7,46 +7,24 @@ $helper = new Helper();
         <!--========== BEGIN .CONTAINER ==========-->                     
         <div class="container"> 
             <!--========== BEGIN #NEWS-SLIDER ==========-->                         
-            <div id="news-slider" class="owl-carousel"> 
-                <div class="news-slide"> 
-                    <?php
-                    foreach ($this->slider as $key => $val):
-                        $position = '';
-                        $style0 = "";
-                        $style1 = "";
-                        $style23 = "";
-                        switch ($key) {
-                            case 0:
-                                $position = 'first';
-                                $style0 = 'style="width: 574px; height: 442px;"';
-                                break;
-                            case 1:
-                                $position = 'second';
-                                $style1 = 'style="width: 274px; height: 442px;"';
-                                break;
-                            case 2:
-                                $position = 'third';
-                                $style23 = 'style="width: 374px; height: 215px;"';
-                                break;
-                            case 3:
-                                $position = 'fourth';
-                                $style23 = 'style="width: 374px; height: 215px;"';
-                                break;
-                        }
-                        ?>
-                        <div class="news-slider-layer <?= $position; ?>" > 
-                            <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"> 
-                                <div class="content"> 
-                                    <span class="category-tag bg-1"><?= utf8_encode($val['marca']); ?></span> 
-                                    <p><?= utf8_encode($val['titulo']) ?></p> 
-                                </div>                                         
-                                <img class="img-responsive" src="<?= URL; ?>public/img/slider/thumb/<?= utf8_encode($val['img_destacado']); ?>" alt="<?= utf8_encode($val['img_destacado']); ?>" <?= $style0 . $style1 . $style23; ?>> 
-                            </a>                                     
-                        </div>                                                          
-
+            <div id="slider"> 
+                <div class="slides">
+                    <?php foreach ($this->slider as $key => $val): ?>
+                        <div class="slider">
+                            <div class="legend"></div> 
+                            <div class="content"> 
+                                <div class="content-txt"> 
+                                    <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><h1><?= utf8_encode($val['titulo']); ?></h1></a>
+                                    <h2><?= substr(strip_tags(utf8_encode($val['contenido'])), 0, 180); ?>...</h2> 
+                                </div> 
+                            </div> 
+                            <div class="images"> 
+                                <img src="<?= URL; ?>/public/img/marcas/<?= $val['img']; ?>" style="width: 100%;"> 
+                            </div> 
+                        </div>
                     <?php endforeach; ?>
-                </div>
-            </div>                         
+                </div> 
+            </div>
             <!--========== END .NEWS-SLIDER ==========-->                         
         </div>                     
     </section>                 
@@ -275,56 +253,56 @@ $helper = new Helper();
             <div class="row no-gutter"> 
                 <!--========== BEGIN .C0L-MD-8 ==========-->
                 <?php if (!empty($this->varios[0])): ?>
-<!--                    <div class="col-md-8"> 
-                         Begin .news                                  
-                        <div class="news"> 
-                            <div class="module-title"> 
-                                <h3 class="title"><span class="bg-1">Variedades</span></h3> 
-                                <h3 class="subtitle">Últimas novedades</h3> 
-                            </div>
-                            <?php
-                            $VariosPrincipal = $this->varios[0];
-                            unset($this->varios[0]);
-                            ?>
-                             Begin .item                                      
-                            <div class="item"> 
-                                <div class="item-image-1">
-                                    <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>">
-                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($VariosPrincipal['img']); ?>" alt="">
-                                    </a>
-                                </div>                                         
-                                <div class="item-content"> 
-                                    <div class="title-left title-style04 underline04"> 
-                                        <h3><a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><?= utf8_encode($VariosPrincipal['titulo']); ?></a></h3> 
-                                    </div>                                             
-                                    <br> 
-                                    <p><?= utf8_encode($VariosPrincipal['contenido']); ?></p> 
-                                    <div> 
-                                        <a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><span class="read-more">Continuar Leyendo</span></a> 
-                                    </div>                                             
-                                </div>                                         
-                            </div>
-                             End .item                                      
-                             Begin .news-block"                                      
-                            <div class="news-block">
-                                <?php foreach ($this->varios as $item): ?>
-                                    <div class="item-block"> 
-                                        <div class="item-image">
-                                            <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
-                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
-                                            </a>
-                                        </div>                                             
-                                        <div class="item-content">
-                                            <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
-                                            <p><a href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
-                                        </div>                                             
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>                                     
-                             End .news-block"                                      
-                        </div>                                 
-                         End .news                                  
-                    </div>     -->
+                    <!--                    <div class="col-md-8"> 
+                                             Begin .news                                  
+                                            <div class="news"> 
+                                                <div class="module-title"> 
+                                                    <h3 class="title"><span class="bg-1">Variedades</span></h3> 
+                                                    <h3 class="subtitle">Últimas novedades</h3> 
+                                                </div>
+                    <?php
+                    $VariosPrincipal = $this->varios[0];
+                    unset($this->varios[0]);
+                    ?>
+                                                 Begin .item                                      
+                                                <div class="item"> 
+                                                    <div class="item-image-1">
+                                                        <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>">
+                                                            <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($VariosPrincipal['img']); ?>" alt="">
+                                                        </a>
+                                                    </div>                                         
+                                                    <div class="item-content"> 
+                                                        <div class="title-left title-style04 underline04"> 
+                                                            <h3><a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><?= utf8_encode($VariosPrincipal['titulo']); ?></a></h3> 
+                                                        </div>                                             
+                                                        <br> 
+                                                        <p><?= utf8_encode($VariosPrincipal['contenido']); ?></p> 
+                                                        <div> 
+                                                            <a href="<?= URL; ?>variedad/publicacion/<?= $VariosPrincipal['id']; ?>/<?= $helper->cleanUrl(utf8_encode($VariosPrincipal['titulo'])); ?>"><span class="read-more">Continuar Leyendo</span></a> 
+                                                        </div>                                             
+                                                    </div>                                         
+                                                </div>
+                                                 End .item                                      
+                                                 Begin .news-block"                                      
+                                                <div class="news-block">
+                    <?php foreach ($this->varios as $item): ?>
+                                                                                            <div class="item-block"> 
+                                                                                                <div class="item-image">
+                                                                                                    <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
+                                                                                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
+                                                                                                    </a>
+                                                                                                </div>                                             
+                                                                                                <div class="item-content">
+                                                                                                    <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
+                                                                                                    <p><a href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
+                                                                                                </div>                                             
+                                                                                            </div>
+                    <?php endforeach; ?>
+                                                </div>                                     
+                                                 End .news-block"                                      
+                                            </div>                                 
+                                             End .news                                  
+                                        </div>     -->
                 <?php endif; ?>
                 <!--========== END .C0L-MD-8 ==========-->                             
                 <!--========== BEGIN .C0L-MD-4 ==========-->  
