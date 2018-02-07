@@ -456,7 +456,7 @@ class Admin_Model extends Model {
         switch ($sql[0]['id_categoria']) {
             case 1: #Marca
                 if (($sql[0]['orden'] >= 1) && ($sql[0]['orden'] <= 4))
-                    $carpeta = 'slider';
+                    $carpeta = 'marcas';
                 else
                     $carpeta = 'marcas';
                 break;

@@ -318,8 +318,8 @@ class Admin extends Controller {
 //                        break;
 //                }
 //            } else {
-            $ancho = 1200;
-            $alto = 800;
+            $ancho = 1240;
+            $alto = 500;
 //            }
             $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
             #############
@@ -703,8 +703,8 @@ class Admin extends Controller {
                 $imagen = $serverdir . $fname;
                 # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
                 $imagen_final = $fname;
-                $ancho = 1200;
-                $alto = 800;
+                $ancho = 1240;
+                $alto = 500;
                 $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
                 #############
                 $imagenes = array(
@@ -805,7 +805,7 @@ class Admin extends Controller {
                 $imagen = $serverdir . $fname;
                 # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
                 $imagen_final = $fname;
-                $ancho = 1200;
+                $ancho = 1240;
                 $alto = 500;
                 $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
                 #############
