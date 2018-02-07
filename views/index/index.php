@@ -15,11 +15,11 @@ $helper = new Helper();
                             <div class="content"> 
                                 <div class="content-txt"> 
                                     <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><h1><?= utf8_encode($val['titulo']); ?></h1></a>
-                                    <h2><?= substr(strip_tags(utf8_encode($val['contenido'])), 0, 180); ?>...</h2> 
+                                    <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><h2><?= substr(strip_tags(utf8_encode($val['contenido'])), 0, 180); ?>...</h2></a>
                                 </div> 
                             </div> 
                             <div class="images"> 
-                                <img src="<?= URL; ?>/public/img/marcas/<?= $val['img']; ?>" style="width: 100%;"> 
+                                <a href="<?= URL; ?>noticia/publicacion/<?= $val['id']; ?>/<?= $helper->cleanUrl(utf8_encode($val['titulo'])); ?>"><img src="<?= URL; ?>/public/img/marcas/<?= $val['img']; ?>" style="width: 100%;"></a>
                             </div> 
                         </div>
                     <?php endforeach; ?>
@@ -286,17 +286,17 @@ $helper = new Helper();
                                                  Begin .news-block"                                      
                                                 <div class="news-block">
                     <?php foreach ($this->varios as $item): ?>
-                                                                                            <div class="item-block"> 
-                                                                                                <div class="item-image">
-                                                                                                    <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
-                                                                                                        <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
-                                                                                                    </a>
-                                                                                                </div>                                             
-                                                                                                <div class="item-content">
-                                                                                                    <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
-                                                                                                    <p><a href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
-                                                                                                </div>                                             
-                                                                                            </div>
+                                                                                                    <div class="item-block"> 
+                                                                                                        <div class="item-image">
+                                                                                                            <a class="img-link" href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>">
+                                                                                                                <img class="img-responsive img-full" src="<?= URL; ?>public/img/variedad/<?= utf8_encode($item['img']); ?>" alt="">
+                                                                                                            </a>
+                                                                                                        </div>                                             
+                                                                                                        <div class="item-content">
+                                                                                                            <span class="day"><?= utf8_encode($item['titulo']); ?></span> 
+                                                                                                            <p><a href="<?= URL; ?>variedad/publicacion/<?= $item['id']; ?>/<?= $helper->cleanUrl(utf8_encode($item['titulo'])); ?>" ><?= substr(utf8_encode($item['contenido']), 0, 60); ?></a></p> 
+                                                                                                        </div>                                             
+                                                                                                    </div>
                     <?php endforeach; ?>
                                                 </div>                                     
                                                  End .news-block"                                      
