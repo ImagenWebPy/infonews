@@ -1090,25 +1090,32 @@ class Admin_Model extends Model {
     public function editarContenido($data) {
         $id = $data['id'];
         $destacado = NULL;
+        $desmarcar = FALSE;
         if (!empty($data['destacado'])) {
             switch ($data['id_categoria']) {
                 case 1: #Marca
-                    if (($data['orden'] >= 1) && ($data['orden'] <= 4))
+                    if (($data['orden'] >= 1) && ($data['orden'] <= 4)) {
                         $destacado = 'PRINCIPAL';
-                    else
+                        $desmarcar = TRUE;
+                    } else {
                         $destacado = 'MARCAS';
+                        $desmarcar = TRUE;
+                    }
                     break;
                 case 2:
                     $destacado = 'VARIOS';
+                    $desmarcar = TRUE;
                     break;
                 case 3:
                     $destacado = 'RRHH';
+                    $desmarcar = TRUE;
                     break;
                 case 4:
                     $destacado = 'VIDEO';
                     break;
             }
         }
+
         $estado = 1;
         if (empty($data['estado'])) {
             $estado = 0;
@@ -1118,6 +1125,18 @@ class Admin_Model extends Model {
         $orden = (!empty($data['orden'])) ? utf8_decode($data['orden']) : NULL;
         $contenido = (!empty($data['contenido'])) ? utf8_decode($data['contenido']) : NULL;
         $img_destacado = NULL;
+        if ($desmarcar == TRUE) {
+            $sqlDestacadoOld = $this->db->select("select id from noticia where destacado = '$destacado' and orden = $orden and estado = 1");
+            if (!empty($sqlDestacadoOld)) {
+                $idOld = $sqlDestacadoOld[0]['id'];
+                #desmarcamos el anterior
+                $update = array(
+                    'destacado' => NULL,
+                    'orden' => NULL
+                );
+                $this->db->update('noticia', $update, "id = $idOld");
+            }
+        }
         $update = array(
             'id_categoria' => $data['id_categoria'],
             'id_marca' => $marca,
